@@ -1,18 +1,19 @@
-# Chrome Extension TypeScript Starter
+# Highlighter Web Extension
 
+Based on:
 [![Build Status](https://travis-ci.org/chibat/chrome-extension-typescript-starter.svg?branch=master)](https://travis-ci.org/chibat/chrome-extension-typescript-starter)
 
 Chrome Extension, TypeScript and Visual Studio Code
 
-## Prerequisites
+## Required
 
 * [node + npm](https://nodejs.org/) (Current Version)
 
-## Option
+## Optional
 
 * [Visual Studio Code](https://code.visualstudio.com/)
 
-## Includes the following
+## Includes the following technologies
 
 * TypeScript
 * Webpack
@@ -57,5 +58,5 @@ type `Ctrl + Shift + B`
 
 ## Load extension to chrome
 
-Load `dist` directory
+Load `dist` directory in the extensions tab of any browser and start the watch process. This will automatically update the extension everytime a change is made in the code.
 
