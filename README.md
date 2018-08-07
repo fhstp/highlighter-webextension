@@ -3,7 +3,7 @@
 Based on:
 [![Build Status](https://travis-ci.org/chibat/chrome-extension-typescript-starter.svg?branch=master)](https://travis-ci.org/chibat/chrome-extension-typescript-starter)
 
-Chrome Extension, TypeScript and Visual Studio Code
+Web Extension, TypeScript and Visual Studio Code
 
 ## Required
 
