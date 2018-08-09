@@ -4,6 +4,11 @@
 Based on:
 [chibat/chrome-extension-typescript-starter ![Build Status](https://travis-ci.org/chibat/chrome-extension-typescript-starter.svg?branch=master)](https://travis-ci.org/chibat/chrome-extension-typescript-starter)
 
+With elements from:
+[https://github.com/chibat/chrome-extension-typescript-starter](https://github.com/chibat/chrome-extension-typescript-starter)
+
+all under [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 **Tags**: Web Extension, TypeScript and Visual Studio Code
 
 ## Installation
