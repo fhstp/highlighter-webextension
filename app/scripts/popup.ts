@@ -1,4 +1,4 @@
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 $(document).ready(
   function listenToClicks() {
@@ -10,15 +10,13 @@ $(document).ready(
   });
 
 
-
-
- /* function listenToClicks(e){
-    document.addEventListener('click',=>{
-      var ev = e.target.id.toString();
-      if(e.target.id=='button_firstpage') {
-        document.body.innerHTML = '';
-      }
-    });
+/*
+document.addEventListener('click', (e: any) => {
+  let event_id = e.target.id;
+  if (event_id === 'button_firstpage') {
+      document.body.innerHTML = '';
   }
-*/
+
+
+});*/
 
