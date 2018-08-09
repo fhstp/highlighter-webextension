@@ -1,6 +1,6 @@
 html, body{
   height:500px;
-  width:320px;
+  width:350px;
  //height:1200px;
   // width:1500px;
   font-family: 'PT Sans', sans-serif;
@@ -38,7 +38,7 @@ html, body{
 .icons_1{
   float:right;
 }
-#popup-content_1{
+.popup-content_1{
   background-color:#EBF1F7;
   padding:5px;
 }
@@ -52,4 +52,10 @@ li{
   padding-top:5px;
   padding-bottom:5px;
 }
-
+.hidden{
+  display:none;
+}
+#AGBtext_1{
+  height:120px;
+  width:320px;
+}

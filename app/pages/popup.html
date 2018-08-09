@@ -6,20 +6,21 @@
     <link rel="stylesheet" type="text/css" href="../styles/popup.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
-    <script src="../node_modules/jquery/dist/jquery.js"></script>
-    <script> src="../jquery/dist/jquery.js"</script>
+    <script src="../scripts/popup.js"></script>
+
 
 </head>
 <body>
-  <div class="container-fluid ">
     <div id="popup-content_1">
         <img id="icon_contractVis" src="../images/Logo_contractVis.png" alt="Logo">
         <img class="icons_1" src="#" alt="i">
         <img src="#" class="icons_1" alt="x">
     </div>
+  <div id="content_1">
 
 
-    <div id="popup-content_2">
+
+    <div class="popup-content_2">
         <h3 class="running_text" style="font-weight:bold">Highliger ermöglicht es dir verschiedene Texte zu analysieren und besser zu verstehen</h3>
         <ol>
             <li class="running_text">Wie es funktioniert: </li>
@@ -32,8 +33,31 @@
 
 
         <button type="button"  class="button_primary" id="button_firstpage">OK! Alles klar!</button>
+
+
     </div>
 </div>
+
+<div id="content_2" class="hidden">
+
+    <div class="popup-content_2">
+        <h3 class="running_text" style="font-weight:bold">Du kannst auch zwei verschiedene AGBs miteinander vergleichen</h3>
+        <ol>
+            <li class="running_text">Wie geht das: </li>
+            <li class="running_text">Bereits geladene AGBs werden gespeichert und können ausgewählt werden.</li>
+            <li class="running_text">Wenn nicht, müssen die AGBs und der Link markiert werden wie auf der vorigen Seite erklärt.</li>
+            <li class="running_text">Treffe die Kriterienauswahl</li>
+            <li class="running_text">Vergleiche die AGBs!</li>
+        </ol>
+
+
+        <button type="button"  class="button_primary" id="button_secondpage">OK! Alles klar!</button>
+
+
+    </div>
+  </div>
+
+
 </body>
 </html>
 
