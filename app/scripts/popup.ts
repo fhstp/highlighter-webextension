@@ -1,4 +1,10 @@
-// Enable chromereload by uncommenting this line:
-// import 'chromereload/devonly'
+$(
+  function listenToClicks(){
+    $('#button_firstpage').click(){ () => {
+        document.body.innerHTML = '';
+      }
+    }
 
-console.log(`'Allo 'Allo! Popup`);
+  }
+
+)

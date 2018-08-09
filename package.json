@@ -60,6 +60,10 @@
     "yargs": "^8.x.x"
   },
   "dependencies": {
+    "bootstrap": "^4.1.3",
+    "jQuery": "^1.7.4",
+    "jquery": "^1.9.1",
+    "popper.js": "^1.14.4",
     "typescript": "^3.0.1"
   }
 }
