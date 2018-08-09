@@ -1,5 +1,55 @@
-body {
-  width: 400px;
-  height: 200px;
-  background-color: aqua;
+html, body{
+  height:500px;
+  width:320px;
+ //height:1200px;
+  // width:1500px;
+  font-family: 'PT Sans', sans-serif;
 }
+#icon_contractVis{
+  height:45px;
+  width: 135px;
+}
+.button_primary{
+  font-size:14px;
+  font-weight:bold;
+  color:#4575B4;
+
+  background-color:white;
+  border: 2px solid #4575B4;
+  border-radius:2px;
+
+  padding:5px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+.heading_1{
+  font-size:28px;
+  font-weight:bold;
+}
+.heading_2{
+  font-size:22px;
+}
+.heading_3{
+  font-size:16px;;
+}
+.running_text{
+  font-size:14px;
+}
+.icons_1{
+  float:right;
+}
+#popup-content_1{
+  background-color:#EBF1F7;
+  padding:5px;
+}
+#popup-content_2{
+  padding:15px;
+}
+ol{
+  padding-left:15px;
+}
+li{
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
