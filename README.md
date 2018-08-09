@@ -1,18 +1,23 @@
-# highlighterWebExtension
 
-Bring highlights to legal texts.
+# Highlighter Web Extension
+
+Based on:
+[![Build Status](https://travis-ci.org/chibat/chrome-extension-typescript-starter.svg?branch=master)](https://travis-ci.org/chibat/chrome-extension-typescript-starter)
+
+Web Extension, TypeScript and Visual Studio Code
 
 ## Installation
 
 	$ npm install
 
 ## Usage
-
-Run `$ gulp --watch` and load the `dist`-directory into chrome.
+run the npm scripts
 
 ## Entryfiles (bundles)
 
+
 There are two kinds of entryfiles that create bundles.
+
 
 1. All ts-files in the root of the `./app/scripts` directory
 2. All css-,scss- and less-files in the root of the `./app/styles` directory
@@ -68,9 +73,4 @@ if(process.env.NODE_ENV === 'development'){
   console.log('We are in development mode!');
 }
 ```
-
-
-
-
-
 
