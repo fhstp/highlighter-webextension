@@ -2,7 +2,7 @@
 # Highlighter Web Extension
 
 Based on:
-[![Build Status](https://travis-ci.org/chibat/chrome-extension-typescript-starter.svg?branch=master)](https://travis-ci.org/chibat/chrome-extension-typescript-starter)
+[chibat/chrome-extension-typescript-starter ![Build Status](https://travis-ci.org/chibat/chrome-extension-typescript-starter.svg?branch=master)](https://travis-ci.org/chibat/chrome-extension-typescript-starter)
 
 Web Extension, TypeScript and Visual Studio Code
 
