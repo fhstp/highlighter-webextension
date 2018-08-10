@@ -16,12 +16,13 @@ html, body{
 
   background-color:white;
   border: 2px solid #4575B4;
-  border-radius:2px;
+  border-radius:4px;
 
   padding:5px;
   padding-top:10px;
   padding-bottom:10px;
 }
+
 .heading_1{
   font-size:28px;
   font-weight:bold;
@@ -58,4 +59,7 @@ li{
 #AGBtext_1{
   height:120px;
   width:320px;
+}
+#button_thirdpage{
+  margin-top:15px;
 }

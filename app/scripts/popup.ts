@@ -78,69 +78,84 @@ function loadThirdPage(c2: any) {
   div_page_3.appendChild(div);
 
 
-  let div_checkboxenlist:any;
-  div_checkboxenlist=document.createElement('div');
-  div_checkboxenlist.setAttribute('id','checkboxen');
+  let div_array = new Array();
+  let checkbox_array = new Array();
+  let textNode_array = new Array();
 
-  let p_policies:any;
-  p_policies=document.createElement('p');
-  p_policies.setAttribute('id','p_policies');
+  let div_page_3_part_2:any;
+  div_page_3_part_2= document.createElement('div');
+  div_page_3_part_2.setAttribute('id','div_page_3_part_2');
 
-  let form_checkboxen: any;
-  form_checkboxen=document.createElement('form');
-  form_checkboxen.setAttribute('id', 'form_checkboxen');
 
-  let checkbox_array=new Array();
-  let textNode_array=new Array();
-  for (let i = 0 ; i < 6 ; i++){
-    checkbox_array[i]=document.createElement('input');
-    checkbox_array[i].setAttribute('id','checkbox_out_of_array_' + i + 1 );
+  let title_div:any;
+  title_div= document.createElement('h3');
+  title_div.setAttribute('class', 'heading_3');
+  title_div.appendChild(document.createTextNode('Kriterien'));
+
+
+  div_page_3_part_2.appendChild(title_div);
+  div_page_3.appendChild(div_page_3_part_2);
+
+  for (let i = 0 ; i < 6 ; i++) {
+    div_array[i] = document.createElement('div');
+    div_array[i].setAttribute('id', 'div_out_of_array_' + (i + 1) );
+
+    checkbox_array[i] = document.createElement('input');
+    checkbox_array[i].setAttribute('id', 'checkbox_out_of_array_' + i + 1 );
+    checkbox_array[i].setAttribute('type', 'checkbox');
+
+    div_array[i].appendChild(checkbox_array[i]);
 
     switch (i) {
         case 0: {
-          textNode_array[0] = document.createElement('p');
-          textNode_array[0].appendChild(document.createTextNode('Bezahlung'));
-
+          textNode_array[0]=document.createTextNode('Bezahlung');
+          div_array[i].appendChild(textNode_array[i]);
         }
         case 1: {
           textNode_array[1]=document.createTextNode('Lieferung und Versand');
+          div_array[i].appendChild(textNode_array[i]);
 
         }
         case 2: {
           textNode_array[2]=document.createTextNode('Gewährleistung');
+          div_array[i].appendChild(textNode_array[i]);
 
         }
         case 3: {
           textNode_array[3]=document.createTextNode('Garantie');
+          div_array[i].appendChild(textNode_array[i]);
 
         }
         case 4: {
           textNode_array[4]=document.createTextNode('Umtausch');
+          div_array[i].appendChild(textNode_array[i]);
 
         }
         case 5: {
           textNode_array[5]=document.createTextNode('Rückgabe');
+          div_array[i].appendChild(textNode_array[i]);
 
         }
 
-
+        div_page_3.appendChild(div_array[i]);
     }
 
 
 
-    checkbox_array[i].appendChild(textNode_array[i]);
   }
 
 
 
 
-  div_checkboxenlist.appendChild(form_checkboxen);
-  div_checkboxenlist.appendChild(p_policies);
 
-
+  var button_thirdpage:any;
+  button_thirdpage=document.createElement('button');
+  button_thirdpage.setAttribute('class','button_primary');
+  button_thirdpage.setAttribute('id','button_thirdpage');
+  button_thirdpage.appendChild(document.createTextNode('Check AGBs'));
 
   document.body.appendChild(div_page_3);
-
+  document.body.appendChild(button_thirdpage);
 
 
 }
