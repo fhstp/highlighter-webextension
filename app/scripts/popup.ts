@@ -178,12 +178,32 @@ function loadThirdPage(c2: any) {
 
 
   }
+  // to add critics this button is made
+  let add_critics:any;
+  add_critics=document.createElement('div');
+
+  let add_button:any; let add_button_image:any;
+  add_button=document.createElement('button');
+  add_button_image=document.createElement('img');
+  add_button.setAttribute('id','add_button');
+  add_button_image.setAttribute('id','add_buttonimage');
+    add_button_image.setAttribute('src', '../images/add_button.png');
+
+
+  add_button.appendChild(add_button_image);
+  add_critics.appendChild(add_button);
+  add_critics.appendChild(document.createTextNode('Kriterien hinzufügen'));
+
+  div_page_3.appendChild(add_critics);
 
 
 
 
 
-  var button_thirdpage:any;
+
+
+  // The primary button of the third page
+  let button_thirdpage:any;
   button_thirdpage=document.createElement('button');
   button_thirdpage.setAttribute('class','button_primary');
   button_thirdpage.setAttribute('id','button_thirdpage');
@@ -194,3 +214,20 @@ function loadThirdPage(c2: any) {
 
 
 }
+
+// the eventlistener of the adding critics button
+
+/*
+document.addEventListener('click', (e:any)=> {
+    let input_critics:any;
+    let bool_3: boolean;
+
+  if(e.target.id==='add_button'){
+    input_critics=document.createElement('input');
+    input_critics.setAttribute('type','text');
+    input_critics.setAttribute('id','input_critics');
+    document.body.insertBefore(input_critics,document.body.childNodes[0]);
+  }
+
+})
+*/
