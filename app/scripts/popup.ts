@@ -15,6 +15,9 @@ $(document).ready(
 // div of page 3
   let div_page_3: any;
   div_page_3 = document.createElement('div');
+
+  // another boolean for an eventHandler
+ let bool_3 = false;
 // loading the first three pages
 document.addEventListener('click', (e: any) => {
   let event_id = e.target.id;
@@ -30,7 +33,7 @@ document.addEventListener('click', (e: any) => {
     loadThirdPage(content_2);
 
   }
-  else if (event_id === 'add_button') {
+  else if (event_id === 'add_buttonimage' || event_id === 'add_button') {
     // add_new_critiques
     addNewCritiques();
   }
@@ -38,14 +41,18 @@ document.addEventListener('click', (e: any) => {
 });
 // add new critiques
 
-function addNewCritiques(){
-  let input_critics:any;
-  let bool_3: boolean;
-  input_critics= document.createElement('input');
-  input_critics.setAttribute('type','text');
-  input_critics.setAttribute('id','input_critics');
-  document.body.appendChild(input_critics);
-  // document.body.insertBefore(input_critics, div_page_3[1]);
+function addNewCritiques() {
+  let input_critics: any;
+
+
+  if (!bool_3) {
+    input_critics = document.createElement('input');
+    input_critics.setAttribute('type', 'text');
+    input_critics.setAttribute('id', 'input_critics');
+     div_page_3.insertBefore(input_critics, div_page_3[0]);
+     bool_3 = true;
+  }
+
 
 }
 
@@ -56,8 +63,8 @@ function addNewCritiques(){
 
 
 // giving the checkbox an event
-let checkbox_1: any; let bool_1:boolean; bool_1=false;
-let div_agb_2:any;
+let checkbox_1: any; let bool_1: boolean; bool_1 = false;
+let div_agb_2: any;
 checkbox_1 = document.createElement('input');
 checkbox_1.addEventListener('change', (e: any) => {
   if (e.target.checked && e.target.id === 'checkbox_1' && !bool_1) {
@@ -77,14 +84,14 @@ checkbox_1.addEventListener('change', (e: any) => {
     div_agb_2.appendChild(AGB_link_2);
 
     // appendChild is not wanted, insertBefore should be used instead
-    div_page_3.insertBefore(div_agb_2,div_page_3.childNodes[2]);
+    div_page_3.insertBefore(div_agb_2, div_page_3.childNodes[2]);
   }
-  else if(e.target.checked && e.target.id === 'checkbox_1' && bool_1){
-    div_agb_2.removeAttribute('class','hidden');
+  else if ( e.target.checked && e.target.id === 'checkbox_1' && bool_1) {
+    div_agb_2.removeAttribute('class', 'hidden');
   }
-  else if(!e.target.checked && e.target.id === 'checkbox_1'){
-    div_agb_2.setAttribute('class','hidden');
-    bool_1=true;
+  else if ( !e.target.checked && e.target.id === 'checkbox_1') {
+    div_agb_2.setAttribute('class', 'hidden');
+    bool_1 = true;
   }
 });
 
@@ -139,13 +146,13 @@ function loadThirdPage(c2: any) {
   let checkbox_array = new Array();
   let textNode_array = new Array();
 
-  let div_page_3_part_2:any;
-  div_page_3_part_2= document.createElement('div');
-  div_page_3_part_2.setAttribute('id','div_page_3_part_2');
+  let div_page_3_part_2: any;
+  div_page_3_part_2 = document.createElement('div');
+  div_page_3_part_2.setAttribute('id', 'div_page_3_part_2');
 
 
-  let title_div:any;
-  title_div= document.createElement('h3');
+  let title_div: any;
+  title_div = document.createElement('h3');
   title_div.setAttribute('class', 'heading_3');
   title_div.appendChild(document.createTextNode('Kriterien'));
 
@@ -165,31 +172,31 @@ function loadThirdPage(c2: any) {
 
     switch (i) {
         case 0: {
-          textNode_array[0]=document.createTextNode('Bezahlung');
+          textNode_array[0] = document.createTextNode('Bezahlung');
           div_array[i].appendChild(textNode_array[i]);
         }
         case 1: {
-          textNode_array[1]=document.createTextNode('Lieferung und Versand');
+          textNode_array[1] = document.createTextNode('Lieferung und Versand');
           div_array[i].appendChild(textNode_array[i]);
 
         }
         case 2: {
-          textNode_array[2]=document.createTextNode('Gewährleistung');
+          textNode_array[2] = document.createTextNode('Gewährleistung');
           div_array[i].appendChild(textNode_array[i]);
 
         }
         case 3: {
-          textNode_array[3]=document.createTextNode('Garantie');
+          textNode_array[3] = document.createTextNode('Garantie');
           div_array[i].appendChild(textNode_array[i]);
 
         }
         case 4: {
-          textNode_array[4]=document.createTextNode('Umtausch');
+          textNode_array[4] = document.createTextNode('Umtausch');
           div_array[i].appendChild(textNode_array[i]);
 
         }
         case 5: {
-          textNode_array[5]=document.createTextNode('Rückgabe');
+          textNode_array[5] = document.createTextNode('Rückgabe');
           div_array[i].appendChild(textNode_array[i]);
 
         }
@@ -201,14 +208,14 @@ function loadThirdPage(c2: any) {
 
   }
   // to add critics this button is made
-  let add_critics:any;
-  add_critics=document.createElement('div');
+  let add_critics: any;
+  add_critics = document.createElement('div');
 
-  let add_button:any; let add_button_image:any;
-  add_button=document.createElement('button');
-  add_button_image=document.createElement('img');
-  add_button.setAttribute('id','add_button');
-  add_button_image.setAttribute('id','add_buttonimage');
+  let add_button: any; let add_button_image: any;
+  add_button = document.createElement('button');
+  add_button_image = document.createElement('img');
+  add_button.setAttribute('id', 'add_button');
+  add_button_image.setAttribute('id', 'add_buttonimage');
     add_button_image.setAttribute('src', '../images/add_button.png');
 
 
@@ -225,10 +232,10 @@ function loadThirdPage(c2: any) {
 
 
   // The primary button of the third page
-  let button_thirdpage:any;
-  button_thirdpage=document.createElement('button');
-  button_thirdpage.setAttribute('class','button_primary');
-  button_thirdpage.setAttribute('id','button_thirdpage');
+  let button_thirdpage: any;
+  button_thirdpage = document.createElement('button');
+  button_thirdpage.setAttribute('class', 'button_primary');
+  button_thirdpage.setAttribute('id', 'button_thirdpage');
   button_thirdpage.appendChild(document.createTextNode('Check AGBs'));
 
   document.body.appendChild(div_page_3);
