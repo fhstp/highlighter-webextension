@@ -16,8 +16,14 @@ $(document).ready(
   let div_page_3: any;
   div_page_3 = document.createElement('div');
 
-  // another boolean for an eventHandler
+  // another boolean for the click-eventHandler
  let bool_3 = false;
+
+ // a counter for the number of times the critiques-div was hidden
+ let counter: number;
+ counter = 0;
+ let input_critiques: any;
+
 // loading the first three pages
 document.addEventListener('click', (e: any) => {
   let event_id = e.target.id;
@@ -33,30 +39,62 @@ document.addEventListener('click', (e: any) => {
     loadThirdPage(content_2);
 
   }
-  else if (event_id === 'add_buttonimage' || event_id === 'add_button') {
+  else if ((event_id === 'add_buttonimage' || event_id === 'add_button' ) && !bool_3 ) {
     // add_new_critiques
     addNewCritiques();
+  }
+  else if ((event_id === 'add_buttonimage' || event_id === 'add_button') && bool_3) {
+    hideNewCritiques();
   }
 
 });
 // add new critiques
 
 function addNewCritiques() {
-  let input_critics: any;
+  let input_critics: any; // it should have been named critiques
+  let input_critics_button: any;
+  let input_critics_div: any;
 
-
-  if (!bool_3) {
+  if (counter === 0) {
     input_critics = document.createElement('input');
     input_critics.setAttribute('type', 'text');
-    input_critics.setAttribute('id', 'input_critics');
-     div_page_3.insertBefore(input_critics, div_page_3[0]);
+    input_critics.setAttribute('id', 'input_critiques');
+    input_critics.setAttribute('placeholder', 'Kriterien hinzufügen');
+
+
+    input_critics_button = document.createElement('button');
+    input_critics_button.setAttribute('type', 'button');
+    input_critics_button.setAttribute('class', 'button_primary');
+    input_critics_button.setAttribute('id', 'button_critiques');
+    input_critics_button.appendChild(document.createTextNode('OK'));
+
+    input_critics_div = document.createElement('div');
+    input_critics_div.setAttribute('id', 'input_critiques_div');
+
+    input_critics_div.appendChild(input_critics);
+    input_critics_div.appendChild(input_critics_button);
+
+    div_page_3.insertBefore(input_critics_div, div_page_3[0]);
      bool_3 = true;
-  }
+
 
 
 }
+else if (counter > 0) {
+  input_critiques.classList.remove('hidden');
+}
+}
+function hideNewCritiques() {
 
 
+  input_critiques = document.getElementById('input_critiques_div');
+  input_critiques.classList.add('hidden');
+
+  if (counter === 0) {
+    counter++;
+  }
+  bool_3 = false;
+}
 
 
 
