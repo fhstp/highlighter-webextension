@@ -1,5 +1,5 @@
-// Loading of the second page through jQuery(Is not accessible at the moment)
-/* import $ from 'jquery';
+ // Loading of the second page through jQuery(Is not accessible at the moment)
+ /*import * as $  from 'jquery';
 
 $(document).ready(
   function listenToClicks() {
@@ -30,9 +30,31 @@ document.addEventListener('click', (e: any) => {
     loadThirdPage(content_2);
 
   }
-
+  else if (event_id === 'add_button') {
+    // add_new_critiques
+    addNewCritiques();
+  }
 
 });
+// add new critiques
+
+function addNewCritiques(){
+  let input_critics:any;
+  let bool_3: boolean;
+  input_critics= document.createElement('input');
+  input_critics.setAttribute('type','text');
+  input_critics.setAttribute('id','input_critics');
+  document.body.appendChild(input_critics);
+  // document.body.insertBefore(input_critics, div_page_3[1]);
+
+}
+
+
+
+
+
+
+
 // giving the checkbox an event
 let checkbox_1: any; let bool_1:boolean; bool_1=false;
 let div_agb_2:any;
@@ -215,19 +237,7 @@ function loadThirdPage(c2: any) {
 
 }
 
-// the eventlistener of the adding critics button
 
-/*
-document.addEventListener('click', (e:any)=> {
-    let input_critics:any;
-    let bool_3: boolean;
 
-  if(e.target.id==='add_button'){
-    input_critics=document.createElement('input');
-    input_critics.setAttribute('type','text');
-    input_critics.setAttribute('id','input_critics');
-    document.body.insertBefore(input_critics,document.body.childNodes[0]);
-  }
 
-})
-*/
+
