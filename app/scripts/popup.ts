@@ -12,6 +12,9 @@ $(document).ready(
 
 */
 
+// div of page 3
+  let div_page_3: any;
+  div_page_3 = document.createElement('div');
 // loading the first three pages
 document.addEventListener('click', (e: any) => {
   let event_id = e.target.id;
@@ -31,11 +34,35 @@ document.addEventListener('click', (e: any) => {
 
 });
 // giving the checkbox an event
-let checkbox_1: any;
+let checkbox_1: any; let bool_1:boolean; bool_1=false;
+let div_agb_2:any;
 checkbox_1 = document.createElement('input');
 checkbox_1.addEventListener('change', (e: any) => {
-  if (e.target.checked && e.target.id === 'checkbox_1') {
-      // code to add the wanted input fields+
+  if (e.target.checked && e.target.id === 'checkbox_1' && !bool_1) {
+    div_agb_2 = document.createElement('div');
+    let AGB_text_2 = document.createElement('input');
+    AGB_text_2.setAttribute('placeholder', 'Fügen Sie den Text der AGBs ein...');
+    AGB_text_2.setAttribute('type', 'text');
+    AGB_text_2.setAttribute('id', 'AGBtext_1');
+
+    div_agb_2.appendChild(AGB_text_2);
+
+    let AGB_link_2 = document.createElement('input');
+    AGB_link_2.setAttribute('placeholder', 'Fügen Sie den Link ein...');
+    AGB_link_2.setAttribute('type', 'text');
+    AGB_link_2.setAttribute('id', 'AGBlink_1');
+
+    div_agb_2.appendChild(AGB_link_2);
+
+    // appendChild is not wanted, insertBefore should be used instead
+    div_page_3.appendChild(div_agb_2);
+  }
+  else if(e.target.checked && e.target.id === 'checkbox_1' && bool_1){
+    div_agb_2.removeAttribute('class','hidden');
+  }
+  else if(!e.target.checked && e.target.id === 'checkbox_1'){
+    div_agb_2.setAttribute('class','hidden');
+    bool_1=true;
   }
 });
 
@@ -51,8 +78,6 @@ function loadSecondPage(e: any, c1: any, c2: any) {
       c2.classList.remove('hidden');
 }
 function loadThirdPage(c2: any) {
-  let div_page_3: any;
-  div_page_3 = document.createElement('div');
   div_page_3.setAttribute('id', 'div_page_3');
 
   c2 = document.getElementById('content_2');
