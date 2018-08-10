@@ -55,7 +55,7 @@ checkbox_1.addEventListener('change', (e: any) => {
     div_agb_2.appendChild(AGB_link_2);
 
     // appendChild is not wanted, insertBefore should be used instead
-    div_page_3.appendChild(div_agb_2);
+    div_page_3.insertBefore(div_agb_2,div_page_3.childNodes[2]);
   }
   else if(e.target.checked && e.target.id === 'checkbox_1' && bool_1){
     div_agb_2.removeAttribute('class','hidden');
