@@ -12,6 +12,7 @@ $(document).ready(
 
 */
 
+// loading the first three pages
 document.addEventListener('click', (e: any) => {
   let event_id = e.target.id;
   let content_1: any;
@@ -29,6 +30,16 @@ document.addEventListener('click', (e: any) => {
 
 
 });
+// giving the checkbox an event
+let checkbox_1: any;
+checkbox_1 = document.createElement('input');
+checkbox_1.addEventListener('change', (e: any) => {
+  if (e.target.checked && e.target.id === 'checkbox_1') {
+      // code to add the wanted input fields+
+  }
+});
+
+
 
 function loadSecondPage(e: any, c1: any, c2: any) {
 
@@ -66,8 +77,7 @@ function loadThirdPage(c2: any) {
   div = document.createElement('div');
   div.setAttribute('id', 'div_page_3');
 
-  let checkbox_1: any;
-  checkbox_1 = document.createElement('input');
+ // checkbox_1...to select the comparison of AGBs
   checkbox_1.setAttribute('type', 'checkbox');
   checkbox_1.setAttribute('id', 'checkbox_1');
 
