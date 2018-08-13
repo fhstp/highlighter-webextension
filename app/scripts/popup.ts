@@ -1,5 +1,5 @@
  // Loading of the second page through jQuery(Is not accessible at the moment)
- /*import * as $  from 'jquery';
+ /*import $  from 'jquery';
 
 $(document).ready(
   function listenToClicks() {
@@ -10,7 +10,15 @@ $(document).ready(
 
   });
 
+
 */
+// localStorage usage
+  let key: any;
+  if (localStorage.getItem('lS') !== 'true' && localStorage.getItem('lS') !== 'false') {
+    key = 'lS';
+    localStorage.setItem(key, 'false');
+  }
+
 
 // div of page 3
   let div_page_3: any;
@@ -30,8 +38,15 @@ document.addEventListener('click', (e: any) => {
   let content_1: any;
   let content_2: any;
 
-  if (event_id === 'button_firstpage') {
+  let lS: any;
+  let bool_4: any;
+  bool_4 = false;
+  lS = localStorage.getItem(key);
+  if (event_id === 'button_firstpage' && lS === 'false') {
     loadSecondPage(e, content_1, content_2);
+  }
+  else if (event_id === 'button_firstpage' && lS === 'true') {
+     loadThirdPage(content_2);
   }
 
 
@@ -47,6 +62,10 @@ document.addEventListener('click', (e: any) => {
     hideNewCritiques();
   }
 
+  if (!bool_4) {
+    localStorage.setItem(key, 'true');
+    bool_4 = true;
+  }
 });
 // add new critiques
 
