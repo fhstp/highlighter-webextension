@@ -30,6 +30,8 @@ $(document).ready(
 
  // another boolean for the click-eventHandler
  let bool_3 = false;
+ let bool_crit_sel: any;
+ bool_crit_sel = false;
 
  // a counter for the number of times the critiques-div was hidden
  let counter: number;
@@ -118,26 +120,42 @@ document.addEventListener('click', (e: any) => {
     if (input_crit.value !== '' ) {
       // check if they are already added
       let critiques_selector: any;
-     // critiques_selector = document.getElementsByClassName()
+      critiques_selector = document.getElementsByClassName('critiques');
 
-     // for(let i = 0; i < div_page_3.){}
-
-
-
-
-      let div_new_critique: any;
-    div_new_critique = document.createElement('div');
-    let crit_checkbox: any;
-    crit_checkbox = document.createElement('input');
-    crit_checkbox.setAttribute('type', 'checkbox');
-
-    div_new_critique.appendChild(crit_checkbox);
-    div_new_critique.appendChild(document.createTextNode(input_crit.value));
+      for(let i = 0; i < critiques_selector.length;i++){
+        if(critiques_selector[i].innerHTML === input_crit.value){
+          bool_crit_sel = true;
+          return;
+        }
+      }
 
 
-     div_page_3.insertBefore(div_new_critique, add_critics);
+
+if(!bool_crit_sel) {
+  let div_new_critique: any;
+  div_new_critique = document.createElement('div');
+  let crit_checkbox: any;
+  crit_checkbox = document.createElement('input');
+  crit_checkbox.setAttribute('type', 'checkbox');
+
+  div_new_critique.appendChild(crit_checkbox);
+  let span_new_critique: any;
+  span_new_critique = document.createElement('span');
+  span_new_critique.setAttribute('class','critiques');
+
+  div_new_critique.appendChild(crit_checkbox);
+  span_new_critique.appendChild(document.createTextNode(input_crit.value));
+  div_new_critique.appendChild(span_new_critique);
+
+
+   div_page_3.insertBefore(div_new_critique, add_critics);
+  }
+else{
+  alert('Dieses Kriterium ist schon hinzhugefügt');
+}
+
     }
-
+    bool_crit_sel = false;
 
   }
 
