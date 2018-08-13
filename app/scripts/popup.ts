@@ -44,6 +44,9 @@ document.addEventListener('click', (e: any) => {
 
   number_page = 1;
   lS = localStorage.getItem(key);
+
+  // the if-statements should be replaced by a switch case
+
   if (event_id === 'button_firstpage' && lS === 'false') {
     loadSecondPage(e, content_1, content_2);
     number_page = false;
@@ -58,7 +61,8 @@ document.addEventListener('click', (e: any) => {
 
 
   else if (event_id === 'button_secondpage') {
-
+    // check if there had been AGBs loaded before
+    // if()
     loadThirdPage(content_2);
     number_page = 2;
 
@@ -94,6 +98,21 @@ document.addEventListener('click', (e: any) => {
   }
   else if(event_id === 'closing_icon'){
     window.close();
+  }
+  else if (event_id === 'button_critiques') {
+    let input_crit: any;
+    input_crit = document.getElementById('input_critiques');
+    let div_new_critique: any;
+    div_new_critique = document.createElement('div');
+    let crit_checkbox: any;
+    crit_checkbox = document.createElement('input');
+    crit_checkbox.setAttribute('type', 'checkbox');
+
+    div_new_critique.appendChild(crit_checkbox);
+    div_new_critique.appendChild(document.createTextNode(input_crit.value));
+
+
+    div_page_3.insertBefore(div_new_critique, div_page_3[0]);
   }
 
 
