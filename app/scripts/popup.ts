@@ -12,25 +12,37 @@ $(document).ready(
 
 
 */
-// localStorage usage
-  let key: any;
-  if (localStorage.getItem('lS') !== 'true' && localStorage.getItem('lS') !== 'false') {
-    key = 'lS';
-    localStorage.setItem(key, 'false');
-  }
+ // localStorage usage
+ let key: any;
+ if (localStorage.getItem('lS') !== 'true' && localStorage.getItem('lS') !== 'false') {
+   key = 'lS';
+   localStorage.setItem(key, 'false');
+ }
+ // the div where all the critiques are put into
+ let input_critics_div: any;
+ // div_of the add critiques div
+ let add_critics: any;
+ add_critics = document.createElement('div');
+ add_critics.setAttribute('id','div_add_crits');
+ // div of page 3
+ let div_page_3: any;
+ div_page_3 = document.createElement('div');
 
-
-// div of page 3
-  let div_page_3: any;
-  div_page_3 = document.createElement('div');
-
-  // another boolean for the click-eventHandler
+ // another boolean for the click-eventHandler
  let bool_3 = false;
 
  // a counter for the number of times the critiques-div was hidden
  let counter: number;
  counter = 0;
  let input_critiques: any;
+
+
+
+
+
+
+
+
 
 // loading the first three pages
 document.addEventListener('click', (e: any) => {
@@ -102,7 +114,18 @@ document.addEventListener('click', (e: any) => {
   else if (event_id === 'button_critiques') {
     let input_crit: any;
     input_crit = document.getElementById('input_critiques');
-    let div_new_critique: any;
+    // check if there are critiques
+    if (input_crit.value !== '' ) {
+      // check if they are already added
+      let critiques_selector: any;
+     // critiques_selector = document.getElementsByClassName()
+
+     // for(let i = 0; i < div_page_3.){}
+
+
+
+
+      let div_new_critique: any;
     div_new_critique = document.createElement('div');
     let crit_checkbox: any;
     crit_checkbox = document.createElement('input');
@@ -112,7 +135,10 @@ document.addEventListener('click', (e: any) => {
     div_new_critique.appendChild(document.createTextNode(input_crit.value));
 
 
-    div_page_3.insertBefore(div_new_critique, div_page_3[0]);
+     div_page_3.insertBefore(div_new_critique, add_critics);
+    }
+
+
   }
 
 
@@ -127,7 +153,7 @@ document.addEventListener('click', (e: any) => {
 function addNewCritiques() {
   let input_critics: any; // it should have been named critiques
   let input_critics_button: any;
-  let input_critics_div: any;
+
 
   if (counter === 0) {
     input_critics = document.createElement('input');
@@ -170,8 +196,6 @@ function hideNewCritiques() {
   }
   bool_3 = false;
 }
-
-
 
 
 
@@ -239,9 +263,10 @@ function loadThirdPage(c2: any) {
 
   div_page_3.appendChild(AGB_link);
 
-  // span-tag
+  // div-tag
   let div: any;
   div = document.createElement('div');
+
   div.setAttribute('id', 'div_page_3');
 
  // checkbox_1...to select the comparison of AGBs
@@ -263,10 +288,12 @@ function loadThirdPage(c2: any) {
   div_page_3_part_2 = document.createElement('div');
   div_page_3_part_2.setAttribute('id', 'div_page_3_part_2');
 
-
   let title_div: any;
   title_div = document.createElement('h3');
   title_div.setAttribute('class', 'heading_3');
+  title_div.setAttribute('id', 'div_add_crits');
+
+
   title_div.appendChild(document.createTextNode('Kriterien'));
 
 
@@ -285,31 +312,43 @@ function loadThirdPage(c2: any) {
 
     switch (i) {
         case 0: {
-          textNode_array[0] = document.createTextNode('Bezahlung');
+          textNode_array[0] = document.createElement('span');
+           textNode_array[0].appendChild(document.createTextNode('Bezahlung'));
+           textNode_array[0].setAttribute('class','critiques');
           div_array[i].appendChild(textNode_array[i]);
         }
         case 1: {
-          textNode_array[1] = document.createTextNode('Lieferung und Versand');
+          textNode_array[1] = document.createElement('span');
+          textNode_array[1].appendChild(document.createTextNode('Lieferung und Versand'));
+          textNode_array[1].setAttribute('class','critiques');
           div_array[i].appendChild(textNode_array[i]);
 
         }
         case 2: {
-          textNode_array[2] = document.createTextNode('Gewährleistung');
+          textNode_array[2] = document.createElement('span');
+          textNode_array[2].appendChild(document.createTextNode('Gewährleistung'));
+          textNode_array[2].setAttribute('class','critiques');
           div_array[i].appendChild(textNode_array[i]);
 
         }
         case 3: {
-          textNode_array[3] = document.createTextNode('Garantie');
+          textNode_array[3] = document.createElement('span');
+          textNode_array[3].appendChild(document.createTextNode('Garantie'));
+          textNode_array[3].setAttribute('class','critiques');
           div_array[i].appendChild(textNode_array[i]);
 
         }
         case 4: {
-          textNode_array[4] = document.createTextNode('Umtausch');
+          textNode_array[4] = document.createElement('span');
+          textNode_array[4].appendChild(document.createTextNode('Umtausch'));
+          textNode_array[4].setAttribute('class','critiques');
           div_array[i].appendChild(textNode_array[i]);
 
         }
         case 5: {
-          textNode_array[5] = document.createTextNode('Rückgabe');
+          textNode_array[5] = document.createElement('span');
+          textNode_array[5].appendChild(document.createTextNode('Rückgabe'));
+          textNode_array[5].setAttribute('class','critiques');
           div_array[i].appendChild(textNode_array[i]);
 
         }
@@ -321,8 +360,7 @@ function loadThirdPage(c2: any) {
 
   }
   // to add critics this button is made
-  let add_critics: any;
-  add_critics = document.createElement('div');
+
 
   let add_button: any; let add_button_image: any;
   add_button = document.createElement('button');
@@ -356,8 +394,5 @@ function loadThirdPage(c2: any) {
 
 
 }
-
-
-
 
 
