@@ -23,7 +23,7 @@ $(document).ready(
  // div_of the add critiques div
  let add_critics: any;
  add_critics = document.createElement('div');
- add_critics.setAttribute('id','div_add_crits');
+ add_critics.setAttribute('id', 'div_add_crits');
  // div of page 3
  let div_page_3: any;
  div_page_3 = document.createElement('div');
@@ -88,7 +88,7 @@ document.addEventListener('click', (e: any) => {
   else if ((event_id === 'add_buttonimage' || event_id === 'add_button') && bool_3) {
     hideNewCritiques();
   }
-  else if(event_id === 'general_information') {
+  else if (event_id === 'general_information') {
 
     switch (number_page) {
       case 1: {
@@ -122,7 +122,7 @@ document.addEventListener('click', (e: any) => {
       let critiques_selector: any;
       critiques_selector = document.getElementsByClassName('critiques');
 
-      for (let i = 0; i < critiques_selector.length; i++){
+      for (let i = 0; i < critiques_selector.length; i++) {
         if (critiques_selector[i].innerHTML === input_crit.value) {
           bool_crit_sel = true;
         }
@@ -130,7 +130,7 @@ document.addEventListener('click', (e: any) => {
 
 
 
-if(!bool_crit_sel) {
+if (!bool_crit_sel) {
   let div_new_critique: any;
   div_new_critique = document.createElement('div');
   let crit_checkbox: any;
@@ -140,7 +140,7 @@ if(!bool_crit_sel) {
   div_new_critique.appendChild(crit_checkbox);
   let span_new_critique: any;
   span_new_critique = document.createElement('span');
-  span_new_critique.setAttribute('class','critiques');
+  span_new_critique.setAttribute('class', 'critiques');
 
   div_new_critique.appendChild(crit_checkbox);
   span_new_critique.appendChild(document.createTextNode(input_crit.value));
@@ -149,7 +149,7 @@ if(!bool_crit_sel) {
 
    div_page_3.insertBefore(div_new_critique, add_critics);
   }
-else{
+else {
   alert('Dieses Kriterium ist schon hinzhugefügt');
   bool_crit_sel = false;
 }
@@ -332,41 +332,41 @@ function loadThirdPage(c2: any) {
         case 0: {
           textNode_array[0] = document.createElement('span');
            textNode_array[0].appendChild(document.createTextNode('Bezahlung'));
-           textNode_array[0].setAttribute('class','critiques');
+           textNode_array[0].setAttribute('class', 'critiques');
           div_array[i].appendChild(textNode_array[i]);
         }
         case 1: {
           textNode_array[1] = document.createElement('span');
           textNode_array[1].appendChild(document.createTextNode('Lieferung und Versand'));
-          textNode_array[1].setAttribute('class','critiques');
+          textNode_array[1].setAttribute('class', 'critiques');
           div_array[i].appendChild(textNode_array[i]);
 
         }
         case 2: {
           textNode_array[2] = document.createElement('span');
           textNode_array[2].appendChild(document.createTextNode('Gewährleistung'));
-          textNode_array[2].setAttribute('class','critiques');
+          textNode_array[2].setAttribute('class', 'critiques');
           div_array[i].appendChild(textNode_array[i]);
 
         }
         case 3: {
           textNode_array[3] = document.createElement('span');
           textNode_array[3].appendChild(document.createTextNode('Garantie'));
-          textNode_array[3].setAttribute('class','critiques');
+          textNode_array[3].setAttribute('class', 'critiques');
           div_array[i].appendChild(textNode_array[i]);
 
         }
         case 4: {
           textNode_array[4] = document.createElement('span');
           textNode_array[4].appendChild(document.createTextNode('Umtausch'));
-          textNode_array[4].setAttribute('class','critiques');
+          textNode_array[4].setAttribute('class', 'critiques');
           div_array[i].appendChild(textNode_array[i]);
 
         }
         case 5: {
           textNode_array[5] = document.createElement('span');
           textNode_array[5].appendChild(document.createTextNode('Rückgabe'));
-          textNode_array[5].setAttribute('class','critiques');
+          textNode_array[5].setAttribute('class', 'critiques');
           div_array[i].appendChild(textNode_array[i]);
 
         }
