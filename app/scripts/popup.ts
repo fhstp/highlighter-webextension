@@ -1,5 +1,5 @@
  // Loading of the second page through jQuery(Is not accessible at the moment)
- /*import $  from 'jquery';
+ import * as $  from 'jquery';
 
 $(document).ready(
   function listenToClicks() {
@@ -11,7 +11,7 @@ $(document).ready(
   });
 
 
-*/
+
  // localStorage usage
  let key: any;
  if (localStorage.getItem('lS') !== 'true' && localStorage.getItem('lS') !== 'false') {
@@ -76,7 +76,7 @@ document.addEventListener('click', (e: any) => {
 
   else if (event_id === 'button_secondpage') {
     // check if there had been AGBs loaded before
-    // if()
+
     loadThirdPage(content_2);
     number_page = 2;
 
@@ -110,7 +110,7 @@ document.addEventListener('click', (e: any) => {
 
 
   }
-  else if(event_id === 'closing_icon'){
+  else if (event_id === 'closing_icon') {
     window.close();
   }
   else if (event_id === 'button_critiques') {
@@ -122,8 +122,8 @@ document.addEventListener('click', (e: any) => {
       let critiques_selector: any;
       critiques_selector = document.getElementsByClassName('critiques');
 
-      for(let i = 0; i < critiques_selector.length;i++){
-        if(critiques_selector[i].innerHTML === input_crit.value){
+      for (let i = 0; i < critiques_selector.length; i++){
+        if (critiques_selector[i].innerHTML === input_crit.value) {
           bool_crit_sel = true;
         }
       }
