@@ -40,18 +40,25 @@ document.addEventListener('click', (e: any) => {
 
   let lS: any;
   let bool_4: any;
+  let number_page: any;
   bool_4 = false;
+  number_page = 1;
   lS = localStorage.getItem(key);
   if (event_id === 'button_firstpage' && lS === 'false') {
     loadSecondPage(e, content_1, content_2);
+    number_page = false;
   }
   else if (event_id === 'button_firstpage' && lS === 'true') {
+    content_1 = document.getElementById('content_1');
+    content_1.classList.add('hidden');
      loadThirdPage(content_2);
+     number_page = 2;
   }
 
 
   else if (event_id === 'button_secondpage') {
     loadThirdPage(content_2);
+    number_page = 2;
 
   }
   else if ((event_id === 'add_buttonimage' || event_id === 'add_button' ) && !bool_3 ) {
@@ -61,7 +68,32 @@ document.addEventListener('click', (e: any) => {
   else if ((event_id === 'add_buttonimage' || event_id === 'add_button') && bool_3) {
     hideNewCritiques();
   }
+  else if(event_id === 'general_information') {
 
+    switch (number_page) {
+      case 1: {
+         // possibility 1: page one info
+        loadSecondPage(e, content_1, content_2);
+      }
+      case 2: {
+        // possibility 2: page two info
+    let popupcontent_2: any;
+    popupcontent_2 = document.getElementById('div_page_3');
+    let button_thirdpage: any;
+    button_thirdpage = document.getElementById('button_thirdpage');
+    popupcontent_2.remove();
+    button_thirdpage.remove();
+
+
+    loadSecondPage(e, content_1, content_2);
+      }
+    }
+
+
+  }
+
+
+// seperate if-branch
   if (!bool_4) {
     localStorage.setItem(key, 'true');
     bool_4 = true;
