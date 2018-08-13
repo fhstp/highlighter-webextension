@@ -125,7 +125,6 @@ document.addEventListener('click', (e: any) => {
       for(let i = 0; i < critiques_selector.length;i++){
         if(critiques_selector[i].innerHTML === input_crit.value){
           bool_crit_sel = true;
-          return;
         }
       }
 
@@ -152,10 +151,11 @@ if(!bool_crit_sel) {
   }
 else{
   alert('Dieses Kriterium ist schon hinzhugefügt');
+  bool_crit_sel = false;
 }
 
     }
-    bool_crit_sel = false;
+
 
   }
 
