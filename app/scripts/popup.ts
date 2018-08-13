@@ -57,6 +57,7 @@ document.addEventListener('click', (e: any) => {
 
 
   else if (event_id === 'button_secondpage') {
+
     loadThirdPage(content_2);
     number_page = 2;
 
@@ -77,15 +78,14 @@ document.addEventListener('click', (e: any) => {
       }
       case 2: {
         // possibility 2: page two info
-    let popupcontent_2: any;
-    popupcontent_2 = document.getElementById('div_page_3');
+    let div_page_3: any;
+    div_page_3 = document.getElementById('div_page_3');
     let button_thirdpage: any;
     button_thirdpage = document.getElementById('button_thirdpage');
-    popupcontent_2.remove();
+    div_page_3.innerHTML= ''; // .remove() had the effect that when recoming to the third page div_page_3 would be loaded two times
     button_thirdpage.remove();
-
-
     loadSecondPage(e, content_1, content_2);
+
       }
     }
 
