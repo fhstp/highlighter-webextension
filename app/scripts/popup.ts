@@ -41,12 +41,13 @@ document.addEventListener('click', (e: any) => {
   let lS: any;
   let bool_4: any;
   let number_page: any;
-  bool_4 = false;
+
   number_page = 1;
   lS = localStorage.getItem(key);
   if (event_id === 'button_firstpage' && lS === 'false') {
     loadSecondPage(e, content_1, content_2);
     number_page = false;
+    bool_4 = true;
   }
   else if (event_id === 'button_firstpage' && lS === 'true') {
     content_1 = document.getElementById('content_1');
@@ -82,7 +83,7 @@ document.addEventListener('click', (e: any) => {
     div_page_3 = document.getElementById('div_page_3');
     let button_thirdpage: any;
     button_thirdpage = document.getElementById('button_thirdpage');
-    div_page_3.innerHTML= ''; // .remove() had the effect that when recoming to the third page div_page_3 would be loaded two times
+    div_page_3.innerHTML = ''; // .remove() had the effect that when recoming to the third page div_page_3 would be loaded two times
     button_thirdpage.remove();
     loadSecondPage(e, content_1, content_2);
 
@@ -90,6 +91,9 @@ document.addEventListener('click', (e: any) => {
     }
 
 
+  }
+  else if(event_id === 'closing_icon'){
+    window.close();
   }
 
 
@@ -126,7 +130,7 @@ function addNewCritiques() {
     input_critics_div.appendChild(input_critics_button);
 
     div_page_3.insertBefore(input_critics_div, div_page_3[0]);
-     bool_3 = true;
+
 
 
 
@@ -134,6 +138,7 @@ function addNewCritiques() {
 else if (counter > 0) {
   input_critiques.classList.remove('hidden');
 }
+bool_3 = true;
 }
 function hideNewCritiques() {
 
