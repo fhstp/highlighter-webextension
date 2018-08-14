@@ -33,6 +33,7 @@ let bool_1: boolean;
  let bool_3 = false;
  let bool_4: any;
  let bool_5: any = false;
+ let bool_6: any = false;
  // another boolean for the click-eventHandler
  let bool_crit_sel: any;
  bool_crit_sel = false;
@@ -51,37 +52,7 @@ $(document).ready (
 
 
 
-checkbox_1 = $('<input>');
 
-$(checkbox_1).change( (e) => {
-  if (e.target.checked && !bool_1) {
-    div_agb_2 = $('<div></div>')
-    .attr('id', 'div_agb_2');
-    let AGB_text_2 = $('<input>')
-    .attr('id', 'AGBtext_2')
-    .attr('type', 'text')
-    .attr('placeholder', 'Fügen Sie den Text der AGBs ein...');
-
-    div_agb_2.append(AGB_text_2);
-
-    let AGB_link_2 = $('<input>')
-    .attr('id', 'AGBlink_2')
-    .attr('type', 'text')
-    .attr('placeholder', 'Fügen Sie den Link ein...');
-    div_agb_2.append(AGB_link_2);
-
-
-    div_page_3.before(div_agb_2);
-  }
-  else if ( e.target.checked && bool_1) {
-    $(div_agb_2).removeAttr('class hidden');
-  }
-  else if ( !e.target.checked) {
-    $(div_agb_2).attr('class', 'hidden');
-    bool_1 = true;
-  }
-}
-);
 
 
 
@@ -123,6 +94,7 @@ $(document).ready(
     // check if there had been AGBs loaded before
     if (bool_5) {
       $('#div_agb_2').removeClass('hidden');
+      bool_6 = true;
     }
     loadThirdPage(content_2);
     number_page = 2;
@@ -237,6 +209,39 @@ $('#closing_icon').click(
   $('#content_2').removeClass('hidden');
   }
 function loadThirdPage(c2: any) {
+///
+checkbox_1 = $('<input>');
+
+$(checkbox_1).change( (e) => {
+  if(bool_6){
+    checkbox_1.checked = true;
+  }
+  if (e.target.checked && !bool_1 && !bool_6) {
+    div_agb_2 = $('<div></div>')
+    .attr('id', 'div_agb_2');
+    let AGB_text_2 = $('<input>')
+    .attr('id', 'AGBtext_2')
+    .attr('type', 'text')
+    .attr('placeholder', 'Fügen Sie den Text der AGBs ein...');
+    div_agb_2.append(AGB_text_2);
+    let AGB_link_2 = $('<input>')
+    .attr('id', 'AGBlink_2')
+    .attr('type', 'text')
+    .attr('placeholder', 'Fügen Sie den Link ein...');
+    div_agb_2.append(AGB_link_2);
+    div_page_3.before(div_agb_2);
+  }
+  else if ( e.target.checked && bool_1) {
+    $(div_agb_2).removeAttr('class hidden');
+  }
+  else if ( !e.target.checked) {
+    $(div_agb_2).attr('class', 'hidden');
+    bool_1 = true;
+  }
+}
+);
+
+  ///
 
 
   c2 =  $('#content_2');
