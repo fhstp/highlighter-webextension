@@ -32,7 +32,7 @@ let bool_1: boolean;
  bool_1 = false;
  let bool_3 = false;
  let bool_4: any;
- let bool_5_hidden: any = false;
+ let bool_5: any = false;
  // another boolean for the click-eventHandler
  let bool_crit_sel: any;
  bool_crit_sel = false;
@@ -40,13 +40,13 @@ let div_agb_2: any;
 
 
 $(document).ready (
- function click_Listener_2() {
-  $('#add_button').click( () => {
-    alert('sth');
-  });
- }
-);
+  function w() {
+    $('#add_button').click( () => {
+      alert('woww');
+    });
+  }
 
+);
 
 
 
@@ -118,10 +118,11 @@ $(document).ready(
   }
 
   });
+
   $('#button_secondpage').click( () => {
     // check if there had been AGBs loaded before
-    if (bool_5_hidden) {
-      $('#agb_div_2').removeClass('hidden');
+    if (bool_5) {
+      $('#div_agb_2').removeClass('hidden');
     }
     loadThirdPage(content_2);
     number_page = 2;
@@ -141,14 +142,17 @@ $('#general_information').click(() => {
       loadSecondPage(content_1, content_2);
     }
     case 2: {
+      if ($('#div_agb_2').html() !== '') {
+          $('#div_agb_2').addClass('hidden');
+          bool_5 = true;
+      }
       let div_page_3: any;
       div_page_3 = $('#div_page_3');
   let button_thirdpage: any;
     button_thirdpage = $('#button_thirdpage');
      div_page_3.html('');
     button_thirdpage.remove();
-    $('#agb_div_2').attr('class', 'hidden');
-    bool_5_hidden = true;
+
   loadSecondPage(content_1, content_2);
 
     }
@@ -203,7 +207,6 @@ bool_crit_sel = false;
 
 
 
-// fff
 
 
 
