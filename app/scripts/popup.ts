@@ -32,6 +32,7 @@ let bool_1: boolean;
  bool_1 = false;
  let bool_3 = false;
  let bool_4: any;
+ let bool_5_hidden: any = false;
 let div_agb_2: any;
 
 
@@ -41,26 +42,26 @@ checkbox_1 = $('<input>');
 
 $(checkbox_1).change( (e) => {
   if (e.target.checked && !bool_1) {
-    div_agb_2 = $('<div</div>');
-    let AGB_text_2 = $('<input id="AGBtext_1" >')
-    .attr('id', 'AGBtext_1')
+    div_agb_2 = $('<div></div>')
+    .attr('id', 'div_agb_2');
+    let AGB_text_2 = $('<input>')
+    .attr('id', 'AGBtext_2')
     .attr('type', 'text')
     .attr('placeholder', 'Fügen Sie den Text der AGBs ein...');
 
     div_agb_2.append(AGB_text_2);
 
     let AGB_link_2 = $('<input>')
-    .attr('id', 'AGBlink_1')
+    .attr('id', 'AGBlink_2')
     .attr('type', 'text')
     .attr('placeholder', 'Fügen Sie den Link ein...');
     div_agb_2.append(AGB_link_2);
 
-    // append is not wanted, insertBefore should be used instead
-    // div_page_3.insertBefore(div_agb_2, div_page_3.childNodes[2]);
+
     div_page_3.before(div_agb_2);
   }
   else if ( e.target.checked && bool_1) {
-    $(div_agb_2).removeAttr('class hidden'); // maybe not functional
+    $(div_agb_2).removeAttr('class hidden');
   }
   else if ( !e.target.checked) {
     $(div_agb_2).attr('class', 'hidden');
@@ -105,11 +106,13 @@ $(document).ready(
   });
   $('#button_secondpage').click( () => {
     // check if there had been AGBs loaded before
+    if (bool_5_hidden) {
+    //  $('#agb_div_2').removeClass('hidden');
+    }
     loadThirdPage(content_2);
     number_page = 2;
   });
   $('#add_button').click( () => {
-    alert('b');
    //  if (!bool_3) {
       addNewCritiques();
  // }
@@ -139,6 +142,8 @@ $('#general_information').click(() => {
     button_thirdpage = $('#button_thirdpage');
      div_page_3.html('');
     button_thirdpage.remove();
+    $('#agb_div_2').attr('class', 'hidden');
+    bool_5_hidden = true;
   loadSecondPage(content_1, content_2);
 
     }
