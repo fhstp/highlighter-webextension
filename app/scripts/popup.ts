@@ -21,9 +21,7 @@ if (localStorage.getItem(key) !== 'true' && localStorage.getItem(key) !== 'false
  // giving the checkbox an event
 let checkbox_1: any;
  // div_of the add critiques div
- let add_critics: any;
-add_critics = $('<div></div>')
-.attr('id', 'div_add_crits');
+
 
  // a counter for the number of times the critiques-div was hidden
  let counter: number;
@@ -118,14 +116,40 @@ $(document).ready(
   });
   */
 /*
-  else if ((event_id === 'add_buttonimage' || event_id === 'add_button' ) && !bool_3 ) {
-    // add_new_critiques
-    addNewCritiques();
-  }
+
   else if ((event_id === 'add_buttonimage' || event_id === 'add_button') && bool_3) {
     hideNewCritiques();
   }
 */
+$('#general_information').click(() => {
+  switch (number_page) {
+    case 1: {
+       // possibility 1: page one info
+      loadSecondPage(content_1, content_2);
+    }
+    case 2: {
+      let div_page_3: any;
+      div_page_3 = $('#div_page_3');
+  let button_thirdpage: any;
+    button_thirdpage = $('#button_thirdpage');
+     div_page_3.html('');
+    button_thirdpage.remove();
+  loadSecondPage(content_1, content_2);
+
+    }
+  }
+
+});
+
+
+
+
+
+$('#closing_icon').click(
+  (() => {
+    window.close();
+  })
+);
 
 
 
@@ -276,12 +300,14 @@ function loadThirdPage(c2: any) {
 
 
   }
+  let add_critics: any;
+  add_critics = $('<div></div>')
+  .attr('id', 'div_add_crits')
+  .append(add_button)
+  .append('Kriterien hinzufügen');
   add_button.append(add_button_image);
 
-    add_critics
-    .append(add_button)
-    .append('Kriterien hinzufügen');
- div_page_3.append(add_critics);
+    div_page_3.append(add_critics);
 
        // The primary button of the third page
   let button_thirdpage: any;
