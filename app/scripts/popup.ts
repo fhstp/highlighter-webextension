@@ -108,13 +108,18 @@ $(document).ready(
     loadThirdPage(content_2);
     number_page = 2;
   });
-  /*
-  $('#add_buttonimage').click( () => {
-    if (!bool_3) {
+  $('#add_button').click( () => {
+    alert('b');
+   //  if (!bool_3) {
       addNewCritiques();
-  }
+ // }
   });
-  */
+  $('#add_buttonimage').click( () => {
+    alert('b');
+   //  if (!bool_3) {
+      addNewCritiques();
+ // }
+  });
 /*
 
   else if ((event_id === 'add_buttonimage' || event_id === 'add_button') && bool_3) {
@@ -238,51 +243,50 @@ function loadThirdPage(c2: any) {
 
     checkbox_array[i] = $('<input>')
     .attr('id', 'checkbox_out_of_array_' + i + 1 )
-    .attr('type', 'checkbox')
-
-    .append(checkbox_array[i]);
+    .attr('type', 'checkbox');
+    div_array[i].append(checkbox_array[i]);
 
     switch (i) {
-        case 0: {
-          textNode_array[0] = $('<span></span>')
-           .append('Bezahlung')
-           .attr('class', 'critiques');
-           div_array[i].append(textNode_array[i]);
-        }
-        case 1: {
-          textNode_array[1] = $('<span></span>')
-          .append('Lieferung und Versand')
-          .attr('class', 'critiques');
-          div_array[i].append(textNode_array[i]);
+      case 0: {
+        textNode_array[0] = $('<span></span>')
+         .append('Bezahlung')
+         .attr('class', 'critiques');
+         div_array[i].append(textNode_array[i]);
+      }
+      case 1: {
+        textNode_array[1] = $('<span></span>')
+        .append('Lieferung und Versand')
+        .attr('class', 'critiques');
+        div_array[i].append(textNode_array[i]);
 
-        }
-        case 2: {
-          textNode_array[2] = $('<span></span>')
-          .append('Gewährleistung')
-          .attr('class', 'critiques');
-          div_array[i].append(textNode_array[i]);
-        }
-        case 3: {
-          textNode_array[3] = $('<span></span>')
-          .append('Garantie')
-          .attr('class', 'critiques');
-          div_array[i].append(textNode_array[i]);
+      }
+      case 2: {
+        textNode_array[2] = $('<span></span>')
+        .append('Gewährleistung')
+        .attr('class', 'critiques');
+        div_array[i].append(textNode_array[i]);
+      }
+      case 3: {
+        textNode_array[3] = $('<span></span>')
+        .append('Garantie')
+        .attr('class', 'critiques');
+        div_array[i].append(textNode_array[i]);
 
-        }
-        case 4: {
-          textNode_array[4] = $('<span></span>')
-          .append('Umtausch')
-          .attr('class', 'critiques');
-          div_array[i] .append(textNode_array[i]);
+      }
+      case 4: {
+        textNode_array[4] = $('<span></span>')
+        .append('Umtausch')
+        .attr('class', 'critiques');
+        div_array[i] .append(textNode_array[i]);
 
-        }
-        case 5: {
-          textNode_array[5] = $('<span></span>')
-          .append('Rückgabe')
-          .attr('class', 'critiques');
-          div_array[i].append(textNode_array[i]);
+      }
+      case 5: {
+        textNode_array[5] = $('<span></span>')
+        .append('Rückgabe')
+        .attr('class', 'critiques');
+        div_array[i].append(textNode_array[i]);
 
-        }
+      }
 
         div_page_3.append(div_array[i]);
 
