@@ -33,7 +33,20 @@ let bool_1: boolean;
  let bool_3 = false;
  let bool_4: any;
  let bool_5_hidden: any = false;
+ // another boolean for the click-eventHandler
+ let bool_crit_sel: any;
+ bool_crit_sel = false;
 let div_agb_2: any;
+
+
+$(document).ready (
+ function click_Listener_2() {
+  $('#add_button').click( () => {
+    alert('sth');
+  });
+ }
+);
+
 
 
 
@@ -77,7 +90,6 @@ $(checkbox_1).change( (e) => {
 
 
 
-
 $(document).ready(
   function listenToClicks() {
   let content_1: any;
@@ -88,6 +100,8 @@ $(document).ready(
   let number_page: any;
   number_page = 1;
   lS = localStorage.getItem(key);
+
+
     $('#button_firstpage').click( () => {
 
     if (lS === 'false') {
@@ -107,22 +121,13 @@ $(document).ready(
   $('#button_secondpage').click( () => {
     // check if there had been AGBs loaded before
     if (bool_5_hidden) {
-    //  $('#agb_div_2').removeClass('hidden');
+      $('#agb_div_2').removeClass('hidden');
     }
     loadThirdPage(content_2);
     number_page = 2;
   });
-  $('#add_button').click( () => {
-   //  if (!bool_3) {
-      addNewCritiques();
- // }
-  });
-  $('#add_buttonimage').click( () => {
-    alert('b');
-   //  if (!bool_3) {
-      addNewCritiques();
- // }
-  });
+
+
 /*
 
   else if ((event_id === 'add_buttonimage' || event_id === 'add_button') && bool_3) {
@@ -150,7 +155,55 @@ $('#general_information').click(() => {
   }
 
 });
+// fff
+$('#button_critiques').click( () => {
+  let input_crit: any;
+  input_crit = $('#input_critiques');
+  // check if there are critiques
+  if (input_crit.value !== '' ) {
+    // check if they are already added
+    let critiques_selector: any;
+    critiques_selector = $('.critiques');
 
+    for (let i = 0; i < critiques_selector.length; i++) {
+      if (critiques_selector[i].html() === input_crit.value) {
+        bool_crit_sel = true;
+      }
+    }
+
+
+
+if (!bool_crit_sel) {
+let crit_checkbox: any;
+crit_checkbox = $('<input>')
+.attr('type', 'checkbox');
+
+let div_new_critique: any;
+div_new_critique = $('<div></div>')
+.append(crit_checkbox);
+
+let span_new_critique: any;
+span_new_critique = $('<span></span>')
+.attr('class', 'critiques');
+
+div_new_critique.append(crit_checkbox);
+span_new_critique.append(input_crit.value + '');
+div_new_critique.append(span_new_critique);
+
+
+ div_page_3.berfore(div_new_critique);
+}
+else {
+alert('Dieses Kriterium ist schon hinzugefügt');
+bool_crit_sel = false;
+}
+
+  }
+});
+
+
+
+// fff
 
 
 
