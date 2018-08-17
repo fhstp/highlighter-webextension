@@ -28,16 +28,16 @@ let checkbox_1: any;
  counter = 0;
  let input_critiques: any;
 
-let bool_1: boolean;
+let bool_1: boolean; // for checking if the checkbox is not being activated for the frist time
  bool_1 = false;
- let bool_3 = false;
- let bool_4: any;
- let bool_5: any = false;
- let bool_6: any = false;
+ let bool_3: any = false; // currently not used ( it is used at the functions addCritique() and hideNexCritique()
+ let bool_4: any = false; // it is for inicating that the the localStorage caluable is now set on true (is now "hiding" the information pages)
+ let bool_5: any = false; // for indicating the press of the info-button on page 3
+ let bool_6: any = false; // decides if the second input fields should be loaded after the checking of of checkbox_1
  // another boolean for the click-eventHandler
  let bool_crit_sel: any;
  bool_crit_sel = false;
-let div_agb_2: any;
+let div_agb_2: any; // div in which the added inputs of the checkbox are
 
 
 $(document).ready (
@@ -66,8 +66,6 @@ $(document).ready(
   let content_1: any;
   let content_2: any;
     let lS: any;
-
-    bool_4 = false;
   let number_page: any;
   number_page = 1;
   lS = localStorage.getItem(key);
@@ -94,7 +92,7 @@ $(document).ready(
     // check if there had been AGBs loaded before
     if (bool_5) {
       $('#div_agb_2').removeClass('hidden');
-      bool_6 = true;
+     // bool_6 = true; // it was the reason the checkbox didn't function without the pre-checked checkbox_1
     }
     loadThirdPage(content_2);
     number_page = 2;
@@ -213,9 +211,6 @@ function loadThirdPage(c2: any) {
 checkbox_1 = $('<input>');
 
 $(checkbox_1).change( (e) => {
-  if(bool_6){
-    checkbox_1.checked = true;
-  }
   if (e.target.checked && !bool_1 && !bool_6) {
     div_agb_2 = $('<div></div>')
     .attr('id', 'div_agb_2');
@@ -241,7 +236,7 @@ $(checkbox_1).change( (e) => {
 }
 );
 
-  ///
+
 
 
   c2 =  $('#content_2');
