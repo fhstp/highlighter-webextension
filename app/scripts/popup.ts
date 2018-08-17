@@ -20,6 +20,7 @@ if (localStorage.getItem(key) !== 'true' && localStorage.getItem(key) !== 'false
 
  // giving the checkbox an event
 let checkbox_1: any;
+checkbox_1 = $('<input>');
  // div_of the add critiques div
 
 
@@ -28,15 +29,14 @@ let checkbox_1: any;
  counter = 0;
  let input_critiques: any;
 
-let bool_1: boolean; // for checking if the checkbox is not being activated for the frist time
+let bool_1: boolean; // for checking if the checkbox is not being activated for the frist time // decides if the second input fields should be loaded after the checking of of checkbox_1
  bool_1 = false;
  let bool_3: any = false; // currently not used ( it is used at the functions addCritique() and hideNexCritique()
  let bool_4: any = false; // it is for inicating that the the localStorage caluable is now set on true (is now "hiding" the information pages)
  let bool_5: any = false; // for indicating the press of the info-button on page 3
- let bool_6: any = false; // decides if the second input fields should be loaded after the checking of of checkbox_1
- // another boolean for the click-eventHandler
- let bool_crit_sel: any;
- bool_crit_sel = false;
+ let bool_crit_sel: any = false; // checkes if the criteria have been added
+ let bool_input_vis: any = false;
+
 let div_agb_2: any; // div in which the added inputs of the checkbox are
 
 
@@ -90,9 +90,10 @@ $(document).ready(
 
   $('#button_secondpage').click( () => {
     // check if there had been AGBs loaded before
-    if (bool_5) {
-      $('#div_agb_2').removeClass('hidden');
-     // bool_6 = true; // it was the reason the checkbox didn't function without the pre-checked checkbox_1
+    if (bool_5 && bool_input_vis) {
+       $('#div_agb_2').removeClass('hidden'); // it would be a temporary solution to have the input fields still hidden, the final solution should be that checkbox_1 is checked after the info-page
+       // bool_6 = true; // it was the reason the checkbox didn't function without the pre-checked checkbox_1
+
     }
     loadThirdPage(content_2);
     number_page = 2;
@@ -207,11 +208,11 @@ $('#closing_icon').click(
   $('#content_2').removeClass('hidden');
   }
 function loadThirdPage(c2: any) {
-///
-checkbox_1 = $('<input>');
 
-$(checkbox_1).change( (e) => {
-  if (e.target.checked && !bool_1 && !bool_6) {
+
+
+$(checkbox_1).change( (e: any) => {
+  if (e.target.checked && !bool_1) {
     div_agb_2 = $('<div></div>')
     .attr('id', 'div_agb_2');
     let AGB_text_2 = $('<input>')
@@ -225,14 +226,21 @@ $(checkbox_1).change( (e) => {
     .attr('placeholder', 'Fügen Sie den Link ein...');
     div_agb_2.append(AGB_link_2);
     div_page_3.before(div_agb_2);
+   // alert('actual_add'); // just for testing
+    bool_1 = true;
+    bool_input_vis = true;
   }
   else if ( e.target.checked && bool_1) {
     $(div_agb_2).removeAttr('class hidden');
+   // alert('rem_hidden');  // just for testing
+   bool_input_vis = true;
   }
-  else if ( !e.target.checked) {
+  else if ( !e.target.checked && bool_1) {
     $(div_agb_2).attr('class', 'hidden');
-    bool_1 = true;
+    bool_input_vis = false;
+   // alert('add_hidden'); // jsut for testing
   }
+
 }
 );
 
@@ -261,8 +269,7 @@ $(checkbox_1).change( (e) => {
   div = $('<div></div>')
  .attr('id', 'div_page_3');
 
- // checkbox_1...to select the comparison of AGBs
- checkbox_1
+checkbox_1
  .attr('type', 'checkbox')
 .attr('id', 'checkbox_1');
 
