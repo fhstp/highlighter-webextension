@@ -41,8 +41,20 @@ let div_agb_2: any; // div in which the added inputs of the checkbox are
 
 let add_critics: any; // the div for adding the critiria
 
-let title_div: any; // the div in w
+let title_div: any;
 
+let input_critics_button: any; // input "OK"-button
+input_critics_button = $('<button></button>')
+    .attr('type', 'button')
+    .attr('class', 'button_primary')
+   .attr('id', 'button_critiques');
+    input_critics_button.append('OK');
+let input_critics: any; // it should have been named criteria
+// the input to write the new criteria in
+input_critics = $('<input>') // with only input as the string it had been added 9 times
+.attr('type', 'text')
+.attr('id', 'input_critiques')
+.attr('placeholder', 'Kriterien hinzufügen');
 
 $(document).ready(
   function listenToClicks() {
@@ -153,7 +165,6 @@ $(checkbox_1).change( (e: any) => {
     .attr('type', 'text')
     .attr('placeholder', 'Fügen Sie den Link ein...');
     div_agb_2.append(AGB_link_2);
-    // div_page_3.after(div_agb_2);
     $('#AGBlink_1').after(div_agb_2);
 
     bool_1 = true;
@@ -312,51 +323,52 @@ checkbox_1
         addNewCritiques();
       }
     });
-
-    // adding the event to the OK-button
-    $('button#button_critiques').click( () => {
-      let input_crit: any;
-      input_crit = $('#input_critiques');
-      // check if there are critiques
-      if (input_crit.value !== '' ) {
-        // check if they are already added
-        let critiques_selector: any;
-        critiques_selector = $('.critiques');
-        for (let i = 0; i < critiques_selector.length; i++) {
-          if (critiques_selector[i].html() === input_crit.value) {
-            bool_crit_sel = true;
+      // adding the event to the OK-button
+      $(input_critics_button).click( () => {
+        let input_crit: any;
+        input_crit = $('input#input_critiques');
+        // check if there are critiques
+        if (input_crit.val() !== '' ) {
+          // check if they are already added
+          let critiques_selector: any;
+          critiques_selector = $('.critiques');
+          for (let i = 0; i < critiques_selector.length; i++) {
+            if (critiques_selector[i].innerHTML === input_crit.val()) {
+              bool_crit_sel = true;
+            }
           }
-        }
 
 
 
-    if (!bool_crit_sel) {
-    let crit_checkbox: any;
-    crit_checkbox = $('<input>')
-    .attr('type', 'checkbox');
+      if (!bool_crit_sel) {
+      let crit_checkbox: any;
+      crit_checkbox = $('<input>')
+      .attr('type', 'checkbox');
 
-    let div_new_critique: any;
-    div_new_critique = $('<div></div>')
-    .append(crit_checkbox);
+      let div_new_critique: any;
+      div_new_critique = $('<div></div>')
+      .append(crit_checkbox);
 
-    let span_new_critique: any;
-    span_new_critique = $('<span></span>')
-    .attr('class', 'critiques');
+      let span_new_critique: any;
+      span_new_critique = $('<span></span>')
+      .attr('class', 'critiques');
 
-    div_new_critique.append(crit_checkbox);
-    span_new_critique.append(input_crit.value + '');
-    div_new_critique.append(span_new_critique);
+      div_new_critique.append(crit_checkbox);
+      span_new_critique.append(input_crit.val());
+      div_new_critique.append(span_new_critique);
 
 
-     div_page_3.berfore(div_new_critique);
-    }
-    else {
-    alert('Dieses Kriterium ist schon hinzugefügt');
-    bool_crit_sel = false;
-    }
-
+       $('div#div_add_crits').before(div_new_critique);
       }
-    });
+      else {
+      alert('Dieses Kriterium ist schon hinzugefügt');
+      bool_crit_sel = false;
+      }
+
+        }
+      });
+
+
 
        // The primary button of the third page
   let button_thirdpage: any;
@@ -370,22 +382,7 @@ checkbox_1
 }
   function addNewCritiques() {
 
-    let input_critics: any; // it should have been named criteria
-  let input_critics_button: any;
-
-
   if (counter === 0) {
-    input_critics = $('<input>') // with only input as the string it had been added 9 times
-    .attr('type', 'text')
-    .attr('id', 'input_critiques')
-    .attr('placeholder', 'Kriterien hinzufügen');
-
-
-    input_critics_button = $('<button></button>')
-    .attr('type', 'button')
-    .attr('class', 'button_primary')
-   .attr('id', 'button_critiques');
-    input_critics_button.append('OK');
 
     let input_critics_div = $('<div></div>')
     .attr('id', 'input_critiques_div');
@@ -397,18 +394,19 @@ checkbox_1
 
 
 
-alert('add');
+// alert('add');
 }
 else if (counter > 0) {
-  alert('show');
+// alert('show');
   input_critiques.removeClass('hidden');
 }
 bool_3 = true;
+
 }
 
 function hideNewCritiques() {
 
- alert('hide');
+ // alert('hide');
   input_critiques = $('#input_critiques_div')
   .addClass('hidden');
   bool_3 = false;
@@ -416,4 +414,5 @@ function hideNewCritiques() {
     counter++;
   }
 }
+
 
