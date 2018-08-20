@@ -44,7 +44,6 @@ let add_critics: any; // the div for adding the critiria
 let title_div: any; // the div in w
 
 
-
 $(document).ready(
   function listenToClicks() {
   let content_1: any;
@@ -76,9 +75,8 @@ $(document).ready(
     // check if there had been AGBs loaded before
     if (bool_5 && bool_input_vis) {
        $('#div_agb_2').removeClass('hidden'); // it would be a temporary solution to have the input fields still hidden, the final solution should be that checkbox_1 is checked after the info-page
-       // bool_6 = true; // it was the reason the checkbox didn't function without the pre-checked checkbox_1
-
     }
+    counter = 0;
     bool_3 = false;
     loadThirdPage(content_2);
     number_page = 2;
@@ -155,20 +153,19 @@ $(checkbox_1).change( (e: any) => {
     .attr('type', 'text')
     .attr('placeholder', 'Fügen Sie den Link ein...');
     div_agb_2.append(AGB_link_2);
-    div_page_3.before(div_agb_2);
-   // alert('actual_add'); // just for testing
+    // div_page_3.after(div_agb_2);
+    $('#AGBlink_1').after(div_agb_2);
+
     bool_1 = true;
     bool_input_vis = true;
   }
   else if ( e.target.checked && bool_1) {
     $(div_agb_2).removeAttr('class hidden');
-   // alert('rem_hidden');  // just for testing
    bool_input_vis = true;
   }
   else if ( !e.target.checked && bool_1) {
     $(div_agb_2).attr('class', 'hidden');
     bool_input_vis = false;
-   // alert('add_hidden'); // jsut for testing
   }
 
 });
@@ -315,9 +312,9 @@ checkbox_1
         addNewCritiques();
       }
     });
-    /*
+
     // adding the event to the OK-button
-    $('#button_critiques').click( () => {
+    $('button#button_critiques').click( () => {
       let input_crit: any;
       input_crit = $('#input_critiques');
       // check if there are critiques
@@ -360,7 +357,7 @@ checkbox_1
 
       }
     });
-*/
+
        // The primary button of the third page
   let button_thirdpage: any;
   button_thirdpage = $('<button></button>')
