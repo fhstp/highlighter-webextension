@@ -165,7 +165,8 @@ $(checkbox_1).change( (e: any) => {
     .attr('type', 'text')
     .attr('placeholder', 'Fügen Sie den Link ein...');
     div_agb_2.append(AGB_link_2);
-    $('#AGBlink_1').after(div_agb_2);
+    div_page_3.before(div_agb_2);
+    // $('#AGBlink_1').after(div_agb_2);
 
     bool_1 = true;
     bool_input_vis = true;
