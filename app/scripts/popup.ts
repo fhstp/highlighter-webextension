@@ -79,6 +79,7 @@ $(document).ready(
        // bool_6 = true; // it was the reason the checkbox didn't function without the pre-checked checkbox_1
 
     }
+    bool_3 = false;
     loadThirdPage(content_2);
     number_page = 2;
   });
@@ -314,6 +315,7 @@ checkbox_1
         addNewCritiques();
       }
     });
+    /*
     // adding the event to the OK-button
     $('#button_critiques').click( () => {
       let input_crit: any;
@@ -358,7 +360,7 @@ checkbox_1
 
       }
     });
-
+*/
        // The primary button of the third page
   let button_thirdpage: any;
   button_thirdpage = $('<button></button>')
@@ -398,9 +400,10 @@ checkbox_1
 
 
 
-
+alert('add');
 }
 else if (counter > 0) {
+  alert('show');
   input_critiques.removeClass('hidden');
 }
 bool_3 = true;
@@ -408,13 +411,12 @@ bool_3 = true;
 
 function hideNewCritiques() {
 
-
+ alert('hide');
   input_critiques = $('#input_critiques_div')
   .addClass('hidden');
-
+  bool_3 = false;
   if (counter === 0) {
     counter++;
   }
-  bool_3 = false;
 }
 
