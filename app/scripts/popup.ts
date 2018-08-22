@@ -90,9 +90,12 @@ $(document).ready(
        $('#button_thirdpage').removeClass('hidden');
        $('#content_2').addClass('hidden');
       }
+      else {
+        loadThirdPage(content_2);
+      }
     counter = 0;
     bool_3 = false;
-    // loadThirdPage(content_2);
+
     number_page = 2;
   });
 
