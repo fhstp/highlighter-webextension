@@ -85,12 +85,14 @@ $(document).ready(
 
   $('#button_secondpage').click( () => {
     // check if there had been AGBs loaded before
-    if (bool_5 && bool_input_vis) {
-       $('#div_agb_2').removeClass('hidden'); // it would be a temporary solution to have the input fields still hidden, the final solution should be that checkbox_1 is checked after the info-page
-    }
+    if (bool_5 ) { // && bool_input_vis
+       $('#div_page_3').removeClass('hidden');
+       $('#button_thirdpage').removeClass('hidden');
+       $('#content_2').addClass('hidden');
+      }
     counter = 0;
     bool_3 = false;
-    loadThirdPage(content_2);
+    // loadThirdPage(content_2);
     number_page = 2;
   });
 
@@ -102,23 +104,19 @@ $('#general_information').click(() => {
       loadSecondPage(content_1, content_2);
     }
     case 2: {
-      if ($('#div_agb_2').html() !== '') {
-          $('#div_agb_2').addClass('hidden');
+
+          $('#div_page_3').addClass('hidden');
           bool_5 = true;
-      }
-      let div_page_3: any;
-      div_page_3 = $('#div_page_3');
+
+
   let button_thirdpage: any;
     button_thirdpage = $('#button_thirdpage');
-     div_page_3.html('');
-    button_thirdpage.remove();
-
+    button_thirdpage.addClass('hidden');
   loadSecondPage(content_1, content_2);
-
     }
   }
-
 });
+
 
 
 
@@ -165,8 +163,8 @@ $(checkbox_1).change( (e: any) => {
     .attr('type', 'text')
     .attr('placeholder', 'Fügen Sie den Link ein...');
     div_agb_2.append(AGB_link_2);
-    div_page_3.before(div_agb_2);
-    // $('#AGBlink_1').after(div_agb_2);
+
+     $('#AGBlink_1').after(div_agb_2);
 
     bool_1 = true;
     bool_input_vis = true;
