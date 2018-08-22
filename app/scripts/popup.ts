@@ -56,6 +56,9 @@ input_critics = $('<input>') // with only input as the string it had been added 
 .attr('id', 'input_critiques')
 .attr('placeholder', 'Kriterien hinzufügen');
 
+let checkbox_array = new Array(); // checkboxes of the criteria
+let textNode_array = new Array(); // actually strings & the text for the checkboxes
+
 $(document).ready(
   function listenToClicks() {
   let content_1: any;
@@ -222,8 +225,7 @@ checkbox_1
 
 
   let div_array = new Array();
-  let checkbox_array = new Array();
-  let textNode_array = new Array(); // actually just strings
+
 
   let div_page_3_part_2: any;
   div_page_3_part_2 = $('<div></div>')
@@ -369,6 +371,12 @@ checkbox_1
 
         }
       });
+      $('#button_thirdpage').click( () => {
+        // if button.thirdpage.checked
+        if (!checkbox_1.checked) {
+          sendData_no_compare();
+        }
+      });
 
 
 
@@ -417,4 +425,28 @@ function hideNewCritiques() {
   }
 }
 
+// Here come the functiona which should send the data to the server
 
+function sendData_no_compare() {
+  let criteria_array = new Array ();
+  let content_inputtext: any;
+  let content_inputtlink: any;
+  for (let i = 0; i < checkbox_array.length; i++) {
+    if (checkbox_array[i].checked) {
+      criteria_array[i] = textNode_array[i].innerHTML;
+    }
+  }
+  let xhttp = new XMLHttpRequest();
+  let json_criteria = JSON.stringify(criteria_array);
+  xhttp.open('POST', '/', true);
+
+  xhttp.setRequestHeader('Content_type', 'application/x-www-form-urlencoded');
+  xhttp.onreadystatechange = () => {
+    if ( this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      // Further Processing
+  }
+  xhttp.send(json_criteria);
+  };
+
+
+}
