@@ -59,6 +59,23 @@ input_critics = $('<input>') // with only input as the string it had been added 
 let checkbox_array = new Array(); // checkboxes of the criteria
 let textNode_array = new Array(); // actually strings & the text for the checkboxes
 
+// The primary button of the third page
+let button_thirdpage: any;
+button_thirdpage = $('<button></button>')
+.attr('class', 'button_primary')
+.attr('id', 'button_thirdpage')
+.append('Check AGBs');
+
+ // valuable declatations for the server
+ let body_link: any;
+ let body_text;
+ let body_search = new Array();
+
+ // the first AGB_section
+
+ let AGB_text: any;
+ let AGB_link: any;
+
 
 
 $(document).ready(
@@ -329,133 +346,83 @@ checkbox_1
         addNewCritiques();
       }
     });
-    $('#button_thirdpage').click( () => {
-      alert('wow');
-      // valuable declatation
-      let body_link;
-      let body_text;
-      let body_search;
+    $(button_thirdpage).click( () => {
+      body_link = $(AGB_link).val();
+      body_text = $(AGB_text).val();
+      check_criteria();
 
-      body_link = 'www.orf.at';
-      body_text = 'Datenschutzerklärung des ORF.at-Netzwerks';
-      body_search = 'Daten';
 
       // if button.thirdpage.checked
               if (!checkbox_1.checked) {
-        sendData_no_compare(body_link, body_text, body_search);
+        sendData_no_compare(body_link , body_text, body_search);
       }
     });
-      // adding the event to the OK-button
-      $(input_critics_button).click( () => {
-        let input_crit: any;
-        input_crit = $('input#input_critiques');
-        // check if there are critiques
-        if (input_crit.val() !== '' ) {
-          // check if they are already added
-          let critiques_selector: any;
-          critiques_selector = $('.critiques');
-          for (let i = 0; i < critiques_selector.length; i++) {
-            if (critiques_selector[i].innerHTML === input_crit.val()) {
-              bool_crit_sel = true;
-            }
-          }
 
+    div_page_3.appendTo(document.body);
+    button_thirdpage.appendTo(document.body);
 
-
-      if (!bool_crit_sel) {
-      let crit_checkbox: any;
-      crit_checkbox = $('<input>')
-      .attr('type', 'checkbox');
-
-      let div_new_critique: any;
-      div_new_critique = $('<div></div>')
-      .append(crit_checkbox);
-
-      let span_new_critique: any;
-      span_new_critique = $('<span></span>')
-      .attr('class', 'critiques');
-
-      div_new_critique.append(crit_checkbox);
-      span_new_critique.append(input_crit.val());
-      div_new_critique.append(span_new_critique);
-
-
-       $('div#div_add_crits').before(div_new_critique);
-      }
-      else {
-      alert('Dieses Kriterium ist schon hinzugefügt');
-      bool_crit_sel = false;
-      }
-
-        }
-      });
-
-
-
-
-       // The primary button of the third page
-  let button_thirdpage: any;
-  button_thirdpage = $('<button></button>')
-  .attr('class', 'button_primary')
-  .attr('id', 'button_thirdpage')
-  .append('Check AGBs');
-
-  div_page_3.appendTo(document.body);
-  button_thirdpage.appendTo(document.body);
-}
-  function addNewCritiques() {
-
-  if (counter === 0) {
-
-    let input_critics_div = $('<div></div>')
-    .attr('id', 'input_critiques_div');
-
-    input_critics_div.append(input_critics)
-    .append(input_critics_button);
-
-    $('div#div_add_crits').after(input_critics_div);
-
-
-
-// alert('add');
-}
-else if (counter > 0) {
-// alert('show');
-  input_critiques.removeClass('hidden');
-}
-bool_3 = true;
-
-}
-
-function hideNewCritiques() {
-
- // alert('hide');
-  input_critiques = $('#input_critiques_div')
-  .addClass('hidden');
-  bool_3 = false;
-  if (counter === 0) {
-    counter++;
   }
-}
+    function addNewCritiques() {
 
-// Here come the functiona which should send the data to the server
+    if (counter === 0) {
 
-function sendData_no_compare(body_link: string, body_text: string, body_search: string) {
-  // valuable declaration
-  let xhttp = new XMLHttpRequest();
-  let data: any;
-  // 1. the headers
-  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhttp.open('POST', 'highlighter.media.fhstp.ac.at:8080/agb', true);
-  xhttp.onreadystatechange = () => {
-    if ( this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      // Further Processing
+      let input_critics_div = $('<div></div>')
+      .attr('id', 'input_critiques_div');
+
+      input_critics_div.append(input_critics)
+      .append(input_critics_button);
+
+      $('div#div_add_crits').after(input_critics_div);
+
+
+
+  // alert('add');
   }
- xhttp.send('link = ' + body_link + '&text=' + body_text + '&search[]=' + body_search);
- data = xhttp.responseText;
- document.write(data);
+  else if (counter > 0) {
+  // alert('show');
+    input_critiques.removeClass('hidden');
+  }
+  bool_3 = true;
+
+  }
+
+  function hideNewCritiques() {
+
+   // alert('hide');
+    input_critiques = $('#input_critiques_div')
+    .addClass('hidden');
+    bool_3 = false;
+    if (counter === 0) {
+      counter++;
+    }
+  }
+
+  // Here come the functiona which should send the data to the server
+
+  function sendData_no_compare(body_link: any, body_text: any, body_search: any) {
+    // valuable declaration
+    let xhttp = new XMLHttpRequest();
+    let data: any;
+    let filtered_data: any;
+
+    let body_search_stringify = JSON. stringify(body_search);
+    xhttp.open('POST', 'http://highlighter.media.fhstp.ac.at:8080/agb', false) ;
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+   xhttp.send('link=' + body_link + '&text=' + body_text + '&search[]=' + body_search_stringify);
+
+  data = xhttp.responseText;
+  filtered_data = JSON.parse(data);
+   document.write(filtered_data.corpus.documents);  // just for testing
 
 
-  };
+  }
+  function check_criteria() {
+    let j = 0;
+    for (let i = 0; i < checkbox_array.length; i++) {
+      if ($('#checkbox_out_of_array_' + i + 1).prop('checked')) {
+        body_search[j] = $('#textNode_out_of_array_' + j + 1 ).html();
+        j++;
+      }
+    }
 
-}
+  }
