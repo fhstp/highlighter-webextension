@@ -59,6 +59,25 @@ input_critics = $('<input>') // with only input as the string it had been added 
 let checkbox_array = new Array(); // checkboxes of the criteria
 let textNode_array = new Array(); // actually strings & the text for the checkboxes
 
+function insertText() {
+  chrome.tabs.executeScript( {
+    code: 'window.getSelection().toString();'
+  }, function(selection) {
+    $('#AGBtext_1').val(selection[0]);
+  });
+}
+
+function insertLink() {
+  chrome.tabs.executeScript({
+    code: 'window.location.href'
+  },
+function(href) {
+  $('#AGBlink_1').val(href);
+});
+}
+
+
+
 $(document).ready(
   function listenToClicks() {
   let content_1: any;
@@ -83,6 +102,8 @@ $(document).ready(
      loadThirdPage(content_2);
      number_page = 2;
   }
+  insertText();
+  insertLink();
 
   });
 
