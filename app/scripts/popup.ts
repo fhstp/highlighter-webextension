@@ -59,6 +59,8 @@ input_critics = $('<input>') // with only input as the string it had been added 
 let checkbox_array = new Array(); // checkboxes of the criteria
 let textNode_array = new Array(); // actually strings & the text for the checkboxes
 
+
+
 $(document).ready(
   function listenToClicks() {
   let content_1: any;
@@ -327,6 +329,22 @@ checkbox_1
         addNewCritiques();
       }
     });
+    $('#button_thirdpage').click( () => {
+      alert('wow');
+      // valuable declatation
+      let body_link;
+      let body_text;
+      let body_search;
+
+      body_link = 'www.orf.at';
+      body_text = 'Datenschutzerklärung des ORF.at-Netzwerks';
+      body_search = 'Daten';
+
+      // if button.thirdpage.checked
+              if (!checkbox_1.checked) {
+        sendData_no_compare(body_link, body_text, body_search);
+      }
+    });
       // adding the event to the OK-button
       $(input_critics_button).click( () => {
         let input_crit: any;
@@ -371,12 +389,7 @@ checkbox_1
 
         }
       });
-      $('#button_thirdpage').click( () => {
-        // if button.thirdpage.checked
-        if (!checkbox_1.checked) {
-          sendData_no_compare();
-        }
-      });
+
 
 
 
@@ -427,26 +440,22 @@ function hideNewCritiques() {
 
 // Here come the functiona which should send the data to the server
 
-function sendData_no_compare() {
-  let criteria_array = new Array ();
-  let content_inputtext: any;
-  let content_inputtlink: any;
-  for (let i = 0; i < checkbox_array.length; i++) {
-    if (checkbox_array[i].checked) {
-      criteria_array[i] = textNode_array[i].innerHTML;
-    }
-  }
+function sendData_no_compare(body_link: string, body_text: string, body_search: string) {
+  // valuable declaration
   let xhttp = new XMLHttpRequest();
-  let json_criteria = JSON.stringify(criteria_array);
-  xhttp.open('POST', '/', true);
-
-  xhttp.setRequestHeader('Content_type', 'application/x-www-form-urlencoded');
+  let data: any;
+  // 1. the headers
+  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhttp.open('POST', 'highlighter.media.fhstp.ac.at:8080/agb', true);
   xhttp.onreadystatechange = () => {
     if ( this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       // Further Processing
   }
-  xhttp.send(json_criteria);
-  };
+ xhttp.send('link = ' + body_link + '&text=' + body_text + '&search[]=' + body_search);
+ data = xhttp.responseText;
+ document.write(data);
 
+
+  };
 
 }
