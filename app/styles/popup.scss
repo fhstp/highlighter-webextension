@@ -1,5 +1,99 @@
-body {
-  width: 400px;
-  height: 200px;
-  background-color: aqua;
+html, body{
+  height:500px;
+  width:350px;
+  font-family: 'PT Sans', sans-serif;
+}
+#icon_contractVis{
+  height:45px;
+  width: 135px;
+}
+.button_primary{
+  font-size:14px;
+  font-weight:bold;
+  color:#4575B4;
+
+  background-color:white;
+  border: 2px solid #4575B4;
+  border-radius:4px;
+
+  padding:5px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.heading_1{
+  font-size:28px;
+  font-weight:bold;
+}
+.heading_2{
+  font-size:22px;
+}
+.heading_3{
+  font-size:16px;;
+}
+.running_text{
+  font-size:14px;
+}
+.icons{
+  float:right;
+  height:25px;
+  width:25px;
+  margin-right:5px;
+}
+#general_information{
+  float:right;
+}
+.popup-content_1{
+  background-color:#EBF1F7;
+  padding:5px;
+}
+#popup-content_2{
+  padding:15px;
+}
+ol{
+  padding-left:15px;
+}
+li{
+  padding-top:5px;
+  padding-bottom:5px;
+}
+.hidden{
+  display:none;
+}
+#AGBtext_1{
+  height:120px;
+  width:320px;
+  margin-top: 5px;
+}
+#AGBlink_1{
+ margin-top: 5px;
+}
+#AGBlink_2{
+  margin-top: 5px;
+}
+#AGBtext_2{
+  height:120px;
+  width:320px;
+  margin-top: 5px;
+}
+#button_thirdpage{
+  margin-top:15px;
+}
+#button_add{
+  background-color:white;
+  border:none;
+  padding:0px;
+}
+
+
+#add_buttonimage{
+
+  height:20px;
+  width:20px;
+}
+#button_critiques{
+  padding:5px;
+  padding-left:7px;
+  padding-right:7px;
+  margin-left:5px;
 }
