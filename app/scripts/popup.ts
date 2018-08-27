@@ -430,15 +430,19 @@ function sendData_no_compare(head_link: any, head_text: any) {
 
   let xhttp = new XMLHttpRequest();
   let json_criteria = JSON.stringify(criteria_array);
-  xhttp.open('POST', 'http://highlighter.media.fhstp.ac.at:8080/agb', false);
+
+  xhttp.open('POST', 'http://highlighter.media.fhstp.ac.at:8080/agb', true);
   xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  /* xhttp.onreadystatechange = () => {
-    if ( this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      // Further Processing
-  } */
-  xhttp.send('link='+head_link+'&text='+head_text+'&search[]='+criteria_array[0]);
-  let response = JSON.parse(xhttp.responseText);
-alert('wow');
+   xhttp.onreadystatechange = () => {
+    if ( xhttp.readyState === 2 && xhttp.status === 201) {
+//      JSON.parse(xhttp.responseText);
+      console.log('hello ' + xhttp.responseText);
+      console.log(JSON.parse(xhttp.responseText));
+      alert(this.responseText);
+  } };
+  xhttp.send('link=' + head_link + '&text=' + head_text + '&search[]=' + criteria_array[0]);
+
+
   }
 
 
