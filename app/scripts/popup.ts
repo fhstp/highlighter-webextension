@@ -79,9 +79,9 @@ button_thirdpage = $('<button></button>')
  let test = 'true';
 
  function insert_in_input(filtered_data: any){
-  chrome.tabs.create({url:'http://highlighter.media.fhstp.ac.at:8080/agb'})
+   chrome.tabs.create({url:'http://highlighter.media.fhstp.ac.at:8080/agb'})
   chrome.tabs.executeScript( { // the code should be written with the help of jQuery and the parameter content should be worked oni
-    code: ' document.body.innerHTML = "";var input_field = document.createElement("input"); input_field.value = '+filtered_data+'; document.body.appendChild(input_field); '})
+    code: ' document.body.innerHTML = "";var input_field = document.createElement("input"); input_field.value =  "'+filtered_data.markupString[0]+'"; document.body.appendChild(input_field); '})
   }
 
 
