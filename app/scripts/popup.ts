@@ -67,24 +67,18 @@ $(document).ready(
   let number_page: any;
   number_page = 1;
   lS = localStorage.getItem(key);
-
-
-    $('#button_firstpage').click( () => {
-
     if (lS === 'false') {
-      loadSecondPage(content_1, content_2);
-    number_page = false;
-    bool_4 = true;
-          localStorage.setItem(key, 'true');
-  }
+      $('#popup-content_2').removeClass('hidden');
+      localStorage.setItem(key, 'true');
+    }
     else if (lS === 'true') {
-      content_1 = $('#content_1')
-     .addClass('hidden');
-     loadThirdPage(content_2);
-     number_page = 2;
-  }
+      loadThirdPage(content_2);
+    }
+    $('#button_firstpage').click( () => {
+      $('#popup-content_2').addClass('hidden');
+      loadThirdPage(content_2);
+        });
 
-  });
 
   $('#button_secondpage').click( () => {
     // check if there had been AGBs loaded before
