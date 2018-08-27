@@ -431,12 +431,14 @@ function sendData_no_compare(head_link: any, head_text: any) {
   let xhttp = new XMLHttpRequest();
   let json_criteria = JSON.stringify(criteria_array);
   xhttp.open('POST', 'http://highlighter.media.fhstp.ac.at:8080/agb', false);
-  xhttp.setRequestHeader('Content_type', 'application/x-www-form-urlencoded');
+  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   /* xhttp.onreadystatechange = () => {
     if ( this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       // Further Processing
   } */
-  xhttp.send('text=head_text&link=head_link&search[]=criteria_array[0]');
+  xhttp.send('link='+head_link+'&text='+head_text+'&search[]='+criteria_array[0]);
+  let response = JSON.parse(xhttp.responseText);
+alert('wow');
   }
 
 
