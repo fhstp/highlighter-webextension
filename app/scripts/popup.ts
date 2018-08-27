@@ -1,5 +1,5 @@
- // Loading of the second page through jQuery
- import * as $  from 'jquery';
+// Loading of the second page through jQuery
+import * as $  from 'jquery';
 // page 1
  let content_1: any;
  // page 2
@@ -12,6 +12,12 @@ key = 'lS';
 if (localStorage.getItem(key) !== 'true' && localStorage.getItem(key) !== 'false') {
  localStorage.setItem(key, 'false');
  }
+ let key_2: any;
+key_2 = 'lS_2';
+if (localStorage.getItem(key_2) !== 'true' && localStorage.getItem(key_2) !== 'false') {
+ localStorage.setItem(key_2, 'false');
+ }
+
  // div of page 3
  let div_page_3: any;
  div_page_3 = $('<div></div>')
@@ -43,6 +49,13 @@ let add_critics: any; // the div for adding the critiria
 
 let title_div: any;
 
+    // The primary button of the third page
+    let button_thirdpage: any;
+    button_thirdpage = $('<button></button>')
+    .attr('class', 'button_primary')
+    .attr('id', 'button_thirdpage')
+    .append('Check AGBs');
+
 let input_critics_button: any; // input "OK"-button
 input_critics_button = $('<button></button>')
     .attr('type', 'button')
@@ -67,60 +80,43 @@ $(document).ready(
   let number_page: any;
   number_page = 1;
   lS = localStorage.getItem(key);
-
-
-    $('#button_firstpage').click( () => {
-
     if (lS === 'false') {
-      loadSecondPage(content_1, content_2);
-    number_page = false;
-    bool_4 = true;
-          localStorage.setItem(key, 'true');
-  }
+      $('#popup-content_2').removeClass('hidden');
+      localStorage.setItem(key, 'true');
+    }
     else if (lS === 'true') {
-      content_1 = $('#content_1')
-     .addClass('hidden');
-     loadThirdPage(content_2);
-     number_page = 2;
-  }
-
-  });
-
-  $('#button_secondpage').click( () => {
-    // check if there had been AGBs loaded before
-    if (bool_5 ) { // && bool_input_vis
-       $('#div_page_3').removeClass('hidden');
-       $('#button_thirdpage').removeClass('hidden');
-       $('#content_2').addClass('hidden');
-      }
-      else {
+      loadThirdPage(content_2);
+    }
+    $('#button_firstpage').click( () => {
+      $('#popup-content_2').addClass('hidden');
+      if (!bool_5) {
         loadThirdPage(content_2);
       }
-    counter = 0;
-    bool_3 = false;
+      else {
+        $('#div_page_3').removeClass('hidden');
+        $('#button_thirdpage').removeClass('hidden');
+      }
+        });
 
-    number_page = 2;
+
+  $('#button_secondpage').click( () => {
+    $('#div_page_3').removeClass('hidden');
+  $('#button_thirdpage').removeClass('hidden');
+  $('#content_2').addClass('hidden');
+    bool_3 = false; // Check not complete
+
   });
 
 
 $('#general_information').click(() => {
-  switch (number_page) {
-    case 1: {
-       // possibility 1: page one info
-      loadSecondPage(content_1, content_2);
-    }
-    case 2: {
 
+      $('#popup-content_2').removeClass('hidden');
           $('#div_page_3').addClass('hidden');
           bool_5 = true;
-
 
   let button_thirdpage: any;
     button_thirdpage = $('#button_thirdpage');
     button_thirdpage.addClass('hidden');
-  loadSecondPage(content_1, content_2);
-    }
-  }
 });
 
 
@@ -142,13 +138,9 @@ $('#closing_icon').click(
 
 
 
- function loadSecondPage(c1: any, c2: any) {
-
-  c1 = $('#content_1');
-  $('#content_1').addClass('hidden');
-
-
-  c2 = $('#content_2');
+ function loadSecondPage() {
+  $('#div_page_3').addClass('hidden');
+  $('#button_thirdpage').addClass('hidden');
   $('#content_2').removeClass('hidden');
   }
 function loadThirdPage(c2: any) {
@@ -156,7 +148,11 @@ function loadThirdPage(c2: any) {
 
 
 $(checkbox_1).change( (e: any) => {
-  if (e.target.checked && !bool_1) {
+    if (e.target.checked && !bool_1) {
+      if ( localStorage.getItem(key_2) === 'false') {
+        loadSecondPage();
+         localStorage.setItem(key_2, 'true');
+      }
     div_agb_2 = $('<div></div>')
     .attr('id', 'div_agb_2');
     let AGB_text_2 = $('<input>')
@@ -371,21 +367,15 @@ checkbox_1
 
         }
       });
-      $('#button_thirdpage').click( () => {
-        // if button.thirdpage.checked
-        if (!checkbox_1.checked) {
-          sendData_no_compare();
-        }
+      $(button_thirdpage).click( () => {
+       // if (!checkbox_1.checked) {
+          sendData_no_compare($('#AGBlink_1').val(), $('#AGBtext_1').val());
+       // }
       });
 
 
 
-       // The primary button of the third page
-  let button_thirdpage: any;
-  button_thirdpage = $('<button></button>')
-  .attr('class', 'button_primary')
-  .attr('id', 'button_thirdpage')
-  .append('Check AGBs');
+
 
   div_page_3.appendTo(document.body);
   button_thirdpage.appendTo(document.body);
@@ -427,26 +417,28 @@ function hideNewCritiques() {
 
 // Here come the functiona which should send the data to the server
 
-function sendData_no_compare() {
-  let criteria_array = new Array ();
-  let content_inputtext: any;
-  let content_inputtlink: any;
+function sendData_no_compare(head_link: any, head_text: any) {
+  let criteria_array = new Array();
   for (let i = 0; i < checkbox_array.length; i++) {
     if (checkbox_array[i].checked) {
       criteria_array[i] = textNode_array[i].innerHTML;
     }
+    else {
+      criteria_array[i] = '';
+    }
   }
+
   let xhttp = new XMLHttpRequest();
   let json_criteria = JSON.stringify(criteria_array);
-  xhttp.open('POST', '/', true);
-
+  xhttp.open('POST', 'http://highlighter.media.fhstp.ac.at:8080/agb', false);
   xhttp.setRequestHeader('Content_type', 'application/x-www-form-urlencoded');
-  xhttp.onreadystatechange = () => {
+  /* xhttp.onreadystatechange = () => {
     if ( this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       // Further Processing
+  } */
+  xhttp.send('text=head_text&link=head_link&search[]=criteria_array[0]');
   }
-  xhttp.send(json_criteria);
-  };
 
 
-}
+
+
