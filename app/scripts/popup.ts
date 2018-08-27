@@ -303,9 +303,11 @@ checkbox_1
   add_button = $('<button></button>')
   .attr('id', 'add_button');
 
-  add_button_image = $('<img>')
+  add_button_image = $('<i></i>')
   .attr('id', 'add_buttonimage')
-  .attr('src', '../images/add_button.png');
+  .attr('class','fa fa-plus-circle')
+  .attr('aria-hidden','true');
+
 
 
 
@@ -374,7 +376,7 @@ checkbox_1
       $('#button_thirdpage').click( () => {
         // if button.thirdpage.checked
         if (!checkbox_1.checked) {
-          sendData_no_compare();
+          // sendData_no_compare();
         }
       });
 
@@ -425,28 +427,4 @@ function hideNewCritiques() {
   }
 }
 
-// Here come the functiona which should send the data to the server
 
-function sendData_no_compare() {
-  let criteria_array = new Array ();
-  let content_inputtext: any;
-  let content_inputtlink: any;
-  for (let i = 0; i < checkbox_array.length; i++) {
-    if (checkbox_array[i].checked) {
-      criteria_array[i] = textNode_array[i].innerHTML;
-    }
-  }
-  let xhttp = new XMLHttpRequest();
-  let json_criteria = JSON.stringify(criteria_array);
-  xhttp.open('POST', '/', true);
-
-  xhttp.setRequestHeader('Content_type', 'application/x-www-form-urlencoded');
-  xhttp.onreadystatechange = () => {
-    if ( this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      // Further Processing
-  }
-  xhttp.send(json_criteria);
-  };
-
-
-}
