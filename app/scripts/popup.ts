@@ -76,7 +76,13 @@ $(document).ready(
     }
     $('#button_firstpage').click( () => {
       $('#popup-content_2').addClass('hidden');
-      loadThirdPage(content_2);
+      if (!bool_5) {
+        loadThirdPage(content_2);
+      }
+      else {
+        $('#div_page_3').removeClass('hidden');
+        $('#button_thirdpage').removeClass('hidden');
+      }
         });
 
 
@@ -98,23 +104,14 @@ $(document).ready(
 
 
 $('#general_information').click(() => {
-  switch (number_page) {
-    case 1: {
-       // possibility 1: page one info
-      loadSecondPage(content_1, content_2);
-    }
-    case 2: {
 
+      $('#popup-content_2').removeClass('hidden');
           $('#div_page_3').addClass('hidden');
           bool_5 = true;
-
 
   let button_thirdpage: any;
     button_thirdpage = $('#button_thirdpage');
     button_thirdpage.addClass('hidden');
-  loadSecondPage(content_1, content_2);
-    }
-  }
 });
 
 
