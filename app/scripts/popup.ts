@@ -12,6 +12,12 @@ key = 'lS';
 if (localStorage.getItem(key) !== 'true' && localStorage.getItem(key) !== 'false') {
  localStorage.setItem(key, 'false');
  }
+
+  let counter_AGB: any;
+ counter_AGB = 'lS_2';
+  if (localStorage.getItem(counter_AGB) !== 'true' && localStorage.getItem(counter_AGB) !== 'false') {
+   localStorage.setItem(counter_AGB, 'false');
+   }
  // div of page 3
  let div_page_3: any;
  div_page_3 = $('<div></div>')
@@ -36,6 +42,7 @@ let bool_1: boolean; // for checking if the checkbox is not being activated for 
  let bool_5: any = false; // for indicating the press of the info-button on page 3
  let bool_crit_sel: any = false; // checkes if the criteria have been added
  let bool_input_vis: any = false;
+ let bool_7 = false; // bool how the compare_AGB-function should be used
 
 let div_agb_2: any; // div in which the added inputs of the checkbox are
 
@@ -78,10 +85,12 @@ button_thirdpage = $('<button></button>')
 
  let test = 'true';
 
- function insert_in_input(filtered_data: any){
-   chrome.tabs.create({url:'http://highlighter.media.fhstp.ac.at:8080/agb'})
+
+
+ function insert_in_input(filtered_data: any) {
+   chrome.tabs.create({url: 'http://highlighter.media.fhstp.ac.at:8080/agb'});
   chrome.tabs.executeScript( { // the code should be written with the help of jQuery and the parameter content should be worked oni
-    code: ' document.body.innerHTML = "";var input_field = document.createElement("input"); input_field.value =  "'+filtered_data.markupString[0]+'"; document.body.appendChild(input_field); '})
+    code: ' document.body.innerHTML = "";var input_field = document.createElement("input"); input_field.value =  "' + filtered_data.markupString[0] + '"; document.body.appendChild(input_field); '});
   }
 
 
@@ -186,17 +195,35 @@ $(checkbox_1).change( (e: any) => {
   if (e.target.checked && !bool_1) {
     div_agb_2 = $('<div></div>')
     .attr('id', 'div_agb_2');
+    let div_agb2_b = $('<b></b>')
+    .attr('id', 'div_agb2_b')
+    .append('Bereits verwendete AGBs');
     let AGB_text_2 = $('<input>')
     .attr('id', 'AGBtext_2')
     .attr('type', 'text')
     .attr('placeholder', 'Fügen Sie den Text der AGBs ein...');
-    div_agb_2.append(AGB_text_2);
     let AGB_link_2 = $('<input>')
     .attr('id', 'AGBlink_2')
     .attr('type', 'text')
     .attr('placeholder', 'Fügen Sie den Link ein...');
-    div_agb_2.append(AGB_link_2);
+    // if there are any former AGBs
+    if ( localStorage.getItem(counter_AGB) !== '0') {
+       let AGB_span = $('<span></span>');
+       let array_of_AGB_buttons = new Array();
+       for (let i = 0; i < 10; i++) {
+        array_of_AGB_buttons[i] = $('<button></button>')
+        .attr('id', 'array_of_AGBs' + i)
+        .attr('class', 'array_of_AGBs');
+        AGB_span.append(array_of_AGB_buttons[i]);
+       }
+        bool_7 = true;
+      //  switch_case_counterAGB();
 
+    }
+    div_agb_2
+    .append(div_agb2_b)
+    .append(AGB_text_2)
+    .append(AGB_link_2);
      $('#AGBlink_1').after(div_agb_2);
 
     bool_1 = true;
@@ -358,11 +385,11 @@ checkbox_1
       body_link = $(AGB_link).val();
       body_text = $(AGB_text).val();
       check_criteria();
-
+      switch_case_counterAGB();
 
       // if button.thirdpage.checked
               if (!checkbox_1.checked) {
-        sendData_no_compare(body_link , body_text, body_search);
+      //  sendData_no_compare(body_link , body_text, body_search);
       }
     });
 
@@ -433,4 +460,49 @@ checkbox_1
       }
     }
 
+  }
+
+  function switch_case_counterAGB() {
+    if (!bool_7 && $('#checkbox_1')checked) {
+        switch (localStorage.getItem(counter_AGB)) {
+          case '0': localStorage.setItem(counter_AGB, '1');
+          case '1': localStorage.setItem(counter_AGB, '2');
+          case '2': localStorage.setItem(counter_AGB, '3');
+          case '3': localStorage.setItem(counter_AGB, '4');
+          case '4': localStorage.setItem(counter_AGB, '5');
+          case '5': localStorage.setItem(counter_AGB, '6');
+          case '6': localStorage.setItem(counter_AGB, '7');
+          case '7': localStorage.setItem(counter_AGB, '8');
+          case '8': localStorage.setItem(counter_AGB, '9');
+          case '9': localStorage.setItem(counter_AGB, '10');
+
+      }
+    }
+    else if (bool_7) {
+      let div_AGB_array = new Array();
+      if (checkbox_1.checked) {
+        switch (localStorage.getItem(counter_AGB)) {
+          case '0': localStorage.setItem(counter_AGB, '1');
+                     div_AGB_array[0] = $('<div></div>');
+          case '1': localStorage.setItem(counter_AGB, '2');
+                    div_AGB_array[1] = $('<div></div>');
+          case '2': localStorage.setItem(counter_AGB, '3');
+          div_AGB_array[2] = $('<div></div>');
+          case '3': localStorage.setItem(counter_AGB, '4');
+          div_AGB_array[3] = $('<div></div>');
+          case '4': localStorage.setItem(counter_AGB, '5');
+          div_AGB_array[4] = $('<div></div>');
+          case '5': localStorage.setItem(counter_AGB, '6');
+          div_AGB_array[5] = $('<div></div>');
+          case '6': localStorage.setItem(counter_AGB, '7');
+          div_AGB_array[6] = $('<div></div>');
+          case '7': localStorage.setItem(counter_AGB, '8');
+          div_AGB_array[7] = $('<div></div>');
+          case '8': localStorage.setItem(counter_AGB, '9');
+          div_AGB_array[8] = $('<div></div>');
+          case '9': localStorage.setItem(counter_AGB, '10');
+          div_AGB_array[9] = $('<div></div>');
+        }
+      }
+    }
   }
