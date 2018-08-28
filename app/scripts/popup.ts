@@ -14,6 +14,12 @@ key = 'lS';
 if (localStorage.getItem(key) !== 'true' && localStorage.getItem(key) !== 'false') {
  localStorage.setItem(key, 'false');
  }
+ let key_2: any;
+key_2 = 'lS_2';
+if (localStorage.getItem(key_2) !== 'true' && localStorage.getItem(key_2) !== 'false') {
+ localStorage.setItem(key_2, 'false');
+ }
+
  // div of page 3
  let div_page_3: any;
  div_page_3 = $('<div></div>')
@@ -81,58 +87,41 @@ $(document).ready(
   let number_page: any;
   number_page = 1;
   lS = localStorage.getItem(key);
-
-
-
-    $('#button_firstpage').click( () => {
-
-    if (lS === 'false') {
-      loadSecondPage(content_1, content_2);
-    number_page = false;
-    bool_4 = true;
-          localStorage.setItem(key, 'true');
-  }
+ if (lS === 'false') {
+      $('#popup-content_2').removeClass('hidden');
+      localStorage.setItem(key, 'true');
+    }
     else if (lS === 'true') {
-      content_1 = $('#content_1')
-     .addClass('hidden');
-     loadThirdPage(content_2);
-     number_page = 2;
-  }
-
-  });
-  $('#button_secondpage').click( () => {
-    // check if there had been AGBs loaded before
-    if (bool_5 ) { // && bool_input_vis
-       $('#div_page_3').removeClass('hidden');
-       $('#button_thirdpage').removeClass('hidden');
-       $('#content_2').addClass('hidden');
-      }
-      else {
+      loadThirdPage(content_2);
+    }
+    $('#button_firstpage').click( () => {
+      $('#popup-content_2').addClass('hidden');
+      if (!bool_5) {
         loadThirdPage(content_2);
       }
-    counter = 0;
-    bool_3 = false;
+      else {
+        $('#div_page_3').removeClass('hidden');
+        $('#button_thirdpage').removeClass('hidden');
+      }
+        });
 
-    number_page = 2;
+
+  $('#button_secondpage').click( () => {
+    $('#div_page_3').removeClass('hidden');
+  $('#button_thirdpage').removeClass('hidden');
+  $('#content_2').addClass('hidden');
+    bool_3 = false; // Check not complete
   });
 
 $('#general_information').click(() => {
-  switch (number_page) {
-    case 1: {
-       // possibility 1: page one info
-      loadSecondPage(content_1, content_2);
-    }
-    case 2: {
 
+      $('#popup-content_2').removeClass('hidden');
           $('#div_page_3').addClass('hidden');
           bool_5 = true;
 
   let button_thirdpage: any;
     button_thirdpage = $('#button_thirdpage');
     button_thirdpage.addClass('hidden');
-  loadSecondPage(content_1, content_2);
-    }
-  }
 });
 
 $('#closing_icon').click(
@@ -143,19 +132,20 @@ $('#closing_icon').click(
   }
 );
 
- function loadSecondPage(c1: any, c2: any) {
-
-  c1 = $('#content_1');
-  $('#content_1').addClass('hidden');
-
-
-  c2 = $('#content_2');
+ function loadSecondPage() {
+  $('#div_page_3').addClass('hidden');
+  $('#button_thirdpage').addClass('hidden');
   $('#content_2').removeClass('hidden');
   }
+
 function loadThirdPage(c2: any) {
 
 $(checkbox_1).change( (e: any) => {
-  if (e.target.checked && !bool_1) {
+    if (e.target.checked && !bool_1) {
+      if ( localStorage.getItem(key_2) === 'false') {
+        loadSecondPage();
+         localStorage.setItem(key_2, 'true');
+      }
     div_agb_2 = $('<div></div>')
     .attr('id', 'div_agb_2');
     let AGB_text_2 = $('<input>')
