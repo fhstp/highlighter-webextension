@@ -1,6 +1,6 @@
  // Loading of the second page through jQuery
  import * as $  from 'jquery';
-// page 1
+ import {browser} from 'webextension-polyfill-ts';
  let content_1: any;
  // page 2
 let content_2: any;
@@ -60,21 +60,12 @@ let checkbox_array = new Array(); // checkboxes of the criteria
 let textNode_array = new Array(); // actually strings & the text for the checkboxes
 
 function insertText() {
-  chrome.tabs.executeScript( {
-    code: 'window.getSelection().toString();'
-  }, function(selection) {
-    $('#AGBtext_1').val(selection[0]);
-  });
+  let AGBtext_1: any;
+   AGBtext_1 = $('#AGBtext_1');
+  browser.tabs.executeScript({file: '../contentscript.ts'});
+   alert(AGBtext_1.val());
 }
 
-function insertLink() {
-  chrome.tabs.executeScript({
-    code: 'window.location.href'
-  },
-function(href) {
-  $('#AGBlink_1').val(href);
-});
-}
 
 
 
@@ -103,7 +94,7 @@ $(document).ready(
      number_page = 2;
   }
   insertText();
-  insertLink();
+  // insertLink();
 
   });
 

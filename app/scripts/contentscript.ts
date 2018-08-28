@@ -1,4 +1,10 @@
 // Enable chromereload by uncommenting this line:
 // import 'chromereload/devonly'
 
-console.log(`'Allo 'Allo! Content script`);
+let selection = window.getSelection();
+
+function returnSelection() {
+  alert(selection.toString());
+  return selection.toString();
+}
+returnSelection();
