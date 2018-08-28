@@ -434,11 +434,11 @@ function sendData_no_compare(head_link: any, head_text: any) {
   xhttp.open('POST', 'http://highlighter.media.fhstp.ac.at:8080/agb', true);
   xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
    xhttp.onreadystatechange = () => {
-    if ( xhttp.readyState === 2 && xhttp.status === 201) {
-//      JSON.parse(xhttp.responseText);
-      console.log('hello ' + xhttp.responseText);
-      console.log(JSON.parse(xhttp.responseText));
-      alert(this.responseText);
+    if (xhttp.readyState === 4 && xhttp.status === 201) {
+      let data = xhttp.responseText;
+      let JSON_data = JSON.parse(data);
+      alert(JSON_data.corpus.documents[0]);
+
   } };
   xhttp.send('link=' + head_link + '&text=' + head_text + '&search[]=' + criteria_array[0]);
 
