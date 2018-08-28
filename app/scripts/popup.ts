@@ -462,7 +462,7 @@ for (let i = 0; i < JSON.parse(json_criteria).length; i++) {
     });
 }}
 
-function insertIntoHTML_with_compare(head_text_1: any, head_link_1: any, head_text_2: any, head_link_2: any,json_criteria: any) {
+function insertIntoHTML_with_compare(head_text_1: any, head_link_1: any, head_text_2: any, head_link_2: any, json_criteria: any) {
   chrome.tabs.create({url: 'http://highlighter.media.fhstp.ac.at:8080/agb'});
   // first inputs
   chrome.tabs.executeScript({
