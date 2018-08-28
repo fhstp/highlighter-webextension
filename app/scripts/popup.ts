@@ -1,5 +1,7 @@
  // Loading of the second page through jQuery
  import * as $  from 'jquery';
+ // import { test } from './additionnal_scripts.ts/utility';
+
 // page 1
  let content_1: any;
  // page 2
@@ -25,8 +27,7 @@ if (localStorage.getItem(key_2) !== 'true' && localStorage.getItem(key_2) !== 'f
 
 
  // giving the checkbox an event
-let checkbox_1: any;
-checkbox_1 = $('<input>');
+let checkbox_1 = $('<input>');
  // div_of the add critiques div
 
 
@@ -37,11 +38,11 @@ checkbox_1 = $('<input>');
 
 let bool_1: boolean; // for checking if the checkbox is not being activated for the frist time // decides if the second input fields should be loaded after the checking of of checkbox_1
  bool_1 = false;
- let bool_3: any = false; // currently not used ( it is used at the functions addCritique() and hideNexCritique()
- let bool_4: any = false; // it is for inicating that the the localStorage caluable is now set on true (is now "hiding" the information pages)
- let bool_5: any = false; // for indicating the press of the info-button on page 3
- let bool_crit_sel: any = false; // checkes if the criteria have been added
- let bool_input_vis: any = false;
+ let bool_3 = false; // currently not used ( it is used at the functions addCritique() and hideNexCritique()
+ let bool_4= false; // it is for inicating that the the localStorage caluable is now set on true (is now "hiding" the information pages)
+ let bool_5 = false; // for indicating the press of the info-button on page 3
+ let bool_crit_sel= false; // checkes if the criteria have been added
+ let bool_input_vis= false;
 
 let div_agb_2: any; // div in which the added inputs of the checkbox are
 
@@ -65,6 +66,19 @@ input_critics = $('<input>') // with only input as the string it had been added 
 let checkbox_array = new Array(); // checkboxes of the criteria
 let textNode_array = new Array(); // actually strings & the text for the checkboxes
 
+// button for deleting criteria
+
+let button_delete_criteria: any;
+let image_delete_criteria: any;
+
+let div_new_critique: any; // the div for only on of the new criteria
+// div_new_critique = new Array();
+
+let  div_all_new_criteria = $('<div></div>');
+let val = 0;// for counting the new criteria
+
+
+
 $(document).ready(
   function listenToClicks() {
   let content_1: any;
@@ -73,7 +87,7 @@ $(document).ready(
   let number_page: any;
   number_page = 1;
   lS = localStorage.getItem(key);
-    if (lS === 'false') {
+ if (lS === 'false') {
       $('#popup-content_2').removeClass('hidden');
       localStorage.setItem(key, 'true');
     }
@@ -97,9 +111,7 @@ $(document).ready(
   $('#button_thirdpage').removeClass('hidden');
   $('#content_2').addClass('hidden');
     bool_3 = false; // Check not complete
-
   });
-
 
 $('#general_information').click(() => {
 
@@ -112,33 +124,21 @@ $('#general_information').click(() => {
     button_thirdpage.addClass('hidden');
 });
 
-
-
-
-
 $('#closing_icon').click(
   (() => {
     window.close();
   })
 );
-
-
-
   }
 );
-
-
-
-
 
  function loadSecondPage() {
   $('#div_page_3').addClass('hidden');
   $('#button_thirdpage').addClass('hidden');
   $('#content_2').removeClass('hidden');
   }
+
 function loadThirdPage(c2: any) {
-
-
 
 $(checkbox_1).change( (e: any) => {
     if (e.target.checked && !bool_1) {
@@ -175,8 +175,6 @@ $(checkbox_1).change( (e: any) => {
 
 });
 
-
-
   c2 =  $('#content_2');
   c2.attr('class', 'hidden');
 
@@ -203,7 +201,6 @@ checkbox_1
  .attr('type', 'checkbox')
 .attr('id', 'checkbox_1');
 
-
   let textNode_1 = 'Vergleiche AGBs';
 
   div
@@ -212,24 +209,19 @@ checkbox_1
 
   div_page_3.append(div);
 
-
   let div_array = new Array();
-
 
   let div_page_3_part_2: any;
   div_page_3_part_2 = $('<div></div>')
   .attr('id', 'div_page_3_part_2');
-
 
   title_div = $('<h3></h3>')
   .attr('class', 'heading_3')
   .attr('id', 'div_add_crits')
   .append('Kriterien');
 
-
   div_page_3_part_2.append(title_div);
   div_page_3.append(div_page_3_part_2);
-
 
   div_page_3_part_2.append(title_div);
   div_page_3.append(div_page_3_part_2);
@@ -268,25 +260,20 @@ checkbox_1
         .append('Garantie')
         .attr('class', 'critiques');
         div_array[i].append(textNode_array[i]);
-
       }
       case 4: {
         textNode_array[4] = $('<span></span>')
         .append('Umtausch')
         .attr('class', 'critiques');
         div_array[i] .append(textNode_array[i]);
-
       }
       case 5: {
         textNode_array[5] = $('<span></span>')
         .append('Rückgabe')
         .attr('class', 'critiques');
         div_array[i].append(textNode_array[i]);
-
       }
-
         div_page_3.append(div_array[i]);
-
     }
   }
   add_button = $('<button></button>')
@@ -318,6 +305,11 @@ checkbox_1
     });
       // adding the event to the OK-button
       $(input_critics_button).click( () => {
+
+
+
+
+
         let input_crit: any;
         input_crit = $('input#input_critiques');
         // check if there are critiques
@@ -331,28 +323,44 @@ checkbox_1
             }
           }
 
+      if (!bool_crit_sel ) {
 
 
-      if (!bool_crit_sel) {
-      let crit_checkbox: any;
-      crit_checkbox = $('<input>')
-      .attr('type', 'checkbox');
+        let crit_checkbox: any;
+        crit_checkbox = $('<input>')
+        .attr('type', 'checkbox');
 
-      let div_new_critique: any;
-      div_new_critique = $('<div></div>')
-      .append(crit_checkbox);
-
-      let span_new_critique: any;
-      span_new_critique = $('<span></span>')
-      .attr('class', 'critiques');
-
-      div_new_critique.append(crit_checkbox);
-      span_new_critique.append(input_crit.val());
-      div_new_critique.append(span_new_critique);
+        let span_new_critique: any;
+        span_new_critique = $('<span></span>')
+        .attr('class', 'critiques');
 
 
-       $('div#div_add_crits').before(div_new_critique);
+
+        image_delete_criteria = $('<img>')
+        .attr('src','../images/delete_criteria_img.png')
+        .attr('height','20px')
+        .attr('width','20px');
+        button_delete_criteria = $('<button></button')
+        .attr('class','button_delete_criteria')
+        .append(image_delete_criteria);
+        span_new_critique.append(input_crit.val());
+       div_new_critique= $('<div></div>')
+        .attr('class','div_new_critiques')
+        .append(crit_checkbox)
+        .append(crit_checkbox)
+        .append(span_new_critique)
+        .append(button_delete_criteria);
+
+div_all_new_criteria.append( div_new_critique);
+$('div#div_add_crits').before(div_all_new_criteria);
+
+  $('.button_delete_criteria').click( (e) => {
+     $(e.currentTarget).parent().remove();
+   });
+
+
       }
+
       else {
       alert('Dieses Kriterium ist schon hinzugefügt');
       bool_crit_sel = false;
@@ -360,13 +368,6 @@ checkbox_1
 
         }
       });
-      $('#button_thirdpage').click( () => {
-        // if button.thirdpage.checked
-        if (!checkbox_1.checked) {
-          sendData_no_compare();
-        }
-      });
-
 
 
        // The primary button of the third page
@@ -379,7 +380,7 @@ checkbox_1
   div_page_3.appendTo(document.body);
   button_thirdpage.appendTo(document.body);
 }
-  function addNewCritiques() {
+   function addNewCritiques() {
 
   if (counter === 0) {
 
@@ -393,16 +394,22 @@ checkbox_1
 
 
 
-// alert('add');
+
 }
 else if (counter > 0) {
-// alert('show');
+
   input_critiques.removeClass('hidden');
 }
 bool_3 = true;
 
 }
 
+
+$('#button_thirdpage').click( () => {
+
+  if (!(checkbox_1 as any).checked) {
+  }
+});
 function hideNewCritiques() {
 
  // alert('hide');
@@ -414,28 +421,4 @@ function hideNewCritiques() {
   }
 }
 
-// Here come the functiona which should send the data to the server
 
-function sendData_no_compare() {
-  let criteria_array = new Array ();
-  let content_inputtext: any;
-  let content_inputtlink: any;
-  for (let i = 0; i < checkbox_array.length; i++) {
-    if (checkbox_array[i].checked) {
-      criteria_array[i] = textNode_array[i].innerHTML;
-    }
-  }
-  let xhttp = new XMLHttpRequest();
-  let json_criteria = JSON.stringify(criteria_array);
-  xhttp.open('POST', '/', true);
-
-  xhttp.setRequestHeader('Content_type', 'application/x-www-form-urlencoded');
-  xhttp.onreadystatechange = () => {
-    if ( this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      // Further Processing
-  }
-  xhttp.send(json_criteria);
-  };
-
-
-}
