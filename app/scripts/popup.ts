@@ -1,5 +1,6 @@
 // Loading of the second page through jQuery
 import * as $  from 'jquery';
+import { browser } from 'webextension-polyfill-ts';
 // page 1
  let content_1: any;
  // page 2
@@ -449,8 +450,8 @@ function sendData_no_compare(head_link: any, head_text: any, checkbox_array: any
   }
 
 function insertIntoHTML_without_compare(head_text: any, head_link: any, json_criteria: any) {
-chrome.tabs.create({url: 'https://highlighter.media.fhstp.ac.at'});
-chrome.tabs.executeScript({
+browser.tabs.create({url: 'https://highlighter.media.fhstp.ac.at'});
+browser.tabs.executeScript({
   code: 'document.body.innerHTML = ""; var input_text = document.createElement("input"); var textNode = "' + head_text + '"; input_text.setAttribute("value", textNode );document.body.appendChild(input_text)'
 });
 chrome.tabs.executeScript({
@@ -463,23 +464,23 @@ for (let i = 0; i < JSON.parse(json_criteria).length; i++) {
 }}
 
 function insertIntoHTML_with_compare(head_text_1: any, head_link_1: any, head_text_2: any, head_link_2: any, json_criteria: any) {
-  chrome.tabs.create({url: 'https://highlighter.media.fhstp.ac.at'});
+  browser.tabs.create({url: 'https://highlighter.media.fhstp.ac.at'});
   // first inputs
-  chrome.tabs.executeScript({
+  browser.tabs.executeScript({
     code: 'document.body.innerHTML = ""; var input_text = document.createElement("input"); var textNode = "' + head_text_1 + '"; input_text.setAttribute("value", textNode );document.body.appendChild(input_text)'
   });
-  chrome.tabs.executeScript({
+  browser.tabs.executeScript({
     code: 'var input_link= document.createElement("input"); var textNode = "' + head_link_1 + '"; input_link.setAttribute("value", textNode );document.body.appendChild(input_link)'
   });
   // second inputs
-  chrome.tabs.executeScript({
+  browser.tabs.executeScript({
     code: 'var input_text = document.createElement("input"); var textNode = "' + head_text_2 + '"; input_text.setAttribute("value", textNode );document.body.appendChild(input_text)'
   });
-  chrome.tabs.executeScript({
+  browser.tabs.executeScript({
     code: 'var input_link= document.createElement("input"); var textNode = "' + head_link_2 + '"; input_link.setAttribute("value", textNode );document.body.appendChild(input_link)'
   });
   for (let i = 0; i < JSON.parse(json_criteria).length; i++) {
-      chrome.tabs.executeScript({
+    browser.tabs.executeScript({
         code: 'var input_attr= new Array(); var textNode = "' + JSON.parse(json_criteria)[i] + '";input_attr[' + i + '] = document.createElement("div");input_attr[' + i + '].innerHTML = textNode;document.body.appendChild(input_attr[' + i + ']);'
       });
   }}
