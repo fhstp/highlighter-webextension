@@ -435,7 +435,7 @@ function sendData_no_compare(head_link: any, head_text: any, checkbox_array: any
   xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
    xhttp.onreadystatechange = () => {
     if (xhttp.readyState === 4 && xhttp.status === 201) {
-      insertIntoHTML_without_compare(head_text);
+      insertIntoHTML_without_compare(head_text, head_link, json_criteria);
       let data = xhttp.responseText;
       let JSON_data = JSON.parse(data);
 
@@ -445,13 +445,21 @@ function sendData_no_compare(head_link: any, head_text: any, checkbox_array: any
 
   }
 
-function insertIntoHTML_without_compare(head_text: any) {
+function insertIntoHTML_without_compare(head_text: any, head_link: any, json_criteria: any) {
 chrome.tabs.create({url: 'http://highlighter.media.fhstp.ac.at:8080/agb'});
 chrome.tabs.executeScript({
   code: 'document.body.innerHTML = ""; var input_text = document.createElement("input"); var textNode = "' + head_text + '"; input_text.setAttribute("value", textNode );document.body.appendChild(input_text)'
 });
+chrome.tabs.executeScript({
+  code: 'var input_link= document.createElement("input"); var textNode = "' + head_link + '"; input_link.setAttribute("value", textNode );document.body.appendChild(input_link)'
+});
+for (let i = 0; i < JSON.parse(json_criteria).length; i++) {
+    chrome.tabs.executeScript({
+      code: 'var input_attr= new Array(); var textNode = "' + JSON.parse(json_criteria)[i] + '";input_attr[' + i + '] = document.createElement("div");input_attr[' + i + '].innerHTML = textNode;document.body.appendChild(input_attr[' + i + ']);'
+    });
+}}
 
-}
+
 
 
 
