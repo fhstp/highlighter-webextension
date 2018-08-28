@@ -308,10 +308,6 @@ checkbox_1
       // adding the event to the OK-button
       $(input_critics_button).click( () => {
 
-
-
-
-
         let input_crit: any;
         input_crit = $('input#input_critiques');
         // check if there are critiques
@@ -336,18 +332,19 @@ checkbox_1
         span_new_critique = $('<span></span>')
         .attr('class', 'critiques');
 
+// <i class="fa fa-minus-circle" aria-hidden="true"></i>
 
+        image_delete_criteria = $('<i></i>')
+        .attr('id', 'delete_criteria')
+        .attr('class', 'fa fa-minus-circle')
+        .attr('aria-hidden', 'true');
 
-        image_delete_criteria = $('<img>')
-        .attr('src','../images/delete_criteria_img.png')
-        .attr('height','20px')
-        .attr('width','20px');
         button_delete_criteria = $('<button></button')
-        .attr('class','button_delete_criteria')
+        .attr('class', 'button_delete_criteria')
         .append(image_delete_criteria);
         span_new_critique.append(input_crit.val());
-       div_new_critique= $('<div></div>')
-        .attr('class','div_new_critiques')
+       div_new_critique = $('<div></div>')
+        .attr('class', 'div_new_critiques')
         .append(crit_checkbox)
         .append(crit_checkbox)
         .append(span_new_critique)
@@ -372,7 +369,7 @@ $('div#div_add_crits').before(div_all_new_criteria);
       });
       $('#button_thirdpage').click( () => {
         // if button.thirdpage.checked
-        if (!checkbox_1.checked) {
+        if (!checkbox_1.prop('checked')) {
           // sendData_no_compare();
         }
       });
