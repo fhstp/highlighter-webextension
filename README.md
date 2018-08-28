@@ -1,13 +1,19 @@
+# ![HighLighter](./app/images/Logo_contractVis.png) Web Extension
 
-# Highlighter Web Extension
+Buying a product or signing up for a service implicates a contract between the consumer and the merchant or provider.
+The average web user is often worried about the possible consequences from such a contract.
+They are worried in particular when they interact with a new web shop or when the general terms and conditions are updated.
+However, each contract involves a multitude of legal text that is hard to read and understand.
 
-Based on:
-[https://github.com/mazamachi/generator-chrome-extension-kickstart-typescript](https://github.com/mazamachi/generator-chrome-extension-kickstart-typescript)
+**ContractVis HighLighter** provides sophisticated text visualization support for online shopping,
+yet targets non-professional users in a casual context without training.
 
-With elements from:
-[https://github.com/chibat/chrome-extension-typescript-starter](https://github.com/chibat/chrome-extension-typescript-starter)
+ContractVis HighLighter consists of three components:
+* a web extension (this package),
+* a [web app](https://github.com/fhstp/highlighter-webapp), and
+* a [backend server](https://github.com/fhstp/highlighter-backend).
 
-all under [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Tags**: Web Extension, TypeScript and Visual Studio Code
 
@@ -18,7 +24,7 @@ all under [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]
 ## Usage (npm)
 run the npm scripts that are avialable:
 
-Command | Effect 
+Command | Effect
 --- | ---
 start | Runs `npm run dev:chrome` which will start the development and watch for the chrome browser
 build | Runs `npm run build:chrome` which will make a production build for chrome store and .zip the package
@@ -97,3 +103,13 @@ if(process.env.NODE_ENV === 'development'){
 }
 ```
 
+## Acknowledgments
+
+This work is supported by the [Internet Foundation Austria (IPA)](https://www.netidee.at/)
+via the netidee project [ContractVis](http://contractvis.fhstp.ac.at/) (no. 2116).
+
+The web extension seed is based on
+[https://github.com/mazamachi/generator-chrome-extension-kickstart-typescript](https://github.com/mazamachi/generator-chrome-extension-kickstart-typescript)
+with elements from
+[https://github.com/chibat/chrome-extension-typescript-starter](https://github.com/chibat/chrome-extension-typescript-starter)
+.
