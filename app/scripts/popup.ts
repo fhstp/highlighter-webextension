@@ -279,9 +279,11 @@ checkbox_1
   add_button = $('<button></button>')
   .attr('id', 'add_button');
 
-  add_button_image = $('<img>')
+  add_button_image = $('<i></i>')
   .attr('id', 'add_buttonimage')
-  .attr('src', '../images/add_button.png');
+  .attr('class','fa fa-plus-circle')
+  .attr('aria-hidden','true');
+
 
 
 
@@ -368,7 +370,12 @@ $('div#div_add_crits').before(div_all_new_criteria);
 
         }
       });
-
+      $('#button_thirdpage').click( () => {
+        // if button.thirdpage.checked
+        if (!checkbox_1.checked) {
+          // sendData_no_compare();
+        }
+      });
 
        // The primary button of the third page
   let button_thirdpage: any;
@@ -404,12 +411,6 @@ bool_3 = true;
 
 }
 
-
-$('#button_thirdpage').click( () => {
-
-  if (!(checkbox_1 as any).checked) {
-  }
-});
 function hideNewCritiques() {
 
  // alert('hide');

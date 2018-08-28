@@ -42,6 +42,8 @@ html, body{
 }
 #general_information{
   float:right;
+  font-size:25px;
+  color:#3577B1;
 }
 .popup-content_1{
   background-color:#EBF1F7;
@@ -89,9 +91,8 @@ li{
 
 
 #add_buttonimage{
-
-  height:20px;
-  width:20px;
+  font-size:20px;
+  color:#3577B1;
 }
 #button_critiques{
   padding:5px;
@@ -99,10 +100,9 @@ li{
   padding-right:7px;
   margin-left:5px;
 }
-.button_delete_criteria{
- padding:0px;
- margin-left:3px;
- margin-right:3px;
- background-color:white;
-  border:none;
+#closing_icon{
+  color:#3577B1;
+  font-size:25px;
+  margin-right:10px;
 }
+
