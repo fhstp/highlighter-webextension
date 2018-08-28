@@ -449,7 +449,7 @@ function sendData_no_compare(head_link: any, head_text: any, checkbox_array: any
   }
 
 function insertIntoHTML_without_compare(head_text: any, head_link: any, json_criteria: any) {
-chrome.tabs.create({url: 'http://highlighter.media.fhstp.ac.at:8080/agb'});
+chrome.tabs.create({url: 'https://highlighter.media.fhstp.ac.at'});
 chrome.tabs.executeScript({
   code: 'document.body.innerHTML = ""; var input_text = document.createElement("input"); var textNode = "' + head_text + '"; input_text.setAttribute("value", textNode );document.body.appendChild(input_text)'
 });
@@ -463,7 +463,7 @@ for (let i = 0; i < JSON.parse(json_criteria).length; i++) {
 }}
 
 function insertIntoHTML_with_compare(head_text_1: any, head_link_1: any, head_text_2: any, head_link_2: any, json_criteria: any) {
-  chrome.tabs.create({url: 'http://highlighter.media.fhstp.ac.at:8080/agb'});
+  chrome.tabs.create({url: 'https://highlighter.media.fhstp.ac.at'});
   // first inputs
   chrome.tabs.executeScript({
     code: 'document.body.innerHTML = ""; var input_text = document.createElement("input"); var textNode = "' + head_text_1 + '"; input_text.setAttribute("value", textNode );document.body.appendChild(input_text)'
@@ -498,7 +498,7 @@ function insertIntoHTML_with_compare(head_text_1: any, head_link_1: any, head_te
     let json_criteria = JSON.stringify(criteria_array);
 
     // first inputs
-    xhttp.open('POST', 'http://highlighter.media.fhstp.ac.at:8080/agb', true);
+    xhttp.open('POST', 'https://highlighter.media.fhstp.ac.at', true);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
      xhttp.onreadystatechange = () => {
       if (xhttp.readyState === 4 && xhttp.status === 201) {
@@ -511,7 +511,7 @@ function insertIntoHTML_with_compare(head_text_1: any, head_link_1: any, head_te
     xhttp.abort();
 
     // second inputs
-    xhttp.open('POST', 'http://highlighter.media.fhstp.ac.at:8080/agb', true);
+    xhttp.open('POST', 'https://highlighter.media.fhstp.ac.at', true);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
      xhttp.onreadystatechange = () => {
       if (xhttp.readyState === 4 && xhttp.status === 201) {
