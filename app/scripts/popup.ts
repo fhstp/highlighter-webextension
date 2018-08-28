@@ -369,7 +369,7 @@ checkbox_1
       });
       $(button_thirdpage).click( () => {
        // if (!checkbox_1.checked) {
-          sendData_no_compare($('#AGBlink_1').val(), $('#AGBtext_1').val());
+          sendData_no_compare($('#AGBlink_1').val(), $('#AGBtext_1').val(), checkbox_array);
        // }
       });
 
@@ -417,11 +417,11 @@ function hideNewCritiques() {
 
 // Here come the functiona which should send the data to the server
 
-function sendData_no_compare(head_link: any, head_text: any) {
+function sendData_no_compare(head_link: any, head_text: any, checkbox_array: any) {
   let criteria_array = new Array();
   for (let i = 0; i < checkbox_array.length; i++) {
-    if (checkbox_array[i].checked) {
-      criteria_array[i] = textNode_array[i].innerHTML;
+    if (checkbox_array[i].prop('checked')) {
+      criteria_array[i] = textNode_array[i].html();
     }
     else {
       criteria_array[i] = '';
@@ -435,16 +435,23 @@ function sendData_no_compare(head_link: any, head_text: any) {
   xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
    xhttp.onreadystatechange = () => {
     if (xhttp.readyState === 4 && xhttp.status === 201) {
+      insertIntoHTML_without_compare(head_text);
       let data = xhttp.responseText;
       let JSON_data = JSON.parse(data);
-      alert(JSON_data.corpus.documents[0]);
 
   } };
-  xhttp.send('link=' + head_link + '&text=' + head_text + '&search[]=' + criteria_array[0]);
+  xhttp.send('link=' + head_link + '&text=' + head_text + '&search[]=' + json_criteria);
 
 
   }
 
+function insertIntoHTML_without_compare(head_text: any) {
+chrome.tabs.create({url: 'http://highlighter.media.fhstp.ac.at:8080/agb'});
+chrome.tabs.executeScript({
+  code: 'document.body.innerHTML = ""; var input_text = document.createElement("input"); var textNode = "' + head_text + '"; input_text.setAttribute("value", textNode );document.body.appendChild(input_text)'
+});
+
+}
 
 
 
