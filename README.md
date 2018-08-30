@@ -106,7 +106,8 @@ if(process.env.NODE_ENV === 'development'){
 ## Acknowledgments
 
 This work is supported by the [Internet Foundation Austria (IPA)](https://www.netidee.at/)
-via the netidee project [ContractVis](http://contractvis.fhstp.ac.at/) (no. 2116).
+via the netidee project [ContractVis](http://contractvis.fhstp.ac.at/) (no. 2116) and
+by the [Austrian Research Promotion Agency (FFG)](https://www.ffg.at/praktika) via the Talente Praktika (no. 870062).
 
 The web extension seed is based on
 [https://github.com/mazamachi/generator-chrome-extension-kickstart-typescript](https://github.com/mazamachi/generator-chrome-extension-kickstart-typescript)
