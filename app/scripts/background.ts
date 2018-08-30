@@ -10,3 +10,4 @@ chrome.browserAction.setBadgeText({
 });
 
 console.log(`'Allo 'Allo! Event Page for Browser Action`);
+console.log('test');

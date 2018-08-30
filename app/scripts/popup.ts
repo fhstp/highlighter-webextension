@@ -1,8 +1,7 @@
  // Loading of the second page through jQuery
  import * as $  from 'jquery';
- // import { test } from './additionnal_scripts.ts/utility';
+ import {browser} from 'webextension-polyfill-ts';
 
-// page 1
  let content_1: any;
  // page 2
 let content_2: any;
@@ -66,7 +65,14 @@ input_critics = $('<input>') // with only input as the string it had been added 
 let checkbox_array = new Array(); // checkboxes of the criteria
 let textNode_array = new Array(); // actually strings & the text for the checkboxes
 
-// button for deleting criteria
+
+function insertText() {
+  let AGBtext_1: any;
+   AGBtext_1 = $('#AGBtext_1');
+  browser.tabs.executeScript({file: '../contentscript.ts'});
+   alert(AGBtext_1.val());
+}
+
 
 let button_delete_criteria: any;
 let image_delete_criteria: any;
@@ -92,6 +98,22 @@ $(document).ready(
       localStorage.setItem(key, 'true');
     }
     else if (lS === 'true') {
+      content_1 = $('#content_1')
+     .addClass('hidden');
+     loadThirdPage(content_2);
+     number_page = 2;
+  }
+  insertText();
+  // insertLink();
+
+  });
+
+  $('#button_secondpage').click( () => {
+    // check if there had been AGBs loaded before
+    if (bool_5 ) { // && bool_input_vis
+       $('#div_page_3').removeClass('hidden');
+       $('#button_thirdpage').removeClass('hidden');
+       $('#content_2').addClass('hidden');
       loadThirdPage(content_2);
     }
     $('#button_firstpage').click( () => {
