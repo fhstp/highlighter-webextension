@@ -3,6 +3,9 @@ html, body{
   width:350px;
   font-family: 'PT Sans', sans-serif;
 }
+input:focus,button:focus{
+  outline:none;
+}
 #icon_contractVis{
   height:45px;
   width: 135px;
