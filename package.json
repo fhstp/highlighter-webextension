@@ -68,7 +68,6 @@
     "i": "^0.3.6",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.4",
-    "typescript": "^3.0.1",
-    "webextension-polyfill-ts": "^0.8.8"
+    "typescript": "^3.0.1"
   }
 }
