@@ -462,16 +462,3 @@ function sendData_no_compare() {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-console.log('TEST');
