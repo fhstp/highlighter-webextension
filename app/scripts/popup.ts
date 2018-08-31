@@ -1,7 +1,6 @@
  // Loading of the second page through jQuery
  import * as $  from 'jquery';
- // import { test } from './additionnal_scripts.ts/utility';
-
+ import { browser } from 'webextension-polyfill-ts';
 // page 1
  let content_1: any;
  // page 2
@@ -66,8 +65,21 @@ input_critics = $('<input>') // with only input as the string it had been added 
 let checkbox_array = new Array(); // checkboxes of the criteria
 let textNode_array = new Array(); // actually strings & the text for the checkboxes
 
-// button for deleting criteria
+function insertText() {
+  browser.tabs.executeScript( {
+    code: 'window.getSelection().toString();'
+  }).then(function(selection) {
+    $('#AGBtext_1').val(selection[0]);
+  });
+}
 
+function insertLink() {
+  browser.tabs.executeScript({
+    code: 'window.location.href'
+  }).then(function(href) {
+  $('#AGBlink_1').val(href);
+});
+}
 let button_delete_criteria: any;
 let image_delete_criteria: any;
 
@@ -92,45 +104,50 @@ $(document).ready(
       localStorage.setItem(key, 'true');
     }
     else if (lS === 'true') {
+      // content_1 = $('#content_1')
+    //  .addClass('hidden');
+     loadThirdPage(content_2);
+    //  number_page = 2;
+  }
+  insertText();
+  insertLink();
+
+  $('#button_firstpage').click( () => {
+    $('#popup-content_2').addClass('hidden');
+    if (!bool_5) {
       loadThirdPage(content_2);
     }
-    $('#button_firstpage').click( () => {
-      $('#popup-content_2').addClass('hidden');
-      if (!bool_5) {
-        loadThirdPage(content_2);
-      }
-      else {
-        $('#div_page_3').removeClass('hidden');
-        $('#button_thirdpage').removeClass('hidden');
-      }
-        });
+    else {
+      $('#div_page_3').removeClass('hidden');
+      $('#button_thirdpage').removeClass('hidden');
+    }
+      });
 
 
-  $('#button_secondpage').click( () => {
-    $('#div_page_3').removeClass('hidden');
-  $('#button_thirdpage').removeClass('hidden');
-  $('#content_2').addClass('hidden');
-    bool_3 = false; // Check not complete
-  });
+$('#button_secondpage').click( () => {
+  $('#div_page_3').removeClass('hidden');
+$('#button_thirdpage').removeClass('hidden');
+$('#content_2').addClass('hidden');
+  bool_3 = false; // Check not complete
+});
 
 $('#general_information').click(() => {
 
-      $('#popup-content_2').removeClass('hidden');
-          $('#div_page_3').addClass('hidden');
-          bool_5 = true;
+    $('#popup-content_2').removeClass('hidden');
+        $('#div_page_3').addClass('hidden');
+        bool_5 = true;
 
-  let button_thirdpage: any;
-    button_thirdpage = $('#button_thirdpage');
-    button_thirdpage.addClass('hidden');
+let button_thirdpage: any;
+  button_thirdpage = $('#button_thirdpage');
+  button_thirdpage.addClass('hidden');
 });
 
 $('#closing_icon').click(
-  (() => {
-    window.close();
-  })
+(() => {
+  window.close();
+})
 );
-  }
-);
+});
 
  function loadSecondPage() {
   $('#div_page_3').addClass('hidden');
