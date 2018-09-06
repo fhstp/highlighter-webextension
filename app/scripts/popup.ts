@@ -18,7 +18,6 @@ key_2 = 'lS_2';
 if (localStorage.getItem(key_2) !== 'true' && localStorage.getItem(key_2) !== 'false') {
   localStorage.setItem(key_2, 'false');
 }
-
 // div of page 3
 let div_page_3: any;
 div_page_3 = $('<div></div>')

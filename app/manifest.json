@@ -1,10 +1,10 @@
 {
-  "name": "__MSG_appName__",
-  "short_name": "__MSG_appShortName__",
+  "name": "Highlighter",
+  "short_name": "Highlighter",
   "description": "__MSG_appDescription__",
   "version": "0.0.2",
   "manifest_version": 2,
-  "default_locale": "en",
+  "default_locale": "de",
   "icons": {
     "16": "images/icon-16.png",
     "128": "images/icon-128.png"
@@ -29,9 +29,6 @@
   },
   "minimum_chrome_version": "10.0",
   "devtools_page": "pages/devtools.html",
-  "chrome_url_overrides": {
-    "newtab": "pages/newtab.html"
-  },
   "content_scripts": [
     {
       "matches": [
