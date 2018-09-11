@@ -1,6 +1,12 @@
 // Loading of the second page through jQuery
 import * as $ from 'jquery';
 import { browser } from 'webextension-polyfill-ts';
+
+// import configs and do typecast to any fot iterations
+import * as crits from '../config/criterias.json';
+let criterias_array = (crits as any).criterias;
+
+//
 // page 1
 let content_1: any;
 // page 2
@@ -34,8 +40,8 @@ let counter: number;
 counter = 0;
 let input_critiques: any;
 
-let bool_1: boolean; // for checking if the checkbox is not being activated for the frist time // decides if the second input fields should be loaded after the checking of of checkbox_1
-bool_1 = false;
+let checkbox_first = false; // for checking if the checkbox is not being activated for the first time // decides if the second input fields should be loaded after the checking of of checkbox_1
+checkbox_first = false;
 let bool_3 = false; // currently not used ( it is used at the functions addCritique() and hideNexCritique()
 let bool_4 = false; // it is for inicating that the the localStorage caluable is now set on true (is now "hiding" the information pages)
 let bool_5 = false; // for indicating the press of the info-button on page 3
@@ -157,7 +163,7 @@ function loadSecondPage() {
 function loadThirdPage(c2: any) {
 
   $(checkbox_1).change((e: any) => {
-    if (e.target.checked && !bool_1) {
+    if (e.target.checked && !checkbox_first) {
       if (localStorage.getItem(key_2) === 'false') {
         loadSecondPage();
         localStorage.setItem(key_2, 'true');
@@ -177,14 +183,14 @@ function loadThirdPage(c2: any) {
 
       $('#AGBlink_1').after(div_agb_2);
 
-      bool_1 = true;
+      checkbox_first = true;
       bool_input_vis = true;
     }
-    else if (e.target.checked && bool_1) {
+    else if (e.target.checked && checkbox_first) {
       $(div_agb_2).removeAttr('class hidden');
       bool_input_vis = true;
     }
-    else if (!e.target.checked && bool_1) {
+    else if (!e.target.checked && checkbox_first) {
       $(div_agb_2).attr('class', 'hidden');
       bool_input_vis = false;
     }
@@ -242,7 +248,10 @@ function loadThirdPage(c2: any) {
   div_page_3_part_2.append(title_div);
   div_page_3.append(div_page_3_part_2);
 
-  for (let i = 0; i < 6; i++) {
+
+  // Ab hier die Erstellung ändern
+  for (let i = 0; i <  criterias_array.length; i++) {
+
     div_array[i] = $('<div></div>')
       .attr('id', 'div_out_of_array_' + (i + 1));
 
@@ -251,46 +260,13 @@ function loadThirdPage(c2: any) {
       .attr('type', 'checkbox');
     div_array[i].append(checkbox_array[i]);
 
-    switch (i) {
-      case 0: {
-        textNode_array[0] = $('<span></span>')
-          .append('Bezahlung')
-          .attr('class', 'critiques');
-        div_array[i].append(textNode_array[i]);
-      }
-      case 1: {
-        textNode_array[1] = $('<span></span>')
-          .append('Lieferung und Versand')
-          .attr('class', 'critiques');
-        div_array[i].append(textNode_array[i]);
+    // Add Checkboxes by using the Criterias.json
+    textNode_array[i] = $('<span></span>')
+      .append(criterias_array[i])
+      .attr('class', 'critiques');
+    div_array[i].append(textNode_array[i]);
+    div_page_3.append(div_array[i]);
 
-      }
-      case 2: {
-        textNode_array[2] = $('<span></span>')
-          .append('Gewährleistung')
-          .attr('class', 'critiques');
-        div_array[i].append(textNode_array[i]);
-      }
-      case 3: {
-        textNode_array[3] = $('<span></span>')
-          .append('Garantie')
-          .attr('class', 'critiques');
-        div_array[i].append(textNode_array[i]);
-      }
-      case 4: {
-        textNode_array[4] = $('<span></span>')
-          .append('Umtausch')
-          .attr('class', 'critiques');
-        div_array[i].append(textNode_array[i]);
-      }
-      case 5: {
-        textNode_array[5] = $('<span></span>')
-          .append('Rückgabe')
-          .attr('class', 'critiques');
-        div_array[i].append(textNode_array[i]);
-      }
-        div_page_3.append(div_array[i]);
-    }
   }
   add_button = $('<button></button>')
     .attr('id', 'add_button');

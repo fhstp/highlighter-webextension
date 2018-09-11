@@ -1,0 +1,18 @@
+{
+  "appName": {
+    "message": "Highlighter",
+    "description": "Der Name der App ist Highlighter"
+  },
+  "appShortName": {
+    "message": "Highlighter",
+    "description": "Die Kurzbeschreibung der App ist ebenfalls Highlighter"
+  },
+  "appDescription": {
+    "message": "Diese App ermöglicht dir in einem Gesetzes Text Passagen zu suchen und zu markieren",
+    "description": "Die Beschreibung dieser App"
+  },
+  "browserActionTitle": {
+    "message": "Highlighter",
+    "description": "Der Titel der Schaltfläche dieser App"
+  }
+}
