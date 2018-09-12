@@ -34,14 +34,13 @@ div_page_3 = $('<div></div>')
 let checkbox_1 = $('<input>');
 // div_of the add critiques div
 
+// All Triggers are now stored in a map
 let triggers = new Map();
 
-triggers.set('checkbox_first', false);
-triggers.set('bool_3', false);
-triggers.set('bool_4', false);
-triggers.set('bool_5', false);
-triggers.set('bool_crit_sel', false);
-triggers.set('bool_input_vis', false);
+triggers.set('checkbox_first_time', false);
+triggers.set('trigger_criterias', false);
+triggers.set('switch_to_third_page', false);
+triggers.set('criteria_selected', false);
 
 // a counter for the number of times the critiques-div was hidden
 let counter: number;
@@ -119,7 +118,7 @@ $(document).ready(
 
     $('#button_firstpage').click(() => {
       $('#popup-content_2').addClass('hidden');
-      if (!triggers.get('bool_5')) {
+      if (!triggers.get('switch_to_third_page')) {
         loadThirdPage(content_2);
       }
       else {
@@ -133,14 +132,14 @@ $(document).ready(
       $('#div_page_3').removeClass('hidden');
       $('#button_thirdpage').removeClass('hidden');
       $('#content_2').addClass('hidden');
-      triggers.set('bool_3', false); // Check not complete
+      triggers.set('trigger_criterias', false); // Check not complete
     });
 
     $('#general_information').click(() => {
 
       $('#popup-content_2').removeClass('hidden');
       $('#div_page_3').addClass('hidden');
-      triggers.set('bool_5', true);
+      triggers.set('switch_to_third_page', true);
 
       let button_thirdpage: any;
       button_thirdpage = $('#button_thirdpage');
@@ -163,7 +162,7 @@ function loadSecondPage() {
 function loadThirdPage(c2: any) {
 
   $(checkbox_1).change((e: any) => {
-    if (e.target.checked && !triggers.get('checkbox_first')) {
+    if (e.target.checked && !triggers.get('checkbox_first_time')) {
       if (localStorage.getItem(key_2) === 'false') {
         loadSecondPage();
         localStorage.setItem(key_2, 'true');
@@ -183,14 +182,14 @@ function loadThirdPage(c2: any) {
 
       $('#AGBlink_1').after(div_agb_2);
 
-      triggers.set('checkbox_first', true);
+      triggers.set('checkbox_first_time', true);
       triggers.set('bool_input,vis', true);
     }
-    else if (e.target.checked && triggers.get('checkbox_first')) {
+    else if (e.target.checked && triggers.get('checkbox_first_time')) {
       $(div_agb_2).removeAttr('class hidden');
       triggers.set('bool_input,vis', true);
     }
-    else if (!e.target.checked && triggers.get('checkbox_first')) {
+    else if (!e.target.checked && triggers.get('checkbox_first_time')) {
       $(div_agb_2).attr('class', 'hidden');
       triggers.set('bool_input,vis', true);
     }
@@ -290,9 +289,9 @@ function loadThirdPage(c2: any) {
 
   div_page_3.append(add_critics);
 
-  // the mistake was accidently putting it into the for-loop
+
   $(add_button).click(() => {
-    if (triggers.get('bool_3')) {
+    if (triggers.get('trigger_criterias')) {
       hideNewCritiques();
     }
     else {
@@ -311,11 +310,11 @@ function loadThirdPage(c2: any) {
       critiques_selector = $('.critiques');
       for (let i = 0; i < critiques_selector.length; i++) {
         if (critiques_selector[i].innerHTML === input_crit.val()) {
-          triggers.set('bool_crit_sel',  true);
+          triggers.set('criteria_selected',  true);
         }
       }
 
-      if (!triggers.get('bool_crit_sel')) {
+      if (!triggers.get('criteria_selected')) {
 
 
         let crit_checkbox: any;
@@ -356,7 +355,7 @@ function loadThirdPage(c2: any) {
 
       else {
         alert('Dieses Kriterium ist schon hinzugefügt');
-        triggers.set('bool_crit_sel',  false);
+        triggers.set('criteria_selected',  false);
       }
 
     }
@@ -389,17 +388,11 @@ function addNewCritiques() {
       .append(input_critics_button);
 
     $('div#div_add_crits').after(input_critics_div);
-
-
-
-
   }
   else if (counter > 0) {
-
     input_critiques.removeClass('hidden');
   }
-  triggers.set('bool_3',  true);
-
+  triggers.set('trigger_criterias',  true);
 }
 
 function hideNewCritiques() {
@@ -407,7 +400,7 @@ function hideNewCritiques() {
   // alert('hide');
   input_critiques = $('#input_critiques_div')
     .addClass('hidden');
-  triggers.set('bool_3',  false);
+  triggers.set('trigger_criterias',  false);
   if (counter === 0) {
     counter++;
   }
