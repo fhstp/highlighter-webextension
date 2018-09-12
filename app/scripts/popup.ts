@@ -15,12 +15,13 @@ let content_2: any;
 let add_button: any; let add_button_image: any;
 // localStorage implementation
 let key: any;
+
 key = 'lS';
 if (localStorage.getItem(key) !== 'true' && localStorage.getItem(key) !== 'false') {
   localStorage.setItem(key, 'false');
 }
-let key_2: any;
-key_2 = 'lS_2';
+let key_2 =  'lS_2';
+
 if (localStorage.getItem(key_2) !== 'true' && localStorage.getItem(key_2) !== 'false') {
   localStorage.setItem(key_2, 'false');
 }
@@ -29,24 +30,23 @@ let div_page_3: any;
 div_page_3 = $('<div></div>')
   .attr('id', 'div_page_3');
 
-
 // giving the checkbox an event
 let checkbox_1 = $('<input>');
 // div_of the add critiques div
 
+let triggers = new Map();
+
+triggers.set('checkbox_first', false);
+triggers.set('bool_3', false);
+triggers.set('bool_4', false);
+triggers.set('bool_5', false);
+triggers.set('bool_crit_sel', false);
+triggers.set('bool_input_vis', false);
 
 // a counter for the number of times the critiques-div was hidden
 let counter: number;
 counter = 0;
 let input_critiques: any;
-
-let checkbox_first = false; // for checking if the checkbox is not being activated for the first time // decides if the second input fields should be loaded after the checking of of checkbox_1
-checkbox_first = false;
-let bool_3 = false; // currently not used ( it is used at the functions addCritique() and hideNexCritique()
-let bool_4 = false; // it is for inicating that the the localStorage caluable is now set on true (is now "hiding" the information pages)
-let bool_5 = false; // for indicating the press of the info-button on page 3
-let bool_crit_sel = false; // checkes if the criteria have been added
-let bool_input_vis = false;
 
 let div_agb_2: any; // div in which the added inputs of the checkbox are
 
@@ -119,7 +119,7 @@ $(document).ready(
 
     $('#button_firstpage').click(() => {
       $('#popup-content_2').addClass('hidden');
-      if (!bool_5) {
+      if (!triggers.get('bool_5')) {
         loadThirdPage(content_2);
       }
       else {
@@ -133,14 +133,14 @@ $(document).ready(
       $('#div_page_3').removeClass('hidden');
       $('#button_thirdpage').removeClass('hidden');
       $('#content_2').addClass('hidden');
-      bool_3 = false; // Check not complete
+      triggers.set('bool_3', false); // Check not complete
     });
 
     $('#general_information').click(() => {
 
       $('#popup-content_2').removeClass('hidden');
       $('#div_page_3').addClass('hidden');
-      bool_5 = true;
+      triggers.set('bool_5', true);
 
       let button_thirdpage: any;
       button_thirdpage = $('#button_thirdpage');
@@ -163,7 +163,7 @@ function loadSecondPage() {
 function loadThirdPage(c2: any) {
 
   $(checkbox_1).change((e: any) => {
-    if (e.target.checked && !checkbox_first) {
+    if (e.target.checked && !triggers.get('checkbox_first')) {
       if (localStorage.getItem(key_2) === 'false') {
         loadSecondPage();
         localStorage.setItem(key_2, 'true');
@@ -183,16 +183,16 @@ function loadThirdPage(c2: any) {
 
       $('#AGBlink_1').after(div_agb_2);
 
-      checkbox_first = true;
-      bool_input_vis = true;
+      triggers.set('checkbox_first', true);
+      triggers.set('bool_input,vis', true);
     }
-    else if (e.target.checked && checkbox_first) {
+    else if (e.target.checked && triggers.get('checkbox_first')) {
       $(div_agb_2).removeAttr('class hidden');
-      bool_input_vis = true;
+      triggers.set('bool_input,vis', true);
     }
-    else if (!e.target.checked && checkbox_first) {
+    else if (!e.target.checked && triggers.get('checkbox_first')) {
       $(div_agb_2).attr('class', 'hidden');
-      bool_input_vis = false;
+      triggers.set('bool_input,vis', true);
     }
 
   });
@@ -249,7 +249,7 @@ function loadThirdPage(c2: any) {
   div_page_3.append(div_page_3_part_2);
 
 
-  // Ab hier die Erstellung ändern
+  // Creation of fix criterias and checkboxes
   for (let i = 0; i <  criterias_array.length; i++) {
 
     div_array[i] = $('<div></div>')
@@ -268,6 +268,8 @@ function loadThirdPage(c2: any) {
     div_page_3.append(div_array[i]);
 
   }
+
+
   add_button = $('<button></button>')
     .attr('id', 'add_button');
 
@@ -290,7 +292,7 @@ function loadThirdPage(c2: any) {
 
   // the mistake was accidently putting it into the for-loop
   $(add_button).click(() => {
-    if (bool_3) {
+    if (triggers.get('bool_3')) {
       hideNewCritiques();
     }
     else {
@@ -309,11 +311,11 @@ function loadThirdPage(c2: any) {
       critiques_selector = $('.critiques');
       for (let i = 0; i < critiques_selector.length; i++) {
         if (critiques_selector[i].innerHTML === input_crit.val()) {
-          bool_crit_sel = true;
+          triggers.set('bool_crit_sel',  true);
         }
       }
 
-      if (!bool_crit_sel) {
+      if (!triggers.get('bool_crit_sel')) {
 
 
         let crit_checkbox: any;
@@ -354,7 +356,7 @@ function loadThirdPage(c2: any) {
 
       else {
         alert('Dieses Kriterium ist schon hinzugefügt');
-        bool_crit_sel = false;
+        triggers.set('bool_crit_sel',  false);
       }
 
     }
@@ -396,7 +398,7 @@ function addNewCritiques() {
 
     input_critiques.removeClass('hidden');
   }
-  bool_3 = true;
+  triggers.set('bool_3',  true);
 
 }
 
@@ -405,7 +407,7 @@ function hideNewCritiques() {
   // alert('hide');
   input_critiques = $('#input_critiques_div')
     .addClass('hidden');
-  bool_3 = false;
+  triggers.set('bool_3',  false);
   if (counter === 0) {
     counter++;
   }
