@@ -2,8 +2,9 @@
 import * as $ from 'jquery';
 import { browser } from 'webextension-polyfill-ts';
 
-// import configs and do typecast to any fot iterations
+// import configs and do typecast to any for iterations
 import * as crits from '../config/criterias.json';
+import { reset_settings } from './additional_scripts';
 let criterias_array = (crits as any).criterias;
 
 //
@@ -14,17 +15,11 @@ let content_2: any;
 // to add critics this button is made
 let add_button: any; let add_button_image: any;
 // localStorage implementation
-let key: any;
+let load_first_page =  'lS';
+let switch_to_second_page =  'lS_2';
 
-key = 'lS';
-if (localStorage.getItem(key) !== 'true' && localStorage.getItem(key) !== 'false') {
-  localStorage.setItem(key, 'false');
-}
-let key_2 =  'lS_2';
-
-if (localStorage.getItem(key_2) !== 'true' && localStorage.getItem(key_2) !== 'false') {
-  localStorage.setItem(key_2, 'false');
-}
+// reset settings
+reset_settings(load_first_page, switch_to_second_page);
 // div of page 3
 let div_page_3: any;
 div_page_3 = $('<div></div>')
@@ -99,13 +94,12 @@ $(document).ready(
   function listenToClicks() {
     let content_1: any;
     let content_2: any;
-    let lS: any;
+    let lS = localStorage.getItem(load_first_page);
     let number_page: any;
     number_page = 1;
-    lS = localStorage.getItem(key);
     if (lS === 'false') {
       $('#popup-content_2').removeClass('hidden');
-      localStorage.setItem(key, 'true');
+      localStorage.setItem(load_first_page, 'true');
     }
     else if (lS === 'true') {
       // content_1 = $('#content_1')
@@ -163,9 +157,9 @@ function loadThirdPage(c2: any) {
 
   $(checkbox_1).change((e: any) => {
     if (e.target.checked && !triggers.get('checkbox_first_time')) {
-      if (localStorage.getItem(key_2) === 'false') {
+      if (localStorage.getItem(switch_to_second_page) === 'false') {
         loadSecondPage();
-        localStorage.setItem(key_2, 'true');
+        localStorage.setItem(switch_to_second_page, 'true');
       }
       div_agb_2 = $('<div></div>')
         .attr('id', 'div_agb_2');
