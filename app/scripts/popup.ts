@@ -4,30 +4,40 @@ import { browser } from 'webextension-polyfill-ts';
 
 // import configs and do typecast to any for iterations
 import * as crits from '../config/criterias.json';
-import { reset_settings } from './additional_scripts';
 let criterias_array = (crits as any).criterias;
 
-//
+// Loading additional functions
+import { reset_settings } from './additional_scripts';
+import { create_criteria } from './additional_scripts';
+import { create_criteria_button } from './additional_scripts';
+
+// localStorage implementation
+let load_first_page =  'lS_load_first_page';
+let switch_to_second_page =  'lS_switch_second_page';
+
+// reset settings of local Storage
+reset_settings(load_first_page, switch_to_second_page);
+
+
 // page 1
 let content_1: any;
 // page 2
 let content_2: any;
 // to add critics this button is made
-let add_button: any; let add_button_image: any;
-// localStorage implementation
-let load_first_page =  'lS';
-let switch_to_second_page =  'lS_2';
+let add_button: any;
+let add_button_image: any;
 
-// reset settings
-reset_settings(load_first_page, switch_to_second_page);
 // div of page 3
 let div_page_3: any;
 div_page_3 = $('<div></div>')
   .attr('id', 'div_page_3');
 
+let input_criteria_button = create_criteria_button();
+let input_criteria = create_criteria();
+
 // giving the checkbox an event
 let checkbox_1 = $('<input>');
-// div_of the add critiques div
+// div_of the add criterias div
 
 // All Triggers are now stored in a map
 let triggers = new Map();
@@ -48,18 +58,7 @@ let add_critics: any; // the div for adding the critiria
 
 let title_div: any;
 
-let input_critics_button: any; // input "OK"-button
-input_critics_button = $('<button></button>')
-  .attr('type', 'button')
-  .attr('class', 'button_primary')
-  .attr('id', 'button_critiques');
-input_critics_button.append('OK');
-let input_critics: any; // it should have been named criteria
-// the input to write the new criteria in
-input_critics = $('<input>') // with only input as the string it had been added 9 times
-  .attr('type', 'text')
-  .attr('id', 'input_critiques')
-  .attr('placeholder', 'Kriterien hinzufügen');
+
 
 let checkbox_array = new Array(); // checkboxes of the criteria
 let textNode_array = new Array(); // actually strings & the text for the checkboxes
@@ -293,7 +292,7 @@ function loadThirdPage(c2: any) {
     }
   });
   // adding the event to the OK-button
-  $(input_critics_button).click(() => {
+  $(input_criteria_button).click(() => {
 
     let input_crit: any;
     input_crit = $('input#input_critiques');
@@ -375,13 +374,13 @@ function addNewCritiques() {
 
   if (counter === 0) {
 
-    let input_critics_div = $('<div></div>')
+    let input_criteria_div = $('<div></div>')
       .attr('id', 'input_critiques_div');
 
-    input_critics_div.append(input_critics)
-      .append(input_critics_button);
+    input_criteria_div.append(input_criteria)
+      .append(input_criteria_button);
 
-    $('div#div_add_crits').after(input_critics_div);
+    $('div#div_add_crits').after(input_criteria_div);
   }
   else if (counter > 0) {
     input_critiques.removeClass('hidden');

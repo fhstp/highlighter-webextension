@@ -1,8 +1,6 @@
 // Imported using:
 // import {exampleFunction} from './additional_scripts/utility'
-export function exampleFunction() {
-  console.log('Function was called from a module!');
-}
+
 export function reset_settings(
   load_first_page: string,
   switch_to_second_page: string
