@@ -11,10 +11,10 @@ import { reset_settings } from './additional_scripts';
 import { create_criteria } from './additional_scripts';
 import { create_criteria_button } from './additional_scripts';
 
-
 // Loading page structure
 import { loadSecondPage } from './additional_scripts';
 import { loadThirdPage } from './additional_scripts';
+
 // localStorage implementation
 let load_first_page =  'lS_load_first_page';
 let switch_to_second_page =  'lS_switch_second_page';
@@ -22,9 +22,6 @@ let switch_to_second_page =  'lS_switch_second_page';
 // reset settings of local Storage
 reset_settings(load_first_page, switch_to_second_page);
 
-
-// giving the checkbox an event
-let checkbox_1 = $('<input>');
 // div_of the add critiques div
 
 // All Triggers are now stored in a map
@@ -34,12 +31,6 @@ triggers.set('checkbox_first_time', false);
 triggers.set('trigger_criterias', false);
 triggers.set('switch_to_third_page', false);
 triggers.set('criteria_selected', false);
-
-
-
-
-
-
 
 function insertText() {
   browser.tabs.executeScript({
@@ -68,11 +59,9 @@ $(document).ready(
       localStorage.setItem(load_first_page, 'true');
     }
     else if (lS === 'true') {
-      // content_1 = $('#content_1')
-      //  .addClass('hidden');
       loadThirdPage(triggers, switch_to_second_page, criterias_array);
-      //  number_page = 2;
     }
+
     insertText();
     insertLink();
 
