@@ -29,7 +29,7 @@ let input_criteria_button = create_criteria_button();
 //   .attr('type', 'button')
 //   .attr('class', 'button_primary')
 //   .attr('id', 'button_critiques');
-input_criteria_button.append('OK');
+// input_criteria_button.append('OK');
 
 let input_criteria =  $('<input>') // with only input as the string it had been added 9 times
 .attr('type', 'text')
@@ -189,8 +189,6 @@ let add_critics: any; // the div for adding the critiria
     .attr('aria-hidden', 'true');
 
 
-
-
   add_critics = $('<div></div>')
     .attr('id', 'div_add_crits')
     .append(add_button)
@@ -209,6 +207,8 @@ let add_critics: any; // the div for adding the critiria
       addNewCritiques(triggers);
     }
   });
+
+
   // adding the event to the OK-button
   $(input_criteria_button).click(() => {
 
@@ -219,6 +219,7 @@ let add_critics: any; // the div for adding the critiria
       // check if they are already added
       let critiques_selector: any;
       critiques_selector = $('.critiques');
+
       for (let i = 0; i < critiques_selector.length; i++) {
         if (critiques_selector[i].innerHTML === input_crit.val()) {
           triggers.set('criteria_selected',  true);
@@ -226,7 +227,6 @@ let add_critics: any; // the div for adding the critiria
       }
 
       if (!triggers.get('criteria_selected')) {
-
 
         let crit_checkbox: any;
         crit_checkbox = $('<input>')
@@ -260,10 +260,7 @@ let add_critics: any; // the div for adding the critiria
         $('.button_delete_criteria').click((e) => {
           $(e.currentTarget).parent().remove();
         });
-
-
       }
-
       else {
         alert('Dieses Kriterium ist schon hinzugefügt');
         triggers.set('criteria_selected',  false);
@@ -271,6 +268,7 @@ let add_critics: any; // the div for adding the critiria
 
     }
   });
+
   $('#button_thirdpage').click(() => {
     // if button.thirdpage.checked
     if (!checkbox_1.prop('checked')) {

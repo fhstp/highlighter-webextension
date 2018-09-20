@@ -22,8 +22,6 @@ let switch_to_second_page =  'lS_switch_second_page';
 // reset settings of local Storage
 reset_settings(load_first_page, switch_to_second_page);
 
-// div_of the add critiques div
-
 // All Triggers are now stored in a map
 let triggers = new Map();
 
@@ -32,21 +30,7 @@ triggers.set('trigger_criterias', false);
 triggers.set('switch_to_third_page', false);
 triggers.set('criteria_selected', false);
 
-function insertText() {
-  browser.tabs.executeScript({
-    code: 'window.getSelection().toString();'
-  }).then(function (selection) {
-    $('#AGBtext_1').val(selection[0]);
-  });
-}
-
-function insertLink() {
-  browser.tabs.executeScript({
-    code: 'window.location.href'
-  }).then(function (href) {
-    $('#AGBlink_1').val(href);
-  });
-}
+/********  Creation of Content and Program starting  ********/
 
 $(document).ready(
   function listenToClicks() {
@@ -107,3 +91,20 @@ loadThirdPage(triggers, switch_to_second_page, criterias_array);
 
 
 
+// *** HELPER FUNCTIONS *** //
+
+function insertText() {
+  browser.tabs.executeScript({
+    code: 'window.getSelection().toString();'
+  }).then(function (selection) {
+    $('#AGBtext_1').val(selection[0]);
+  });
+}
+
+function insertLink() {
+  browser.tabs.executeScript({
+    code: 'window.location.href'
+  }).then(function (href) {
+    $('#AGBlink_1').val(href);
+  });
+}
