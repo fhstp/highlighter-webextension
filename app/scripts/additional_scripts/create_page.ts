@@ -25,11 +25,6 @@ export function create_criteria_button() {
 }
 
 let input_criteria_button = create_criteria_button();
-// = $('<button></button>')
-//   .attr('type', 'button')
-//   .attr('class', 'button_primary')
-//   .attr('id', 'button_critiques');
-// input_criteria_button.append('OK');
 
 let input_criteria =  $('<input>') // with only input as the string it had been added 9 times
 .attr('type', 'text')
@@ -49,8 +44,7 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
   let div_agb_2: any; // div in which the added inputs of the checkbox are
   // div of page 3
 let div_page_3: any;
-div_page_3 = $('<div></div>')
-  .attr('id', 'div_page_3');
+div_page_3 = $('#div_page_3');
 
   let title_div: any;
 
@@ -84,12 +78,14 @@ let add_critics: any; // the div for adding the critiria
         .attr('id', 'div_agb_2');
       let AGB_text_2 = $('<input>')
         .attr('id', 'AGBtext_2')
-        .attr('type', 'text')
-        .attr('placeholder', 'Fügen Sie den Text der AGBs ein...');
+        .attr('type', 'textarea')
+        .attr('placeholder', 'Fügen Sie den Text der AGBs ein...')
+        .attr('class', 'form-control input-sm');
       div_agb_2.append(AGB_text_2);
       let AGB_link_2 = $('<input>')
         .attr('id', 'AGBlink_2')
         .attr('type', 'text')
+        .attr('class', 'form-control')
         .attr('placeholder', 'Fügen Sie den Link ein...');
       div_agb_2.append(AGB_link_2);
 
@@ -114,7 +110,8 @@ let add_critics: any; // the div for adding the critiria
 
   let AGB_text = $('<input>')
     .attr('placeholder', 'Fügen Sie den Text der AGBs ein...')
-    .attr('type', 'text')
+    .attr('type', 'textarea')
+    .attr('class', 'form-control input-sm')
     .attr('id', 'AGBtext_1');
 
   div_page_3.append(AGB_text);
@@ -122,7 +119,8 @@ let add_critics: any; // the div for adding the critiria
   let AGB_link = $('<input>')
     .attr('placeholder', 'Fügen Sie den Link ein...')
     .attr('type', 'text')
-    .attr('id', 'AGBlink_1');
+    .attr('id', 'AGBlink_1')
+    .attr('class', 'form-control');
 
   div_page_3.append(AGB_link);
 
@@ -132,9 +130,11 @@ let add_critics: any; // the div for adding the critiria
 
   checkbox_1
     .attr('type', 'checkbox')
-    .attr('id', 'checkbox_1');
+    .attr('id', 'checkbox_1')
+    .attr('class', 'checkbox');
 
-  let textNode_1 = 'Vergleiche AGBs';
+
+  let textNode_1 = '<span class="criterias">Vergleiche AGBs</span>';
 
   div.append(checkbox_1)
     .append(textNode_1);
@@ -150,7 +150,7 @@ let add_critics: any; // the div for adding the critiria
   title_div = $('<h3></h3>')
     .attr('class', 'heading_3')
     .attr('id', 'div_add_crits')
-    .append('Kriterien');
+    .append('Kriterien:');
 
   div_page_3_part_2.append(title_div);
   div_page_3.append(div_page_3_part_2);
@@ -173,7 +173,7 @@ let add_critics: any; // the div for adding the critiria
     // Add Checkboxes by using the Criterias.json
     textNode_array[i] = $('<span></span>')
       .append(criterias_array[i])
-      .attr('class', 'critiques');
+      .attr('class', 'criterias');
     div_array[i].append(textNode_array[i]);
     div_page_3.append(div_array[i]);
 
@@ -279,7 +279,7 @@ let add_critics: any; // the div for adding the critiria
   // The primary button of the third page
   let button_thirdpage: any;
   button_thirdpage = $('<button></button>')
-    .attr('class', 'button_primary')
+    .attr('class', 'btn btn-primary')
     .attr('id', 'button_thirdpage')
     .append('Check AGBs');
 
