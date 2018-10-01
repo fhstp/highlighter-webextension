@@ -2,6 +2,9 @@
 import * as $ from 'jquery';
 import { browser } from 'webextension-polyfill-ts';
 
+// Loading bootstrap
+import 'bootstrap';
+
 // import configs and do typecast to any for iterations
 import * as crits from '../config/criterias.json';
 let criterias_array = (crits as any).criterias;
