@@ -76,7 +76,7 @@ let add_critics: any; // the div for adding the critiria
       }
       div_agb_2 = $('<div></div>')
         .attr('id', 'div_agb_2');
-      let AGB_text_2 = $('<input>')
+      let AGB_text_2 = $('<textarea>')
         .attr('id', 'AGBtext_2')
         .attr('type', 'textarea')
         .attr('placeholder', 'Fügen Sie den Text der AGBs ein...')
@@ -108,7 +108,7 @@ let add_critics: any; // the div for adding the critiria
   let c2 = $('#content_2');
   c2.attr('class', 'hidden');
 
-  let AGB_text = $('<input>')
+  let AGB_text = $('<textarea>')
     .attr('placeholder', 'Fügen Sie den Text der AGBs ein...')
     .attr('type', 'textarea')
     .attr('class', 'form-control input-sm')
