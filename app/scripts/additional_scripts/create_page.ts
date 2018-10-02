@@ -1,8 +1,8 @@
 import * as $ from 'jquery';
+import {  } from './index';
+import { sendData_no_compare, sendData_with_compare } from './server_interaction';
+import { getValueUsingClass } from './utility';
 
-export function exampleFunction() {
-  console.log('Function was called from a module!');
-}
 
 export function create_criteria() {
   let input_criteria = $('<input>') // with only input as the string it had been added 9 times
@@ -167,7 +167,10 @@ let add_critics: any; // the div for adding the critiria
 
     checkbox_array[i] = $('<input>')
       .attr('id', 'checkbox_out_of_array_' + i + 1)
-      .attr('type', 'checkbox');
+      .attr('type', 'checkbox')
+      .attr('class', 'chk')
+      .attr('value', criterias_array[i]);
+
     div_array[i].append(checkbox_array[i]);
 
     // Add Checkboxes by using the Criterias.json
@@ -230,11 +233,13 @@ let add_critics: any; // the div for adding the critiria
 
         let crit_checkbox: any;
         crit_checkbox = $('<input>')
-          .attr('type', 'checkbox');
+          .attr('type', 'checkbox')
+          .attr('class', 'chk')
+          .attr('value', input_crit.val());
 
         let span_new_critique: any;
         span_new_critique = $('<span></span>')
-          .attr('class', 'critiques');
+          .attr('class', 'criterias');
 
         // <i class="fa fa-minus-circle" aria-hidden="true"></i>
 
@@ -248,7 +253,7 @@ let add_critics: any; // the div for adding the critiria
           .append(image_delete_criteria);
         span_new_critique.append(input_crit.val());
         div_new_critique = $('<div></div>')
-          .attr('class', 'div_new_critiques')
+          .attr('class', 'div_new_criterias chk')
           .append(crit_checkbox)
           .append(crit_checkbox)
           .append(span_new_critique)
@@ -269,13 +274,6 @@ let add_critics: any; // the div for adding the critiria
     }
   });
 
-  $('#button_thirdpage').click(() => {
-    // if button.thirdpage.checked
-    if (!checkbox_1.prop('checked')) {
-      // sendData_no_compare();
-    }
-  });
-
   // The primary button of the third page
   let button_thirdpage: any;
   button_thirdpage = $('<button></button>')
@@ -285,6 +283,23 @@ let add_critics: any; // the div for adding the critiria
 
   div_page_3.appendTo(document.body);
   button_thirdpage.appendTo(document.body);
+
+
+  // If we want to check AGBs (start sending request to server)
+  $('#button_thirdpage').click(() => {
+    const link = $('#AGBlink_1').val();
+    const agb_text = $('#AGBtext_1').val();
+    const checkboxes = getValueUsingClass();
+    if (!checkbox_1.prop('checked')) {
+      sendData_no_compare(link, agb_text, checkboxes);
+    } else {
+      const link_2 = $('#AGBlink_2').val();
+      const agb_text_2 = $('#AGBtext_2').val();
+      sendData_with_compare(link, agb_text, link_2, agb_text_2, checkbox_array);
+    }
+  });
+
+
 }
 
 // a counter for the number of times the critiques-div was hidden
@@ -296,7 +311,7 @@ function addNewCritiques(triggers: Map<string, boolean>) {
   if (counter === 0) {
 
     let input_criteria_div = $('<div></div>')
-      .attr('id', 'input_critiques_div');
+      .attr('id', 'input_criterias_div');
 
     input_criteria_div.append(input_criteria)
       .append(input_criteria_button);
