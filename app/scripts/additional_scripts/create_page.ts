@@ -1,6 +1,6 @@
 import * as $ from 'jquery';
 import {  } from './index';
-import { sendData_no_compare, sendData_with_compare } from './server_interaction';
+import { sendData_no_compare, sendData_with_compare, insertIntoHTML_with_compare } from './server_interaction';
 import { getValueUsingClass } from './utility';
 
 
