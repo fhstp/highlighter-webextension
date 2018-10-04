@@ -7,7 +7,7 @@ import 'bootstrap';
 
 // import configs and do typecast to any for iterations
 import * as crits from '../config/criterias.json';
-let criterias_array = (crits as any).criterias;
+let criterias_array = crits;
 
 // Loading additional functions
 import { reset_settings } from './additional_scripts';

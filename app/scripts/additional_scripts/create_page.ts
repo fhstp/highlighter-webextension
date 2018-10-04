@@ -39,7 +39,7 @@ export function loadSecondPage() {
 }
 
 
-export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string, criterias_array: any) {
+export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string, crits: any) {
   let checkbox_1 = $('<input>');
   let div_agb_2: any; // div in which the added inputs of the checkbox are
   // div of page 3
@@ -160,6 +160,8 @@ let add_critics: any; // the div for adding the critiria
 
 
   // Creation of fix criterias and checkboxes
+  let criterias_array = (crits as any).criterias;
+
   for (let i = 0; i <  criterias_array.length; i++) {
 
     div_array[i] = $('<div></div>')
@@ -173,9 +175,24 @@ let add_critics: any; // the div for adding the critiria
 
     div_array[i].append(checkbox_array[i]);
 
+    let criteria = criterias_array[i];
+    // console.log(criteria);
+    // HOW THE FCK bekomme ich auf das Objekt zugriff!!! mit einer variable ohne es hardcoden zu müssen!
+    // let additional_array = crits[criteria];
+    // console.log('Criteria: ', criteria);
+    // console.log('Value: ', additional_array);
+    // for (let j = 0; j <  additional_array.length; j++) {
+    //   console.log('test');
+    //   if (checkbox_array[j] === crits[j]) {
+    //     console.log(crits[j]);
+    //   }
+    // }
+
     // Add Checkboxes by using the Criterias.json
     textNode_array[i] = $('<span></span>')
       .append(criterias_array[i])
+      .attr('id', criterias_array[i])
+      .attr('title', 'Blablabla, To fill from other file')
       .attr('class', 'criterias');
     div_array[i].append(textNode_array[i]);
     div_page_3.append(div_array[i]);

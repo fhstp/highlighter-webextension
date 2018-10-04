@@ -129,4 +129,10 @@ li{
   font-size: 0.7em;
 }
 
+/* Tooltips Wraps from the checkboxes */
 
+.wrapIt{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
