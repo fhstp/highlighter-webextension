@@ -26,11 +26,6 @@ export function sendData_no_compare(head_link: any, head_text: any, criteria_arr
   };
   xhttp.send('link=' + head_link + '&text=' + head_text + '&search[]=' + json_criteria);
 
-
-}
-
-async function sendRequests() {
-
 }
 
 export async function insertIntoHTML_without_compare(agb: any) {

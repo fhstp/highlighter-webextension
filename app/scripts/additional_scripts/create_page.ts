@@ -159,44 +159,27 @@ let add_critics: any; // the div for adding the critiria
   div_page_3.append(div_page_3_part_2);
 
 
-  // Creation of fix criterias and checkboxes
+  // Creation of criterias and checkboxes
   let criterias_array = (crits as any).criterias;
 
   for (let i = 0; i <  criterias_array.length; i++) {
 
-    div_array[i] = $('<div></div>')
-      .attr('id', 'div_out_of_array_' + (i + 1));
-
-    checkbox_array[i] = $('<input>')
-      .attr('id', 'checkbox_out_of_array_' + i + 1)
-      .attr('type', 'checkbox')
-      .attr('class', 'chk')
-      .attr('value', criterias_array[i]);
-
-    div_array[i].append(checkbox_array[i]);
-
     let criteria = criterias_array[i];
-    // console.log(criteria);
-    // HOW THE FCK bekomme ich auf das Objekt zugriff!!! mit einer variable ohne es hardcoden zu müssen!
-    // let additional_array = crits[criteria];
-    // console.log('Criteria: ', criteria);
-    // console.log('Value: ', additional_array);
-    // for (let j = 0; j <  additional_array.length; j++) {
-    //   console.log('test');
-    //   if (checkbox_array[j] === crits[j]) {
-    //     console.log(crits[j]);
-    //   }
-    // }
+    let additional_array = crits[criteria];
+    let additional_attributes: string = '';
 
-    // Add Checkboxes by using the Criterias.json
-    textNode_array[i] = $('<span></span>')
-      .append(criterias_array[i])
-      .attr('id', criterias_array[i])
-      .attr('title', 'Blablabla, To fill from other file')
-      .attr('class', 'criterias');
-    div_array[i].append(textNode_array[i]);
-    div_page_3.append(div_array[i]);
+    // Collecting all of the additional criterias, out of the json.
+    let values = additional_array.toString();
+    for (let j = 0; j <  additional_array.length; j++) {
+      const textToAdd = ', '  + additional_array[j];
+      additional_attributes += textToAdd ;
+     }
+     div_array[i] = $('<li class="noListItem"><input type="checkbox" class="checkbox chk" value="' + criterias_array[i] + ', ' + values + '"></li>')
+     .append(criterias_array[i] + additional_attributes)
+     .attr('title', criterias_array[i] + additional_attributes)
+     .attr('id', 'div_out_of_array_' + (i + 1));
 
+     div_page_3.append(div_array[i]);
   }
 
 
@@ -308,7 +291,7 @@ let add_critics: any; // the div for adding the critiria
     const agb_text = $('#AGBtext_1').val();
     const checkboxes = getValueUsingClass();
     if (!checkbox_1.prop('checked')) {
-      sendData_no_compare(link, agb_text, checkboxes);
+      // sendData_no_compare(link, agb_text, checkboxes);
     } else {
       const link_2 = $('#AGBlink_2').val();
       const agb_text_2 = $('#AGBtext_2').val();

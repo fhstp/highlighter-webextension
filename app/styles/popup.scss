@@ -131,7 +131,12 @@ li{
 
 /* Tooltips Wraps from the checkboxes */
 
-.wrapIt{
+.checkbox{
+  margin-right: 5px
+}
+
+.noListItem{
+  list-style-type: none;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
