@@ -11,8 +11,6 @@ let criterias_array = crits;
 
 // Loading additional functions
 import { reset_settings } from './additional_scripts';
-import { create_criteria } from './additional_scripts';
-import { create_criteria_button } from './additional_scripts';
 
 // Loading page structure
 import { loadSecondPage } from './additional_scripts';
@@ -67,7 +65,7 @@ $(document).ready(
       $('#div_page_3').removeClass('hidden');
       $('#button_thirdpage').removeClass('hidden');
       $('#content_2').addClass('hidden');
-      triggers.set('trigger_criterias', false); // Check not complete
+      triggers.set('trigger_criterias', false);
     });
 
     $('#general_information').click(() => {
