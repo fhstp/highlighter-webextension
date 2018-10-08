@@ -24,11 +24,17 @@ export function reset_settings(
 // With credits to https://bytutorial.com/blogs/jquery/jquery-get-selected-checkboxes
 export function getValueUsingClass() {
   let chkArray:  any[] = [];
-
+  let processed: any[] = [];
   /* look for all checkboxes that have a class 'chk' attached to it and check if it was checked and push it to an array*/
   $('.chk:checked').each(function() {
     chkArray.push($(this).val());
+    for (let i = 0; i < chkArray.length; i++) {
+      const original = chkArray[i];
+      const items = original.split(',');
+      for (let item of items) {
+        processed.push(item.trim());
+      }
+    }
   });
-  console.log(chkArray);
-  return chkArray;
+  return processed;
 }
