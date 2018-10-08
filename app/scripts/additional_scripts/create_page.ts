@@ -161,6 +161,7 @@ let add_critics: any; // the div for adding the critiria
 
   // Creation of criterias and checkboxes
   let criterias_array = (crits as any).criterias;
+  div_page_3.append('<div id="checkboxContainer"></div>');
 
   for (let i = 0; i <  criterias_array.length; i++) {
 
@@ -174,12 +175,13 @@ let add_critics: any; // the div for adding the critiria
       const textToAdd = ', '  + additional_array[j];
       additional_attributes += textToAdd ;
      }
-     div_array[i] = $('<li class="noListItem"><input type="checkbox" class="checkbox chk" value="' + criterias_array[i] + ', ' + values + '"></li>')
-     .append(criterias_array[i] + additional_attributes)
+     div_array[i] = $('<div class="noListItem"><input type="checkbox" class="checkbox chk" value="' + criterias_array[i] + ', ' + values + '"></div>')
+     .append(criterias_array[i])
      .attr('title', criterias_array[i] + additional_attributes)
-     .attr('id', 'div_out_of_array_' + (i + 1));
+     .attr('id', 'div_out_of_array_' + (i + 1))
+        .append('<small>' + additional_attributes + '</small>');
 
-     div_page_3.append(div_array[i]);
+     $('#checkboxContainer').append(div_array[i]);
   }
 
 
@@ -291,7 +293,7 @@ let add_critics: any; // the div for adding the critiria
     const agb_text = $('#AGBtext_1').val();
     const checkboxes = getValueUsingClass();
     if (!checkbox_1.prop('checked')) {
-      // sendData_no_compare(link, agb_text, checkboxes);
+      sendData_no_compare(link, agb_text, checkboxes);
     } else {
       const link_2 = $('#AGBlink_2').val();
       const agb_text_2 = $('#AGBtext_2').val();
