@@ -1,6 +1,7 @@
 import * as $ from 'jquery';
-import {  } from './index';
-import { sendData_no_compare, sendData_with_compare, insertIntoHTML_with_compare } from './server_interaction';
+import { setFormerAGB } from './index';
+import { createBadges } from './index';
+import { sendData_no_compare, sendData_with_compare } from './server_interaction';
 import { getValueUsingClass } from './utility';
 
 
@@ -62,8 +63,6 @@ let div_new_critique: any; // the div for only on of the new criteria
 // div_new_critique = new Array();
 
 let div_all_new_criteria = $('<div></div>');
-let val = 0; // for counting the new criteria
-
 let add_critics: any; // the div for adding the critiria
 
 
@@ -88,6 +87,10 @@ let add_critics: any; // the div for adding the critiria
         .attr('class', 'form-control')
         .attr('placeholder', 'Fügen Sie den Link ein...');
       div_agb_2.append(AGB_link_2);
+
+      if (createBadges() !== null){
+        div_agb_2.append(createBadges);
+      }
 
       $('#AGBlink_1').after(div_agb_2);
 
@@ -213,7 +216,6 @@ let add_critics: any; // the div for adding the critiria
     }
   });
 
-
   // adding the event to the OK-button
   $(input_criteria_button).click(() => {
 
@@ -242,8 +244,6 @@ let add_critics: any; // the div for adding the critiria
         let span_new_critique: any;
         span_new_critique = $('<span></span>')
           .attr('class', 'criterias');
-
-        // <i class="fa fa-minus-circle" aria-hidden="true"></i>
 
         image_delete_criteria = $('<i></i>')
           .attr('id', 'delete_criteria')
@@ -293,6 +293,7 @@ let add_critics: any; // the div for adding the critiria
     const agb_text = $('#AGBtext_1').val();
     const checkboxes = getValueUsingClass();
     if (!checkbox_1.prop('checked')) {
+      setFormerAGB(String(link), agb_text);
       sendData_no_compare(link, agb_text, checkboxes);
     } else {
       const link_2 = $('#AGBlink_2').val();

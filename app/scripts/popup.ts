@@ -109,4 +109,3 @@ function insertLink() {
     $('#AGBlink_1').val(href);
   });
 }
-
