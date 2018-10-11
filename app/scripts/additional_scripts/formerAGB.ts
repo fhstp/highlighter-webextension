@@ -1,7 +1,5 @@
 import * as $ from 'jquery';
-
-/**  **/
-
+const key = 'FormerAGB';
 
 export function setFormerAGB(link: string, agb: any) {
   let data = {
@@ -10,7 +8,6 @@ export function setFormerAGB(link: string, agb: any) {
     timeStamp: new Date().toDateString()
   };
   checkLocalStorage(data);
-
 }
 
 export function createBadges() {
@@ -19,7 +16,7 @@ export function createBadges() {
       return null;
   } else {
     let buttonArray: any[] = [];
-    let buttondiv = $('<div class="buttonDiv"></div>');
+    let buttondiv = $('<div id="buttonDiv"></div>');
     let stored_obj = JSON.parse(String(localStorage.getItem(key)));
     for (let i = 0; i < stored_obj.length; i++) {
       let link = String(stored_obj[i].link);
@@ -28,7 +25,8 @@ export function createBadges() {
       link = link.replace('https://', '');
       let re = /\.[a-z]*?(.*)/; // capture everything behind...
       link = link.replace(re, '');
-      let button = $('<button type="button" class="btn btn-primary"><span class="badge badge-light"></span></button>')
+      // let button = $('<button type="button" class="btn btn-primary" id="former_' + i + '"><span class="badge badge-light"></span></button>')
+      let button = $('<button type="button" class="btn btn-primary buttonFormer" data-btn="' + i + '"><span class="badge badge-light"></span></button>')
         .append(link);
         buttondiv.append(button);
         buttonArray.push(buttondiv);
@@ -37,8 +35,17 @@ export function createBadges() {
   }
 }
 
+// After selecting a button of the formerAGBs insert text into the lower AGB textareas and links
+export function setValueOfAGB(localStorageidx: number) {
+  const stored_obj = JSON.parse(String(localStorage.getItem(key)));
+  let formerAGBByKey = stored_obj[localStorageidx];
+  $('#AGBtext_2').val(formerAGBByKey.agb_text);
+  $('#AGBlink_2').val(formerAGBByKey.link);
+
+}
+
 /** HELPER METHODS **/
-const key = 'FormerAGB';
+
 
 function checkLocalStorage(agb: any) {
   // If there are no entries -> just push it

@@ -88,10 +88,6 @@ $(document).ready(
 
 loadSecondPage();
 
-loadThirdPage(triggers, switch_to_second_page, criterias_array);
-
-
-
 // *** HELPER FUNCTIONS *** //
 
 function insertText() {

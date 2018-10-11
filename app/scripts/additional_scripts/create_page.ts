@@ -3,10 +3,11 @@ import { setFormerAGB } from './index';
 import { createBadges } from './index';
 import { sendData_no_compare, sendData_with_compare } from './server_interaction';
 import { getValueUsingClass } from './utility';
+import { setValueOfAGB } from './index';
 
 
 export function create_criteria() {
-  let input_criteria = $('<input>') // with only input as the string it had been added 9 times
+  let input_criteria = $('<input>')
     .attr('type', 'text')
     .attr('id', 'input_critiques')
     .attr('placeholder', 'Kriterien hinzufügen');
@@ -70,7 +71,6 @@ let add_critics: any; // the div for adding the critiria
   $(checkbox_1).change((e: any) => {
     if (e.target.checked && !triggers.get('checkbox_first_time')) {
       if (localStorage.getItem(pageSwitch) === 'false') {
-        // loadSecondPage();
         localStorage.setItem(pageSwitch, 'true');
       }
       div_agb_2 = $('<div></div>')
@@ -88,7 +88,7 @@ let add_critics: any; // the div for adding the critiria
         .attr('placeholder', 'Fügen Sie den Link ein...');
       div_agb_2.append(AGB_link_2);
 
-      if (createBadges() !== null){
+      if (createBadges() !== null) {
         div_agb_2.append(createBadges);
       }
 
@@ -218,14 +218,31 @@ let add_critics: any; // the div for adding the critiria
 
   // adding the event to the OK-button
   $(input_criteria_button).click(() => {
+    console.trace();
 
     let input_crit: any;
     input_crit = $('input#input_critiques');
     // check if there are critiques
     if (input_crit.val() !== '') {
       // check if they are already added
-      let critiques_selector: any;
-      critiques_selector = $('.critiques');
+      let critiques_selector = $('.chk');
+      console.log(critiques_selector);
+
+      let already_added = false;
+      let criterias_array_for_check = [];
+      for (let i = 0; i < critiques_selector.length; i++) {
+        const original =  <HTMLInputElement> critiques_selector[i];
+        const value = original.value;
+        const items = value.split(',');
+        for (let item of items) {
+          criterias_array_for_check.push(item.trim());
+        }
+        for (let item of criterias_array_for_check) {
+          if (item === input_crit.val()) {
+            already_added = true;
+          }
+        }
+      }
 
       for (let i = 0; i < critiques_selector.length; i++) {
         if (critiques_selector[i].innerHTML === input_crit.val()) {
@@ -233,7 +250,7 @@ let add_critics: any; // the div for adding the critiria
         }
       }
 
-      if (!triggers.get('criteria_selected')) {
+      if (!already_added) {
 
         let crit_checkbox: any;
         crit_checkbox = $('<input>')
@@ -255,7 +272,7 @@ let add_critics: any; // the div for adding the critiria
           .append(image_delete_criteria);
         span_new_critique.append(input_crit.val());
         div_new_critique = $('<div></div>')
-          .attr('class', 'div_new_criterias chk')
+          .attr('class', 'div_new_criterias')
           .append(crit_checkbox)
           .append(crit_checkbox)
           .append(span_new_critique)
@@ -267,12 +284,14 @@ let add_critics: any; // the div for adding the critiria
         $('.button_delete_criteria').click((e) => {
           $(e.currentTarget).parent().remove();
         });
-      }
-      else {
+        // After the new criteria is added -> reset input field.
+        $('#input_critiques').val('');
+      } else {
         alert('Dieses Kriterium ist schon hinzugefügt');
         triggers.set('criteria_selected',  false);
+        // After checking if the value is already added -> reset input field.
+        $('#input_critiques').val('');
       }
-
     }
   });
 
@@ -285,7 +304,6 @@ let add_critics: any; // the div for adding the critiria
 
   div_page_3.appendTo(document.body);
   button_thirdpage.appendTo(document.body);
-
 
   // If we want to check AGBs (start sending request to server)
   $('#button_thirdpage').click(() => {
@@ -301,10 +319,11 @@ let add_critics: any; // the div for adding the critiria
       sendData_with_compare(link, agb_text, link_2, agb_text_2, checkbox_array);
     }
   });
-
-
 }
+$(document).on('click', '.buttonFormer', function () {
+  setValueOfAGB(Number($(this).attr('data-btn')));
 
+});
 // a counter for the number of times the critiques-div was hidden
 let counter: number;
 counter = 0;
@@ -329,7 +348,6 @@ function addNewCritiques(triggers: Map<string, boolean>) {
 
 function hideNewCritiques(triggers: Map<string, boolean>) {
 
-  // alert('hide');
   input_critiques = $('#input_critiques_div')
     .addClass('hidden');
   triggers.set('trigger_criterias',  false);
