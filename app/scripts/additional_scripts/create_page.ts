@@ -218,7 +218,8 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
 
   $(document).on('keydown', '#input_critiques', function (evt) {
     if (evt.keyCode === 13) {
-      const val = evt.target.value;
+      // Ignore Error: Due to no Type of event.target -> See: https://stackoverflow.com/questions/28900077/why-is-event-target-not-element-in-typescript
+      const val = evt.target.value; // eslint-disable-line
       if (val !== undefined || val !== '' || val !== null) {
         let trig = false;
         // check if they are already added
