@@ -28,10 +28,10 @@ export function create_criteria_button() {
 
 let input_criteria_button = create_criteria_button();
 
-let input_criteria =  $('<input>') // with only input as the string it had been added 9 times
-.attr('type', 'text')
-.attr('id', 'input_critiques')
-.attr('placeholder', 'Kriterien hinzufügen');
+let input_criteria = $('<input>') // with only input as the string it had been added 9 times
+  .attr('type', 'text')
+  .attr('id', 'input_critiques')
+  .attr('placeholder', 'Kriterien hinzufügen');
 
 
 export function loadSecondPage() {
@@ -45,8 +45,8 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
   let checkbox_1 = $('<input>');
   let div_agb_2: any; // div in which the added inputs of the checkbox are
   // div of page 3
-let div_page_3: any;
-div_page_3 = $('#div_page_3');
+  let div_page_3: any;
+  div_page_3 = $('#div_page_3');
 
   let title_div: any;
 
@@ -54,17 +54,17 @@ div_page_3 = $('#div_page_3');
   let textNode_array = new Array(); // actually strings & the text for the checkboxes
 
   // to add critics this button is made
-let add_button: any;
-let add_button_image: any;
+  let add_button: any;
+  let add_button_image: any;
 
-let button_delete_criteria: any;
-let image_delete_criteria: any;
+  let button_delete_criteria: any;
+  let image_delete_criteria: any;
 
-let div_new_critique: any; // the div for only on of the new criteria
-// div_new_critique = new Array();
+  let div_new_critique: any; // the div for only on of the new criteria
+  // div_new_critique = new Array();
 
-let div_all_new_criteria = $('<div></div>');
-let add_critics: any; // the div for adding the critiria
+  let div_all_new_criteria = $('<div></div>');
+  let add_critics: any; // the div for adding the critiria
 
 
 
@@ -166,7 +166,7 @@ let add_critics: any; // the div for adding the critiria
   let criterias_array = (crits as any).criterias;
   div_page_3.append('<div id="checkboxContainer"></div>');
 
-  for (let i = 0; i <  criterias_array.length; i++) {
+  for (let i = 0; i < criterias_array.length; i++) {
 
     let criteria = criterias_array[i];
     let additional_array = crits[criteria];
@@ -174,17 +174,17 @@ let add_critics: any; // the div for adding the critiria
 
     // Collecting all of the additional criterias, out of the json.
     let values = additional_array.toString();
-    for (let j = 0; j <  additional_array.length; j++) {
-      const textToAdd = ', '  + additional_array[j];
-      additional_attributes += textToAdd ;
-     }
-     div_array[i] = $('<div class="noListItem"><input type="checkbox" class="checkbox chk" value="' + criterias_array[i] + ', ' + values + '"></div>')
-     .append(criterias_array[i])
-     .attr('title', criterias_array[i] + additional_attributes)
-     .attr('id', 'div_out_of_array_' + (i + 1))
-        .append('<small>' + additional_attributes + '</small>');
+    for (let j = 0; j < additional_array.length; j++) {
+      const textToAdd = ', ' + additional_array[j];
+      additional_attributes += textToAdd;
+    }
+    div_array[i] = $('<div class="noListItem"><input type="checkbox" class="checkbox chk" value="' + criterias_array[i] + ', ' + values + '"></div>')
+      .append(criterias_array[i])
+      .attr('title', criterias_array[i] + additional_attributes)
+      .attr('id', 'div_out_of_array_' + (i + 1))
+      .append('<small>' + additional_attributes + '</small>');
 
-     $('#checkboxContainer').append(div_array[i]);
+    $('#checkboxContainer').append(div_array[i]);
   }
 
 
@@ -216,9 +216,78 @@ let add_critics: any; // the div for adding the critiria
     }
   });
 
+  $(document).on('keydown', '#input_critiques', function (evt) {
+    if (evt.keyCode === 13) {
+      const val = evt.target.value;
+      if (val !== undefined || val !== '' || val !== null) {
+        let trig = false;
+        // check if they are already added
+        let critiques_selector = $('.chk');
+        let already_added = false;
+        let criterias_array_for_check = [];
+        for (let i = 0; i < critiques_selector.length; i++) {
+          const original = <HTMLInputElement>critiques_selector[i];
+          const value = original.value;
+          const items = value.split(',');
+          for (let item of items) {
+            criterias_array_for_check.push(item.trim());
+          }
+        }
+          for (let item of criterias_array_for_check) {
+            if (item === val) {
+              already_added = true;
+            }
+          }
+
+          console.log(criterias_array_for_check);
+          if (!already_added && !trig) {
+
+            let crit_checkbox: any;
+            crit_checkbox = $('<input>')
+              .attr('type', 'checkbox')
+              .attr('class', 'chk')
+              .attr('value', val)
+              .prop('checked', true);
+
+            let span_new_critique: any;
+            span_new_critique = $('<span></span>')
+              .attr('class', 'criterias');
+
+            image_delete_criteria = $('<i></i>')
+              .attr('id', 'delete_criteria')
+              .attr('class', 'fa fa-minus-circle')
+              .attr('aria-hidden', 'true');
+
+            button_delete_criteria = $('<button></button')
+              .attr('class', 'button_delete_criteria')
+              .append(image_delete_criteria);
+            span_new_critique.append(val);
+            div_new_critique = $('<div></div>')
+              .attr('class', 'div_new_criterias')
+              .append(crit_checkbox)
+              .append(crit_checkbox)
+              .append(span_new_critique)
+              .append(button_delete_criteria);
+
+            div_all_new_criteria.append(div_new_critique);
+            $('div#div_add_crits').before(div_all_new_criteria);
+
+            $('.button_delete_criteria').click((e) => {
+              $(e.currentTarget).parent().remove();
+            });
+            // After the new criteria is added -> reset input field.
+            $('#input_critiques').val('');
+            trig = true;
+          } else {
+            alert('Dieses Kriterium ist schon hinzugefügt');
+            triggers.set('criteria_selected', false);
+          }
+      }
+    }
+  });
+
   // adding the event to the OK-button
   $(input_criteria_button).click(() => {
-    console.trace();
 
     let input_crit: any;
     input_crit = $('input#input_critiques');
@@ -226,12 +295,11 @@ let add_critics: any; // the div for adding the critiria
     if (input_crit.val() !== '') {
       // check if they are already added
       let critiques_selector = $('.chk');
-      console.log(critiques_selector);
 
       let already_added = false;
       let criterias_array_for_check = [];
       for (let i = 0; i < critiques_selector.length; i++) {
-        const original =  <HTMLInputElement> critiques_selector[i];
+        const original = <HTMLInputElement>critiques_selector[i];
         const value = original.value;
         const items = value.split(',');
         for (let item of items) {
@@ -246,7 +314,7 @@ let add_critics: any; // the div for adding the critiria
 
       for (let i = 0; i < critiques_selector.length; i++) {
         if (critiques_selector[i].innerHTML === input_crit.val()) {
-          triggers.set('criteria_selected',  true);
+          triggers.set('criteria_selected', true);
         }
       }
 
@@ -256,7 +324,8 @@ let add_critics: any; // the div for adding the critiria
         crit_checkbox = $('<input>')
           .attr('type', 'checkbox')
           .attr('class', 'chk')
-          .attr('value', input_crit.val());
+          .attr('value', input_crit.val())
+          .prop('checked', true);
 
         let span_new_critique: any;
         span_new_critique = $('<span></span>')
@@ -288,7 +357,7 @@ let add_critics: any; // the div for adding the critiria
         $('#input_critiques').val('');
       } else {
         alert('Dieses Kriterium ist schon hinzugefügt');
-        triggers.set('criteria_selected',  false);
+        triggers.set('criteria_selected', false);
         // After checking if the value is already added -> reset input field.
         $('#input_critiques').val('');
       }
@@ -343,14 +412,14 @@ function addNewCritiques(triggers: Map<string, boolean>) {
   else if (counter > 0) {
     input_critiques.removeClass('hidden');
   }
-  triggers.set('trigger_criterias',  true);
+  triggers.set('trigger_criterias', true);
 }
 
 function hideNewCritiques(triggers: Map<string, boolean>) {
 
   input_critiques = $('#input_critiques_div')
     .addClass('hidden');
-  triggers.set('trigger_criterias',  false);
+  triggers.set('trigger_criterias', false);
   if (counter === 0) {
     counter++;
   }
