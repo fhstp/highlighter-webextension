@@ -35,7 +35,6 @@ triggers.set('criteria_selected', false);
 
 $(document).ready(
   function listenToClicks() {
-
     let lS = localStorage.getItem(load_first_page);
     let number_page: any;
     number_page = 1;

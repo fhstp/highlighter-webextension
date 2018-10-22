@@ -11,3 +11,4 @@ export { insertIntoHTML_without_compare } from './server_interaction';
 export { setFormerAGB } from './formerAGB';
 export { createBadges } from './formerAGB';
 export { setValueOfAGB } from './formerAGB';
+export { removeAGB } from './formerAGB';
