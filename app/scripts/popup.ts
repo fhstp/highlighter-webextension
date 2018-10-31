@@ -71,9 +71,8 @@ $(document).ready(
 
     $('#general_information').click(() => {
       if (localStorage.getItem('informationBtnFirstTime') === 'true') {
-        localStorage.setItem(load_first_page, 'true');
         localStorage.removeItem('informationBtnFirstTime');
-        loadThirdPage(triggers, switch_to_second_page, criterias_array);
+        return;
       }
 
       const showComparison = localStorage.getItem('showComparisonInfo');
