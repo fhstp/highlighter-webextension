@@ -30,7 +30,7 @@ export function sendData_no_compare(head_link: any, head_text: any, criteria_arr
 
 export async function insertIntoHTML_without_compare(agb: any) {
   // open tab in background, so this context isn't unloadad (?); wait for it to be ready
-  const highlighterTab = await browser.tabs.create({ url: 'https://highlighter.media.fhstp.ac.at', active: false });
+  const highlighterTab = await browser.tabs.create({ url: 'https://highlighter.media.fhstp.ac.at/#/viz', active: false });
   if (highlighterTab.id != null) {
 
     agb = JSON.stringify(agb);
@@ -52,7 +52,7 @@ export async function insertIntoHTML_without_compare(agb: any) {
 
 export async function insertIntoHTML_with_compare(agb_1: any, agb_2: any) {
   // open tab in background, so this context isn't unloadad (?); wait for it to be ready
-  const highlighterTab = await browser.tabs.create({ url: 'https://highlighter.media.fhstp.ac.at', active: false });
+  const highlighterTab = await browser.tabs.create({ url: 'https://highlighter.media.fhstp.ac.at/#/viz', active: false });
   if (highlighterTab.id != null) {
 
     agb_1 = JSON.stringify(agb_1);

@@ -12,6 +12,7 @@ export function setFormerAGB(link: string, agb: any) {
 }
 
 export function createBadges() {
+  const date = new Date();
   // if not set
   if (!localStorage.hasOwnProperty(key)) {
     return null;
@@ -28,7 +29,7 @@ export function createBadges() {
       link = link.replace(re, '');
       // let button = $('<button type="button" class="btn btn-primary" id="former_' + i + '"><span class="badge badge-light"></span></button>')
       let button = $(`<div class="chip">
-      <button type="button" class="buttonFormer" data-btn="${i}">${link}</button>
+      <button type="button" class="buttonFormer" title="Erstellt: ${date.toLocaleString()}" data-btn="${i}">${link}</button>
       <span class="closebtn" data-btn="${i}">&times</span></div>`);
       buttondiv.append(button);
     }

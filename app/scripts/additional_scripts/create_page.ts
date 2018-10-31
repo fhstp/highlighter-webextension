@@ -34,7 +34,7 @@ let input_criteria = $('<input>') // with only input as the string it had been a
 export function loadSecondPage() {
   $('#div_page_3').addClass('hidden');
   $('#button_thirdpage').addClass('hidden');
-  $('#content_2').removeClass('hidden');
+/*   $('#content_2').removeClass('hidden'); */
 }
 
 export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string, crits: any) {
@@ -60,6 +60,7 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
     if (e.target.checked && !triggers.get('checkbox_first_time')) {
       if (localStorage.getItem(pageSwitch) === 'false') {
         localStorage.setItem(pageSwitch, 'true');
+        localStorage.setItem('showComparisonInfo', 'show');
       }
       div_agb_2 = $('<div></div>')
         .attr('id', 'div_agb_2');
@@ -86,18 +87,16 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
       triggers.set('bool_input,vis', true);
     }
     else if (e.target.checked && triggers.get('checkbox_first_time')) {
+      localStorage.setItem('showComparisonInfo', 'show');
       $(div_agb_2).removeAttr('class hidden');
       triggers.set('bool_input,vis', true);
     }
     else if (!e.target.checked && triggers.get('checkbox_first_time')) {
+      localStorage.setItem('showComparisonInfo', 'noShow');
       $(div_agb_2).attr('class', 'hidden');
       triggers.set('bool_input,vis', true);
     }
-
   });
-
-  let c2 = $('#content_2');
-  c2.attr('class', 'hidden');
 
   let AGB_text = $('<textarea>')
     .attr('placeholder', 'Fügen Sie den Text der AGBs ein...')

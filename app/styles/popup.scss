@@ -22,7 +22,8 @@ button:focus {
 .chip {
     display: inline-block;
     background-color: #4575B4;
-    border-radius: 15px;
+    border-radius: 5px;
+    margin: 5px 5px 5px;
 }
 
 .closebtn {
@@ -79,15 +80,20 @@ button:focus {
     float: right;
     font-size: 25px;
     color: #3577B1;
+    cursor: pointer;
 }
 
-.popup-content_1 {
+/* .popup-content_1 {
     background-color: #EBF1F7;
     padding: 5px;
 }
-
+ */
 #popup-content_2 {
     padding: 15px;
+}
+
+#popup-content_3 {
+  padding: 15px;
 }
 
 ol {
@@ -138,13 +144,13 @@ li {
 }
 
 #add_button {
-  border: none;
-  outline: none !important;
-  background: none !important;
-  box-shadow: none !important;
-  -webkit-box-shadow: none !important;
-  -moz-box-shadow: none !important;
-  margin-left: -12px;
+    border: none;
+    outline: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    margin-left: -12px;
 }
 
 #add_buttonimage {
@@ -153,13 +159,14 @@ li {
 }
 
 #input_critiques {
-  width: 60% !important;
-  display: initial !important;
+    width: 60% !important;
+    display: initial !important;
 }
 
 #delete_criteria {
     font-size: 20px;
     color: #3577B1;
+    cursor: pointer;
 }
 
 .button_delete_criteria {
@@ -178,6 +185,7 @@ li {
     color: #3577B1;
     font-size: 25px;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .criterias {
@@ -187,7 +195,7 @@ li {
 /* Bootstrap Overwrites */
 
 .form-control {
-    font-size: 0.7em;
+    font-size: 0.8em;
 }
 
 /* Tooltips Wraps from the checkboxes */
@@ -235,4 +243,27 @@ li {
 
 *::-webkit-scrollbar-thumb {
     background-color: #4575B4;
+    border-radius: 20px;
+}
+
+#buttonDiv {
+    margin-top: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 300px;
+}
+
+.btn-primary {
+  background-color: #3577B1 !important;
+  outline: none;
+  border: none;
+}
+
+#div_agb_2 {
+  margin-top: 25px;
+}
+
+.additional_info {
+  border: 1px solid gray;
+  padding: 5px;
 }
