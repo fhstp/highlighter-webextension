@@ -1,4 +1,5 @@
 import * as $ from 'jquery';
+
 const key = 'FormerAGB';
 
 export function setFormerAGB(link: string, agb: any) {
@@ -11,9 +12,10 @@ export function setFormerAGB(link: string, agb: any) {
 }
 
 export function createBadges() {
+  const date = new Date();
   // if not set
   if (!localStorage.hasOwnProperty(key)) {
-      return null;
+    return null;
   } else {
     let buttonArray: any[] = [];
     let buttondiv = $('<div id="buttonDiv"></div>');
@@ -26,11 +28,12 @@ export function createBadges() {
       let re = /\.[a-z]*?(.*)/; // capture everything behind...
       link = link.replace(re, '');
       // let button = $('<button type="button" class="btn btn-primary" id="former_' + i + '"><span class="badge badge-light"></span></button>')
-      let button = $('<button type="button" class="btn btn-primary buttonFormer" data-btn="' + i + '"><span class="badge badge-light"></span></button>')
-        .append(link);
-        buttondiv.append(button);
-        buttonArray.push(buttondiv);
+      let button = $(`<div class="chip">
+      <button type="button" class="buttonFormer" title="Erstellt: ${date.toLocaleString()}" data-btn="${i}">${link}</button>
+      <span class="closebtn" data-btn="${i}">&times</span></div>`);
+      buttondiv.append(button);
     }
+    buttonArray.push(buttondiv);
     return buttonArray;
   }
 }
@@ -44,8 +47,11 @@ export function setValueOfAGB(localStorageidx: number) {
 
 }
 
-/** HELPER METHODS **/
+export function removeAGB(localStorageidx: number) {
+  console.log('delete: ', localStorageidx);
+}
 
+/** HELPER METHODS **/
 
 function checkLocalStorage(agb: any) {
   // If there are no entries -> just push it

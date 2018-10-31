@@ -35,13 +35,13 @@ triggers.set('criteria_selected', false);
 
 $(document).ready(
   function listenToClicks() {
-
     let lS = localStorage.getItem(load_first_page);
     let number_page: any;
     number_page = 1;
     if (lS === 'false') {
       $('#popup-content_2').removeClass('hidden');
       localStorage.setItem(load_first_page, 'true');
+      localStorage.setItem('informationBtnFirstTime', 'true');
     }
     else if (lS === 'true') {
       loadThirdPage(triggers, switch_to_second_page, criterias_array);
@@ -52,28 +52,40 @@ $(document).ready(
 
     $('#button_firstpage').click(() => {
       $('#popup-content_2').addClass('hidden');
-      if (!triggers.get('switch_to_third_page')) {
+
+      if (!triggers.get('switch_to_third_page')) { // First time only...
         loadThirdPage(triggers, switch_to_second_page, criterias_array);
       }
-      else {
+      else {  // ... when we switch back to normal view from info
         $('#div_page_3').removeClass('hidden');
         $('#button_thirdpage').removeClass('hidden');
       }
     });
 
     $('#button_secondpage').click(() => {
+      $('#popup-content_3').addClass('hidden');
       $('#div_page_3').removeClass('hidden');
       $('#button_thirdpage').removeClass('hidden');
-      $('#content_2').addClass('hidden');
       triggers.set('trigger_criterias', false);
     });
 
     $('#general_information').click(() => {
+      if (localStorage.getItem('informationBtnFirstTime') === 'true') {
+        localStorage.setItem(load_first_page, 'true');
+        localStorage.removeItem('informationBtnFirstTime');
+        loadThirdPage(triggers, switch_to_second_page, criterias_array);
+      }
 
-      $('#popup-content_2').removeClass('hidden');
-      $('#div_page_3').addClass('hidden');
-      triggers.set('switch_to_third_page', true);
-
+      const showComparison = localStorage.getItem('showComparisonInfo');
+      if (showComparison === 'show') {
+        $('#popup-content_3').removeClass('hidden');
+        $('#div_page_3').addClass('hidden');
+        triggers.set('switch_to_third_page', true);
+      } else {
+        $('#popup-content_2').removeClass('hidden');
+        $('#div_page_3').addClass('hidden');
+        triggers.set('switch_to_third_page', true);
+      }
       let button_thirdpage: any;
       button_thirdpage = $('#button_thirdpage');
       button_thirdpage.addClass('hidden');

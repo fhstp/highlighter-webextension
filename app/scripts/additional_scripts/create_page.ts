@@ -1,10 +1,9 @@
 import * as $ from 'jquery';
-import { setFormerAGB } from './index';
-import { createBadges } from './index';
+import swal from 'sweetalert2';
+
+import { setFormerAGB, createBadges, setValueOfAGB, removeAGB } from './index';
 import { sendData_no_compare, sendData_with_compare } from './server_interaction';
 import { getValueUsingClass } from './utility';
-import { setValueOfAGB } from './index';
-
 
 export function create_criteria() {
   let input_criteria = $('<input>')
@@ -16,10 +15,9 @@ export function create_criteria() {
 }
 
 export function create_criteria_button() {
-
   let input_criteria_button = $('<button></button>')
     .attr('type', 'button')
-    .attr('class', 'button_primary')
+    .attr('class', 'btn btn-primary')
     .attr('id', 'button_critiques');
 
   input_criteria_button.append('OK');
@@ -27,19 +25,17 @@ export function create_criteria_button() {
 }
 
 let input_criteria_button = create_criteria_button();
-
 let input_criteria = $('<input>') // with only input as the string it had been added 9 times
   .attr('type', 'text')
   .attr('id', 'input_critiques')
+  .attr('class', 'form-control')
   .attr('placeholder', 'Kriterien hinzufügen');
-
 
 export function loadSecondPage() {
   $('#div_page_3').addClass('hidden');
   $('#button_thirdpage').addClass('hidden');
-  $('#content_2').removeClass('hidden');
+/*   $('#content_2').removeClass('hidden'); */
 }
-
 
 export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string, crits: any) {
   let checkbox_1 = $('<input>');
@@ -51,27 +47,20 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
   let title_div: any;
 
   let checkbox_array = new Array(); // checkboxes of the criteria
-  let textNode_array = new Array(); // actually strings & the text for the checkboxes
+  // let textNode_array = new Array(); // actually strings & the text for the checkboxes
 
-  // to add critics this button is made
-  let add_button: any;
-  let add_button_image: any;
-
-  let button_delete_criteria: any;
-  let image_delete_criteria: any;
-
-  let div_new_critique: any; // the div for only on of the new criteria
-  // div_new_critique = new Array();
+  // Various storages for the buttons
+  let add_button: any, add_button_image: any, button_delete_criteria: any,
+  image_delete_criteria: any, div_new_critique: any; // the div for only on of the new criteria
 
   let div_all_new_criteria = $('<div></div>');
   let add_critics: any; // the div for adding the critiria
-
-
 
   $(checkbox_1).change((e: any) => {
     if (e.target.checked && !triggers.get('checkbox_first_time')) {
       if (localStorage.getItem(pageSwitch) === 'false') {
         localStorage.setItem(pageSwitch, 'true');
+        localStorage.setItem('showComparisonInfo', 'show');
       }
       div_agb_2 = $('<div></div>')
         .attr('id', 'div_agb_2');
@@ -98,18 +87,16 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
       triggers.set('bool_input,vis', true);
     }
     else if (e.target.checked && triggers.get('checkbox_first_time')) {
+      localStorage.setItem('showComparisonInfo', 'show');
       $(div_agb_2).removeAttr('class hidden');
       triggers.set('bool_input,vis', true);
     }
     else if (!e.target.checked && triggers.get('checkbox_first_time')) {
+      localStorage.setItem('showComparisonInfo', 'noShow');
       $(div_agb_2).attr('class', 'hidden');
       triggers.set('bool_input,vis', true);
     }
-
   });
-
-  let c2 = $('#content_2');
-  c2.attr('class', 'hidden');
 
   let AGB_text = $('<textarea>')
     .attr('placeholder', 'Fügen Sie den Text der AGBs ein...')
@@ -129,7 +116,7 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
 
   // div-tag
   let div = $('<div></div>')
-    .attr('id', 'div_page_3');
+    .attr('id', 'div_page_3_1');
 
   checkbox_1
     .attr('type', 'checkbox')
@@ -188,21 +175,12 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
   }
 
 
-  add_button = $('<button></button>')
-    .attr('id', 'add_button');
-
-  add_button_image = $('<i></i>')
-    .attr('id', 'add_buttonimage')
-    .attr('class', 'fa fa-plus-circle')
-    .attr('aria-hidden', 'true');
-
+  add_button = $(`<button class="btn" id="add_button"><i id="add_buttonimage"
+  class="fa fa-plus-circle" aria-hidden="true"></i> Kriterien hinzufügen</button>`);
 
   add_critics = $('<div></div>')
     .attr('id', 'div_add_crits')
-    .append(add_button)
-    .append('Kriterien hinzufügen');
-  add_button.attr('id', 'button_add')
-    .append(add_button_image);
+    .append(add_button);
 
   div_page_3.append(add_critics);
 
@@ -219,7 +197,7 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
   $(document).on('keydown', '#input_critiques', function (evt) {
     if (evt.keyCode === 13) {
       // Ignore Error: Due to no Type of event.target -> See: https://stackoverflow.com/questions/28900077/why-is-event-target-not-element-in-typescript
-      const val = evt.target.value; // eslint-disable-line
+      const val = (evt.target as any).value; // eslint-disable-line
       if (val !== undefined || val !== '' || val !== null) {
         let trig = false;
         // check if they are already added
@@ -280,7 +258,12 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
             $('#input_critiques').val('');
             trig = true;
           } else {
-            alert('Dieses Kriterium ist schon hinzugefügt');
+            swal({
+              type: 'error',
+              title: 'Achtung',
+              text: 'Dieses Kriterium ist schon hinzugefügt!',
+              showCloseButton: true
+            });
             triggers.set('criteria_selected', false);
           }
       }
@@ -357,7 +340,13 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
         // After the new criteria is added -> reset input field.
         $('#input_critiques').val('');
       } else {
-        alert('Dieses Kriterium ist schon hinzugefügt');
+        swal({
+          type: 'error',
+          title: 'Achtung',
+          text: 'Dieses Kriterium ist schon hinzugefügt!',
+          showCloseButton: true,
+          customClass: 'bootstrapLook'
+        });
         triggers.set('criteria_selected', false);
         // After checking if the value is already added -> reset input field.
         $('#input_critiques').val('');
@@ -392,7 +381,9 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
 }
 $(document).on('click', '.buttonFormer', function () {
   setValueOfAGB(Number($(this).attr('data-btn')));
-
+});
+$(document).on('click', '.closebtn', function () {
+  removeAGB(Number($(this).attr('data-btn')));
 });
 // a counter for the number of times the critiques-div was hidden
 let counter: number;
