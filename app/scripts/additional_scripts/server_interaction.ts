@@ -9,10 +9,8 @@ export type agbObject = {
 };
 
 export function sendData_no_compare(head_link: any, head_text: any, criteria_array: any) {
-
   let xhttp = new XMLHttpRequest();
   let json_criteria = JSON.stringify(criteria_array);
-
 
   xhttp.open('POST', 'http://highlighter.media.fhstp.ac.at:8080/agb', true);
   xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -21,18 +19,15 @@ export function sendData_no_compare(head_link: any, head_text: any, criteria_arr
       const data = xhttp.response;
       const agb = JSON.parse(data) as agbObject;
       insertIntoHTML_without_compare(agb);
-
     }
   };
   xhttp.send('link=' + head_link + '&text=' + head_text + '&search[]=' + json_criteria);
-
 }
 
 export async function insertIntoHTML_without_compare(agb: any) {
   // open tab in background, so this context isn't unloadad (?); wait for it to be ready
   const highlighterTab = await browser.tabs.create({ url: 'https://highlighter.media.fhstp.ac.at/#/viz', active: false });
   if (highlighterTab.id != null) {
-
     agb = JSON.stringify(agb);
     const interpolatedCode = `
     var el = document.querySelector('#data1');
