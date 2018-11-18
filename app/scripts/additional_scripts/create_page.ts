@@ -375,7 +375,7 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
     } else {
       const link_2 = $('#AGBlink_2').val();
       const agb_text_2 = $('#AGBtext_2').val();
-      sendData_with_compare(link, agb_text, link_2, agb_text_2, checkbox_array);
+      sendData_with_compare(link, agb_text, link_2, agb_text_2, checkboxes);
     }
   });
 }

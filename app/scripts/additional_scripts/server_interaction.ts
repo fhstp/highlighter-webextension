@@ -89,7 +89,6 @@ export function sendData_with_compare(head_link_1: any, head_text_1: any, head_l
     if (xhttp.readyState === 4 && xhttp.status === 201) {
       const data1 = xhttp.response;
        agb1 = JSON.parse(data1) as agbObject;
-
       // Opening second Request and processing Data
        xhttp2.open('POST', 'http://highlighter.media.fhstp.ac.at:8080/agb', true);
        xhttp2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
