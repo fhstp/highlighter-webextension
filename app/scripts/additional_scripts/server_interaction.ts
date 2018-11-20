@@ -1,5 +1,9 @@
 import { browser } from 'webextension-polyfill-ts';
 
+const BACKEND_URL = 'http://highlighter.media.fhstp.ac.at:8080/agb';
+const FRONTEND_URL = 'https://highlighter.media.fhstp.ac.at/#/viz';
+// const BACKEND_URL = 'http://localhost:8080/agb';
+// const FRONTEND_URL = 'http://localhost:4200/#/viz';
 
 // Here come the function which should send the data to the server
 export type agbObject = {
@@ -12,7 +16,7 @@ export function sendData_no_compare(head_link: any, head_text: any, criteria_arr
   let xhttp = new XMLHttpRequest();
   let json_criteria = JSON.stringify(criteria_array);
 
-  xhttp.open('POST', 'http://highlighter.media.fhstp.ac.at:8080/agb', true);
+  xhttp.open('POST', BACKEND_URL, true);
   xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhttp.onreadystatechange = () => {
     if (xhttp.readyState === 4 && xhttp.status === 201) {
@@ -26,7 +30,7 @@ export function sendData_no_compare(head_link: any, head_text: any, criteria_arr
 
 export async function insertIntoHTML_without_compare(agb: any) {
   // open tab in background, so this context isn't unloadad (?); wait for it to be ready
-  const highlighterTab = await browser.tabs.create({ url: 'https://highlighter.media.fhstp.ac.at/#/viz', active: false });
+  const highlighterTab = await browser.tabs.create({ url: FRONTEND_URL, active: false });
   if (highlighterTab.id != null) {
     agb = JSON.stringify(agb);
     const interpolatedCode = `
@@ -47,7 +51,7 @@ export async function insertIntoHTML_without_compare(agb: any) {
 
 export async function insertIntoHTML_with_compare(agb_1: any, agb_2: any) {
   // open tab in background, so this context isn't unloadad (?); wait for it to be ready
-  const highlighterTab = await browser.tabs.create({ url: 'https://highlighter.media.fhstp.ac.at/#/viz', active: false });
+  const highlighterTab = await browser.tabs.create({ url: FRONTEND_URL, active: false });
   if (highlighterTab.id != null) {
 
     agb_1 = JSON.stringify(agb_1);
@@ -83,14 +87,14 @@ export function sendData_with_compare(head_link_1: any, head_text_1: any, head_l
   let agb2: any;
 
   // Opening first Request and processing Data
-  xhttp.open('POST', 'http://highlighter.media.fhstp.ac.at:8080/agb', true);
+  xhttp.open('POST', BACKEND_URL, true);
   xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhttp.onreadystatechange = () => {
     if (xhttp.readyState === 4 && xhttp.status === 201) {
       const data1 = xhttp.response;
        agb1 = JSON.parse(data1) as agbObject;
       // Opening second Request and processing Data
-       xhttp2.open('POST', 'http://highlighter.media.fhstp.ac.at:8080/agb', true);
+       xhttp2.open('POST', BACKEND_URL, true);
        xhttp2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
        xhttp2.onreadystatechange = () => {
          if (xhttp2.readyState === 4 && xhttp2.status === 201) {
