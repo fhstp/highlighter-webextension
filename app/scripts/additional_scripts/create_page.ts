@@ -67,7 +67,7 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
       let AGB_text_2 = $('<textarea>')
         .attr('id', 'AGBtext_2')
         .attr('type', 'textarea')
-        .attr('placeholder', 'Fügen Sie den Text der AGBs ein...')
+        .attr('placeholder', 'Fügen Sie den Text (z.B. AGBs) ein...')
         .attr('class', 'form-control input-sm');
       div_agb_2.append(AGB_text_2);
       let AGB_link_2 = $('<input>')
@@ -99,7 +99,7 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
   });
 
   let AGB_text = $('<textarea>')
-    .attr('placeholder', 'Fügen Sie den Text der AGBs ein...')
+    .attr('placeholder', 'Fügen Sie den Text (z.B. AGBs) ein...')
     .attr('type', 'textarea')
     .attr('class', 'form-control input-sm')
     .attr('id', 'AGBtext_1');
@@ -124,7 +124,7 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
     .attr('class', 'checkbox');
 
 
-  let textNode_1 = '<span class="criterias">Vergleiche AGBs</span>';
+  let textNode_1 = '<span class="criterias">Vergleiche zwei Texte</span>';
 
   div.append(checkbox_1)
     .append(textNode_1);
@@ -359,7 +359,7 @@ export function loadThirdPage(triggers: Map<string, boolean>, pageSwitch: string
   button_thirdpage = $('<button></button>')
     .attr('class', 'btn btn-primary')
     .attr('id', 'button_thirdpage')
-    .append('Check AGBs');
+    .append('Checke Text');
 
   div_page_3.appendTo(document.body);
   button_thirdpage.appendTo(document.body);
