@@ -1,6 +1,6 @@
 {
-  "name": "Highlighter",
-  "short_name": "Highlighter",
+  "name": "ContractVis HighLighter",
+  "short_name": "HighLighter",
   "description": "__MSG_appDescription__",
   "version": "0.0.2",
   "manifest_version": 2,
