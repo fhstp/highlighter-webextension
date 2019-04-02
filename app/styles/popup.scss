@@ -1,99 +1,269 @@
-html, body{
-  height:500px;
-  width:350px;
-  font-family: 'PT Sans', sans-serif;
-}
-#icon_contractVis{
-  height:45px;
-  width: 135px;
-}
-.button_primary{
-  font-size:14px;
-  font-weight:bold;
-  color:#4575B4;
-
-  background-color:white;
-  border: 2px solid #4575B4;
-  border-radius:4px;
-
-  padding:5px;
-  padding-top:10px;
-  padding-bottom:10px;
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300');
+html,
+body {
+    height: 500px;
+    width: 350px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
 }
 
-.heading_1{
-  font-size:28px;
-  font-weight:bold;
-}
-.heading_2{
-  font-size:22px;
-}
-.heading_3{
-  font-size:16px;;
-}
-.running_text{
-  font-size:14px;
-}
-.icons{
-  float:right;
-  height:25px;
-  width:25px;
-  margin-right:5px;
-}
-#general_information{
-  float:right;
-}
-.popup-content_1{
-  background-color:#EBF1F7;
-  padding:5px;
-}
-#popup-content_2{
-  padding:15px;
-}
-ol{
-  padding-left:15px;
-}
-li{
-  padding-top:5px;
-  padding-bottom:5px;
-}
-.hidden{
-  display:none;
-}
-#AGBtext_1{
-  height:120px;
-  width:320px;
-  margin-top: 5px;
-}
-#AGBlink_1{
- margin-top: 5px;
-}
-#AGBlink_2{
-  margin-top: 5px;
-}
-#AGBtext_2{
-  height:120px;
-  width:320px;
-  margin-top: 5px;
-}
-#button_thirdpage{
-  margin-top:15px;
-}
-#button_add{
-  background-color:white;
-  border:none;
-  padding:0px;
+input:focus,
+button:focus {
+    outline: none;
 }
 
-
-#add_buttonimage{
-
-  height:20px;
-  width:20px;
+#icon_contractVis {
+    height: 45px;
+    width: 135px;
 }
-#button_critiques{
-  padding:5px;
-  padding-left:7px;
-  padding-right:7px;
-  margin-left:5px;
+
+// Chips for the former AGBs
+.chip {
+    display: inline-block;
+    background-color: #4575B4;
+    border-radius: 5px;
+    margin: 5px 5px 5px;
+}
+
+.closebtn {
+    font-size: 21px;
+    margin-right: 4px;
+    margin-left: -4px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    cursor: pointer;
+}
+
+.closebtn:hover {
+    color: yellow;
+}
+
+// --------------------------
+.buttonFormer {
+    background-color: #4575B4;
+    color: white;
+    margin: 6px;
+    outline: none;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.heading_1 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.heading_2 {
+    font-size: 22px;
+}
+
+.heading_3 {
+    font-size: 16px;
+    padding-top: 10px;
+}
+
+.running_text {
+    font-size: 14px;
+}
+
+.icons {
+    float: right;
+    height: 25px;
+    width: 25px;
+    margin-right: 5px;
+}
+
+#general_information {
+    float: right;
+    font-size: 25px;
+    color: #3577B1;
+    cursor: pointer;
+}
+
+/* .popup-content_1 {
+    background-color: #EBF1F7;
+    padding: 5px;
+}
+ */
+#popup-content_2 {
+    padding: 15px;
+}
+
+#popup-content_3 {
+  padding: 15px;
+}
+
+ol {
+    padding-left: 15px;
+}
+
+li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+#AGBtext_1 {
+    height: 120px;
+    width: 320px;
+    margin-top: 5px;
+}
+
+#AGBlink_1 {
+    margin-top: 5px;
+}
+
+#AGBlink_2 {
+    margin-top: 5px;
+}
+
+#AGBtext_2 {
+    height: 120px;
+    width: 320px;
+    margin-top: 5px;
+}
+
+#button_thirdpage {
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-bottom: 20px
+}
+
+#button_add {
+    background-color: white;
+    border: none;
+    padding: 0px;
+    margin-left: -2px;
+    margin-right: 3px;
+}
+
+#add_button {
+    border: none;
+    outline: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    margin-left: -12px;
+}
+
+#add_buttonimage {
+    font-size: 15px;
+    color: #3577B1;
+}
+
+#input_critiques {
+    width: 60% !important;
+    display: initial !important;
+}
+
+#delete_criteria {
+    font-size: 20px;
+    color: #3577B1;
+    cursor: pointer;
+}
+
+.button_delete_criteria {
+    background-color: white;
+    border: none;
+}
+
+#button_critiques {
+    padding: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: 5px;
+}
+
+#closing_icon {
+    color: #3577B1;
+    font-size: 25px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.criterias {
+    padding-left: 5px;
+}
+
+/* Bootstrap Overwrites */
+
+.form-control {
+    font-size: 0.8em;
+}
+
+/* Tooltips Wraps from the checkboxes */
+
+.checkbox {
+    margin-right: 5px
+}
+
+.noListItem {
+    list-style-type: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#popup-content_1 {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+#icon_contractVis {
+    margin-left: 16px;
+}
+
+.bootstrapLook {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+}
+
+#div_page_3_1 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+// Better Scrollbar
+*::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #4575B4;
+    border-radius: 20px;
+}
+
+#buttonDiv {
+    margin-top: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 300px;
+}
+
+.btn-primary {
+  background-color: #3577B1 !important;
+  outline: none;
+  border: none;
+}
+
+#div_agb_2 {
+  margin-top: 25px;
+}
+
+.additional_info {
+  border: 1px solid gray;
+  padding: 5px;
 }

@@ -1,0 +1,49 @@
+{
+  "criterias" : [
+    "Bezahlung",
+    "Lieferung und Versand",
+    "Gewährleistung",
+    "Garantie",
+    "Umtausch",
+    "Rückgabe"
+  ],
+  "Rückgabe" : [
+    "Rücksendung",
+    "Warenrückgabe",
+    "Zurückgabe",
+    "Rückversand",
+    "Retoure",
+    "Rücklieferung"
+  ],
+  "Bezahlung" : [
+    "Betrag",
+    "Summe",
+    "Ergebnis",
+    "Kreditkartenbezahlung",
+    "Rechnungskauf"
+  ],
+  "Lieferung und Versand" : [
+    "Versendung",
+    "Lieferung",
+    "Versand",
+    "Verschickung",
+    "Transport",
+    "Beförderung",
+    "Übergabe",
+    "Verschicken",
+    "Zustellung"
+  ],
+  "Gewährleistung" : [
+    "Mangel",
+    "Gewähr"
+  ],
+  "Garantie" : [
+    "Mangel",
+    "Gewähr",
+    "Gewährleistung"
+  ],
+  "Umtausch" : [
+    "Mangel",
+    "Beschädigung"
+  ]
+}

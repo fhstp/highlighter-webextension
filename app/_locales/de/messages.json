@@ -1,0 +1,18 @@
+{
+  "appName": {
+    "message": "ContractVis HighLighter",
+    "description": "Der Name der App ist HighLighter"
+  },
+  "appShortName": {
+    "message": "HighLighter",
+    "description": "Die Kurzbeschreibung der App ist ebenfalls HighLighter"
+  },
+  "appDescription": {
+    "message": "Diese App ermöglicht dir in einem Rechtstext relevante Begriffe zu suchen und zu markieren",
+    "description": "Die Beschreibung dieser App"
+  },
+  "browserActionTitle": {
+    "message": "HighLighter",
+    "description": "Der Titel der Schaltfläche dieser App"
+  }
+}
