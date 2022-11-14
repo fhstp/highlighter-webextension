@@ -1,3 +1,6 @@
+> **Warning**
+> This project is no longer actively maintained. You can still (re)use it under its MIT license but be aware that the underlying npm packages are outdated and might pose security risks.
+
 # ![HighLighter](./app/images/Logo_contractVis.png) Web Extension
 
 Buying a product or signing up for a service implicates a contract between the consumer and the merchant or provider.
